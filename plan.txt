@@ -1,0 +1,37 @@
+General design  - menu with all the modules
+	each module will have the same menu, but also a menu specific to that module page
+	for navigating around the Module material
+
+We need a design for the 2 menus 
+	- they have to be distinct and implemented with CSS and JS/frameworks ( for practice )
+
+Graphical design :
+	we need a look and feel for the whole website
+		-consistant design -  theme, colors, fonts 
+		-positioning of pictures and material.
+	layout of the page.
+	implementing Usability engineering techniques- etc. paragraph lengths 
+	Good optimization  - size of images is important
+	responsive design - for mobiles.
+	
+
+possible things to consider:
+	automatic code higlighting for Java
+	animations for menus
+	animations for interactive content showing (Jquery / JS ) 
+		- for example show/hide answers or images for questions
+	
+	making a maintainable design to update this page next semester with new modules.
+	
+	additional page to implement coursework material like DBs with php
+	make a simple game for when you are bored from studying
+		- like xes and oes
+
+	Consier using Sass or an other CSS variant
+
+index.html  - introductory welcome page, will contain previews of all the module pages.
+
+module pages - each will have a delicate color theme, with its own menu, in addition to the main menu. 
+
+additional pages - simple javascript canvas games
+		- showcasing a database connection using php
