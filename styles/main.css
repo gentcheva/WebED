@@ -1,0 +1,40 @@
+
+main{
+    border: 1px solid black;
+    margin-left:3em;
+    margin-right: 3em;
+}
+
+.main{
+    background-color: turquoise;
+    padding: 2em;
+    margin:5em;
+}
+
+nav{
+    border: 1px solid black;
+    overflow: hidden;
+    width: 100%;
+}
+
+nav ul {
+    
+    list-style: none;
+    margin-right: auto;
+    margin-left: auto;
+    display: inline-flex;
+    
+}
+nav li{
+    margin:1em;
+}
+nav a {
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+.lectures{
+    border:2px solid black;
+    padding:2em;
+    margin:2em;
+}
