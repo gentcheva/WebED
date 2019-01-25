@@ -1,4 +1,4 @@
-General design  - menu with all the modules
+General design - menu with all the modules
 	each module will have the same menu, but also a menu specific to that module page
 	for navigating around the Module material
 
