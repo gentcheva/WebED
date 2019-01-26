@@ -87,13 +87,34 @@
     <section id="l4" class="lectures">
         <h3>Sorting</h3>
         <p>
-            Bubble
-
-
-
-
+            Bubble sort-worst case complexity and swaps is O(n2)
+            You may implement any sorting algorithm with a Priority Queue, which may improve the complexity of some sorts in some cases.
+            <ul>
+                <li>Implementing <i>selection sort</i> with th priority queue does not change its complexity,O(n2), but
+                it is still faster than bubble sort.</li>
+                <li>Implementing <i>insertion sort</i> with the PQ leaves a complexity of O(n) on a sorted list, however, on a n unsorted list, worst
+                case complexity is again O(n2).</li>
+                <li>Implementing <i>Heap sort</i> with PQ, where all action takes place with heap operations.Adding and removing items to the heap 
+                is complexity O(logn), worst case to build the heap is O(nlogn).</li>
+            </ul>    
         </p>
+            <h3>Another  way to implement these sorting algorithms is with:</h3>
+            <p>  
+                <li>In place sorting</li>
+                This method of sorting is restrictive, as you only sort within the memory space of the list itself.
+                <ul>
+                    <li>Implementing selection sort in this manner, makes the entire list the PQ, which decreases by 1 after each swap.
+                    </li>
+                    <li>Implementing insertion sort in this manner, PQ becomes the first part of the list, the unsorted items,the PQ grows as thr list becomes sorted.</li>
+                    <li>Implementing heap sort in this manner is different to th other heaps,as you must construct a <i>max heap</i> which will grow out the PQ and shrink, when
+                    sorting the list. However, in the final output you want the biggest item at the end, so we must swp the biggest item at the end.
+                    <li>Complexity is O(nlogn) to build max heap and turn into a(n) (sorted) array.</li></li>
+                </ul>
 
+
+            </p> 
+
+        
     </section>
 <main>
 </body>
