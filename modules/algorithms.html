@@ -31,14 +31,57 @@
         <h3>Overview of course - Lecture 1</h3>
         <p>the focus of this course is mainly on the <i>algorithms</i> , as opposed
             to the data structures,like last year - all coding is done in python again.
-            <li>Implementing the algorithms efficiently:</li>
+            Implementing the algorithms efficiently:
+            <ul>
                 <li>Finding the shortest path</li>
                 <li>Finding trees - shortest path between nodes</li>
+            </ul>
             Complexity and analysis, sorting and selecting are also <i>key</i> aims in this semester.
         </p>
     </section>
     <section id="l2" class="lectures">
         <h3>Recursive Code - Lecture 2</h3>
+        <p>Some sample recursive code:</p>
+            <pre><code>
+            def rsum(mylist):
+            If len(mylist) == 0: - base case, this is needed for recursive code to terminate
+                Return 0
+            Endsum = rsum(mylist[1:]) - recursively calculates the sum of the rest of the list
+            Return mylist[0] + endsum
+            rsum([3,5,1,8,4])
+            </code></pre>
+        <p>
+        For <i>every</i> if statement/branch in your code, which produces a result, you <i>must</i>
+        have a return statement.
+        Each recursive statement in your code must get closer to the base case, so the code itself terminates.
+
+        Best steps for Recursive code Analysis: you must understand whats happening as it is executing.
+        <ul>
+            <li>Count worst-case work done by a single activation, without the recursive call</li>
+            <li>Count worst case number of recursive calls</li>
+            <li>Multiply these two counts together</li>
+        </ul>
+        </p>
+    </section>
+    <section id="l3" class="lectures">
+        <h3>Complexity Analysis - Lecture 3</h3>
+        <h4>Different Notations:</h4>
+        <p>
+            <ul>
+                <li>Big Oh - O()</li>
+                <li>Big Omega - Ω()</li>
+                <li>Big Theta - θ()</li>
+            </ul>
+            <li>Big Oh - f(n) &#60;= C*g(n), where C is some constant</li>
+            Hierarchy of functions is strict, for big oh
+            Find the smallest simple function that works for …..
+            <li>Big Omega  - Ω - f(n) is  - Ω(g(n))</li>
+            C*g(n) &#60;= f(n), where C is some constant, and is always better than f(n)
+            <li>Big Theta - θ - f(n) is θ(g(n)) if its both big oh and big Ω</li>
+
+
+
+        </p>
 
     </section>
 
