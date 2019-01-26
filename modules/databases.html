@@ -4,76 +4,79 @@
 </html>
 
 <head>
-    <meta charset="utf-8" />
-    <link href="../styles/main.css" rel="stylesheet" />
-    <title>CS2501-DB</title>
+	<meta charset="utf-8" />
+	<link href="../styles/main.css" rel="stylesheet" />
+	<title>CS2501-DB</title>
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="java.html">Java</a></li>
-            <li><a href="compArchitecture.html">Architecture</a></li>
-            <li><a href="networking.html">Networking</a></li>
-            <li><a href="databases.html">Databases</a></li>
-            <li><a href="operatingSystems.html">OS</a></li>
-            <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
-            <li><a href="algorithms.html">Algorithms</a></li>
-        </ul>
-    </nav>
-<main>
-
-    <section id="main">
-        <h1>Database Design and Administration </h1>
-        <h3>Relevant coursework can be found here</h3>
-    </section>
-	<section id="l1" class="lectures">
-		<h1>Module Goals:</h1>	
+	<nav>
 		<ul>
-			<li>Database programming: interface with <b>PHP</b> </li>
-			<li>Implementation of database systems and how they work</li>
-			<li>Database directory</li>
-			<li>Relational Algebra/Calculus</li>
-			<li>Design of Database systems with <b>UML</b> modelling</li>
-			<li>Entitiy-Relationship modelling</li>
+			<li><a href="java.html">Java</a></li>
+			<li><a href="compArchitecture.html">Architecture</a></li>
+			<li><a href="networking.html">Networking</a></li>
+			<li><a href="databases.html">Databases</a></li>
+			<li><a href="operatingSystems.html">OS</a></li>
+			<li><a href="usabilityEngineering.html">Usability Eng.</a></li>
+			<li><a href="algorithms.html">Algorithms</a></li>
 		</ul>
-		<p>Databases store data. They can be accessed via SQL language through queries. 
-This requires <b>SQL knowledge</b>. To provide clients with an easier way, 
-we build programs (interface) to interact with the database in an easy way.</p>
+	</nav>
+	<main>
 
-		<ol>
-			<li>Casual online users (few users)</li>
-			<li>Programmers</li>
-			<li>Parametric end-users ( majority )</li>
-			<li>Database Administrators</li>
-		</ol>
-		
-	</section>
+		<section id="main">
+			<h1>Database Design and Administration </h1>
+			<h3>Relevant coursework can be found here</h3>
+		</section>
+		<section id="l1" class="lectures">
+			<h1>Module Goals:</h1>
+			<ul>
+				<li>Database programming: interface with <b>PHP</b> </li>
+				<li>Implementation of database systems and how they work</li>
+				<li>Database directory</li>
+				<li>Relational Algebra/Calculus</li>
+				<li>Design of Database systems with <b>UML</b> modelling</li>
+				<li>Entitiy-Relationship modelling</li>
+			</ul>
+			<p>Databases store data. They can be accessed via SQL language through queries.
+				This requires <b>SQL knowledge</b>. To provide clients with an easier way,
+				we build programs (interface) to interact with the database in an easy way.</p>
 
-	<section id="l2" class="lectures">
-	<h1>Discussion about History of SQL and DBMS</h1>
-		<p>History of the SQL language. Oracle company - how it originated , differences between Oracle DBMS and MySQL. How MySQL was founded.</p>
-	<h1>How to connect to DBMS </h1>
-	<p> 
-		ssh -l username csgate.ucc.ie 
-</p><p>
-		ssh -l username cs1.ucc.ie 
-</p>
-		mysql -u ****** -p 
-</p><p>
-		password: ******* 
-</p>
-		use dreamhome         ===> changes which database you want to interact with.
-</p>
-			
-	</section>
-	<section id="l3" class="lectures">
-	<h1>Introduction to PHP programming</h1>
-	<p>
-		We use php to provide an interface for accessing data in the database.
+			<ol>
+				<li>Casual online users (few users)</li>
+				<li>Programmers</li>
+				<li>Parametric end-users ( majority )</li>
+				<li>Database Administrators</li>
+			</ol>
 
-	</p>
-		<pre><code>
+		</section>
+
+		<section id="l2" class="lectures">
+			<h1>Discussion about History of SQL and DBMS</h1>
+			<p>History of the SQL language. Oracle company - how it originated , differences between Oracle DBMS and MySQL. How
+				MySQL was founded.</p>
+			<h1>How to connect to DBMS </h1>
+			<p>
+				ssh -l username csgate.ucc.ie
+			</p>
+			<p>
+				ssh -l username cs1.ucc.ie
+			</p>
+			mysql -u ****** -p
+			</p>
+			<p>
+				password: *******
+			</p>
+			use dreamhome ===> changes which database you want to interact with.
+			</p>
+
+		</section>
+		<section id="l3" class="lectures">
+			<h1>Introduction to PHP programming</h1>
+			<p>
+				We use php to provide an interface for accessing data in the database.
+
+			</p>
+			<pre><code>
 // connect to the database , host - username - password
 $conn_id = mysqli_connect("cs1.ucc.ie", "CS2501","CS2501") or exit( ( "Login Failed"); 
 
@@ -92,40 +95,46 @@ If ($row = mysqli_fetch_row($result_id))
 Mysqli_free_result($result_id); 
 
 	</code></pre>
-	
-	</section>
-	<section id="l4" class="lectures">
-		<h1>How php does things</h1>
-		<p>Variables aren't initialized .
 
-They are case sensitive. 
+		</section>
+		<section id="l4" class="lectures">
+			<h1>How php does things</h1>
+			<p>Variables aren't initialized .
 
-<strong>All variables are strings</strong>. 
+				They are case sensitive.
 
-There are no data types 
+				<strong>All variables are strings</strong>.
 
-If you need to do arithmeti operations it converts the string into some internal numeric value and does the arithmetic there, then stores it back into a string. 
-</p>
- <p>
-		The program only deals with String variables 
-</p><p>
-		Accessing a character in a string - string[1] - first index character 
-</p><p>
-		The result of a query, is stored on the machine we queried, and we store the pointer to that table produced.  
-</p>		 
-<p>
-		To access the data we have to mysqli_fetch_row 
-</p>
-<p>		 
-		.   Dot concatenates 
-</p><p>
-		[0] element means everything from the start to the terminator character  
-</p><p>
-	.row[0].   = means all of the string 
-</p><p>
-		[1] refers to the element after the terminator character, like a list. 
-</p>	
-</section>
+				There are no data types
 
-</main>
+				If you need to do arithmeti operations it converts the string into some internal numeric value and does the
+				arithmetic there, then stores it back into a string.
+			</p>
+			<p>
+				The program only deals with String variables
+			</p>
+			<p>
+				Accessing a character in a string - string[1] - first index character
+			</p>
+			<p>
+				The result of a query, is stored on the machine we queried, and we store the pointer to that table produced.
+			</p>
+			<p>
+				To access the data we have to mysqli_fetch_row
+			</p>
+			<p>
+				. Dot concatenates
+			</p>
+			<p>
+				[0] element means everything from the start to the terminator character
+			</p>
+			<p>
+				.row[0]. = means all of the string
+			</p>
+			<p>
+				[1] refers to the element after the terminator character, like a list.
+			</p>
+		</section>
+
+	</main>
 </body>

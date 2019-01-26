@@ -4,64 +4,138 @@
 </html>
 
 <head>
-    <meta charset="utf-8" />
+	<meta charset="utf-8" />
 	<link href="../styles/main.css" rel="stylesheet" />
-    <title>intro page</title>
+	<title>Operating Systems</title>
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="java.html">Java</a></li>
-            <li><a href="compArchitecture.html">Architecture</a></li>
-            <li><a href="networking.html">Networking</a></li>
-            <li><a href="databases.html">Databases</a></li>
-            <li><a href="operatingSystems.html">OS</a></li>
-            <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
-            <li><a href="algorithms.html">Algorithms</a></li>
-        </ul>
-    </nav>
-<main>
-    <section id="main">
-        <h1>Hi this the java module page.</h1>
-        <h3>Relevant coursework can be found here</h3>
-    </section>
-	<section id="l1" class="lectures">
-		<h1>Lecture 1</h1>
-		<p>
-	shift in the nature we use the software demands us to understand Operating systems. 
-	we are beginning to see more flexible OS , that run on different environments. Slowly moving away from bulky software like windows.
-		</p>
-
-	<p>OS - Management of computer resources. </p>
-	
-	<ul>
-		<li>CPU - OS's scheduler manages the CPU</li>
-
-		<li>there's a change in how the resources are being used, since we have more than 1 core, we need a better scheduler.</li> 
-
-		<li>Main Memory - hierarchy of levels  </li>
-	<ul>
-		<li>Cache </li>
-
-		<li>Physical / Virtual -  Virtual was used to expend the space ( using paging) </li>
-	</ul>
-		<li>Storage - local/remote </li>
-
-		<li>I/O devices </li>
+	<nav>
 		<ul>
-		<li>standard inputs/outputs </li>
-
-		<li>sensors </li>
+			<li><a href="java.html">Java</a></li>
+			<li><a href="compArchitecture.html">Architecture</a></li>
+			<li><a href="networking.html">Networking</a></li>
+			<li><a href="databases.html">Databases</a></li>
+			<li><a href="operatingSystems.html">OS</a></li>
+			<li><a href="usabilityEngineering.html">Usability Eng.</a></li>
+			<li><a href="algorithms.html">Algorithms</a></li>
 		</ul>
-		<li>clouds - data centre computers that you can buy to run your applications.  </li>
+	</nav>
+	<main>
+		<section id="main">
+			<h1>Hi this the java module page.</h1>
+			<h3>Relevant coursework can be found here</h3>
+		</section>
+		<section id="l1" class="lectures">
+			<h1>Lecture 1</h1>
+			<p>
+				shift in the nature we use the software demands us to understand Operating systems.
+				we are beginning to see more flexible OS , that run on different environments. Slowly moving away from bulky
+				software like windows.
+			</p>
+			<p>OS - Management of computer resources. </p>
+			<ul>
+				<li>CPU - OS's scheduler manages the CPU</li>
+				<li>there's a change in how the resources are being used, since we have more than 1 core, we need a better
+					scheduler.</li>
+				<li>Main Memory - hierarchy of levels </li>
+				<ul>
+					<li>Cache </li>
+					<li>Physical / Virtual - Virtual was used to expend the space ( using paging) </li>
+				</ul>
+				<li>Storage - local/remote </li>
+				<li>I/O devices </li>
+				<ul>
+					<li>standard inputs/outputs </li>
+					<li>sensors </li>
+				</ul>
+				<li>clouds - data centre computers that you can buy to run your applications. </li>
+				<li>IoT </li>
+			</ul>
+			<p>
+				OS will be needed to run Internet of things. We could say that OS is just providing a set of services.
+				OS needs to adapt to different machines.
+			</p>
+		</section>
+		<section id="l2" class="lectures">
+			<h1>Operating Systems goals</h1>
+			<p>To meet user requirements - quick response, least cost, fairness, best user experience, security</p>
+			<p>to meet system admin requirements - optimal use of resources, energy efficiency , max revenue</p>
+			<h2>Access to Kernel Services</h2>
+			<p> the kernel is a collection of services that user programs may call.</p>
+			<li>Functionality and abstraction </li>
+			<p>
+				system calls enter the kernel mode ( using a trap instruction )
+			</p>
+			<li>parameters in the trap instruction tell which service to run.</li>
+			</p>
+			when a function is complete it goes back to user mode
+			</p>
+			<h1>Execution flows - Threads and process scheduler</h1>
+			<p>process- instance of a running program // context associated with a program that is running</p>
+			<p>Context - variables/values - stored in user space , ID, priority, Current dir etc - stored in kernel space</p>
+			<p>fork() - a unix function , that creates a child process</p>
+			<p>Create, terminate, change program , block, awaken, switch process, schedule process, set/get process params - are
+				all things the os can do with a process</p>
+		</section>
+		<section id="l3" class="lectures">
+			<h1>Threads</h1>
+			<p>Threads - better execution flow than processes and froking (as forking can waste resources by making copies) </p>
+			<p>With threads you can create many execution flows
+				All of the threads are running concurrently.
+				"All the resources available to that process are also available to the threads"
+			</p>
+			<p>All threads are sharing the process context but they also have a distinct context. Time slices are allocated to a
+				process according to its priority. More than one thread can run at a time.</p>
+			<p><b>Affinity of a thread</b> refers to a condition of allocating a thread and its resources to a specific core.
+				This is so all the threads that share context can access the data, which loaded into the cache of that processor</p>
+			<p> <b>Affinity mask</b>- tells the system if you want the threads on the same core, or different core.
+			</p>
+			<h2>Scheduling strategies</h2>
+			<p>FCFS - first come first serve , simplest algorithm for scheduling.
+			</p>
+			<p>Shortest process first- if the CPU is not time-shared, the shortest processes are executed first.
+				<b>Turnaround time </b>- time it takes for a process to wait to be executed and to be executed.
+			</p>
+			<p>Priority scheduling - based on the importance of a process.
+				All Kernel processes have a higher priority than a user processes.
+			</p>
+			<p>after a process completes its time slice its priority is lowered to the next level. Until it reaches the lowest
+				priority then its round-robin strategy.</p>
+			<p> After a process is being blocked, its priority gets higher.
+				The higher the priority the lower the time slice.
+			</p>
+			<p>
+				(2^i)Q - i is the priority number, and q is the time slice.
+				Idle process with lowest priority, is executed to put the computer to sleep. It is executed when nothing else is
+				to execute.
+			</p>
+		</section>
+		<section id="l4" class="lectures">
+			<h1>Scheduler service</h1>
+			<p>embedded systems use avarage turnaround time, general systems use priority to schedule their CPU time.</p>
+			<p>lock- a method of preventing multiple threads from accessing a resource at the same time</p>
+			<p> The system detects issues by knowing which threads want to accesses locked resources. Where theres priority
+				clashes</p>
+			<h3>Two-Level Scheduling</h3>
+			<p> When the main memory is becoming filled with processes:
+				It Keeps higher priority processes in the main memory, and moves lower priority into disk.
+			</p>
+			<p>Embedded systems use deadlines, a process with a shortest deadline is executed</p>
+			<h3>Multi-core systems</h3>
+			<p> Implement Real parallelism: running multiple processes at the same time on different cores.
+			</p>
+			<p> Scheduler main challenge: to identify and predict the resource needs of each process and schedule them in a
+				fashion that will minimize shared resource content, maximize shared resource utilization, and exploit the advantage
+				of shared resources between cores.
+			</p>
+			<p>Scheduler needs to be aware of:</p>	
 
-		<li>IoT </li>
-	</ul>
-		<p> 
-			OS  will be needed to run Internet of things. We could say that OS is just providing a set of services. 
-			OS needs to adapt to different machines.  
-		 </p>
-	</section>
-</main>
+			<ul>
+				<li> Shared resource topology,</li>
+				<li>Resource requirements of processes , and </li>
+				<li> The inter-relationship between the processes</li>
+			</ul>
+		</section>
+	</main>
 </body>
