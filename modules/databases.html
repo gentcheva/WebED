@@ -7,6 +7,13 @@
 	<meta charset="utf-8" />
 	<link href="../styles/main.css" rel="stylesheet" />
 	<title>CS2501-DB</title>
+
+
+	<link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
+	<script src="../highlighjs/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+
 </head>
 
 <body>
@@ -76,9 +83,9 @@
 				We use php to provide an interface for accessing data in the database.
 
 			</p>
-			<pre><code>
+			<pre><code class="php">
 // connect to the database , host - username - password
-$conn_id = mysqli_connect("cs1.ucc.ie", "CS2501","CS2501") or exit( ( "Login Failed"); 
+$conn_id = mysqli_connect("cs1.ucc.ie", "CS2501","CS2501") or exit("Login Failed"); 
 
 // selecting which database table to use
 Mysqli_select_db(%conn_id, "dreamhome"); 
@@ -90,7 +97,7 @@ $result_id = mysqli_query($conn_id,"select count (*) from staff") or exit("Query
 If ($row = mysqli_fetch_row($result_id)) 
 
 // .$row[0] means print from 0 index untill the terminator mark
-	Print("<p> there are currently ".$row[0].</p>" staff members"); 
+	Print(" &lt;p&gt; there are currently ".$row[0]. " staff members &lt;/p&gt;"); 
 
 Mysqli_free_result($result_id); 
 
