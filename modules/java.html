@@ -7,6 +7,9 @@
     <meta charset="utf-8" />
     <link href="../styles/main.css" rel="stylesheet" />
     <title>intro page</title>
+    <link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
+    <script src="../highlighjs/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <body>
@@ -16,7 +19,7 @@
             <li><a href="compArchitecture.html">Architecture</a></li>
             <li><a href="networking.html">Networking</a></li>
             <li><a href="databases.html">Databases</a></li>
-            <li><a href="algorithms.html">OS</a></li>
+            <li><a href="operatingSystems.html">OS</a></li>
             <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
             <li><a href="algorithms.html">Algorithms</a></li>
         </ul>
@@ -53,13 +56,106 @@
                 When constructing the one that fits the parameters given is used</p>
 
         </section>
+        <section id="l2" class="lectures">
+            <h1>Note.java</h1>
+            <pre><code class = "cs hljs java">
+                
+    public class Note {
+        @author name of the author
+        @date 18/01/2019
+        private static final int MAX_NOTE_SIZE = 40; // upper case because it is a class constant
+        private final String comment; // instance attribute
+
+        // private constructor because we have a class method to construct the instances instead,
+        // because they dont construct it themselves, they use the API - class methods to do that
+        private Note (final String text){
+                // class constructors dont have a return type - not even void
+            this.comment = text;
+        }
+        // to call this method
+        // Note.makeNote(...) -this tell you its a class method
+        public static Note makeNote ( final string text){ // class method because it is static
+            // for ease of reading, you should have one return statement in methods
+            final Note result; // by saying its final, we convince the compiler that a value has been assigned
+            if(text.length > MAX_NOTE_SIZE){
+                result = null;
+            }else{
+                result = new Note(text);
+            }
+                return result
+            }
+
+        /**
+        * Get the comment of this Note
+        * @param name .....
+        * @return the comment of this Note
+        */
+
+        public String getComment() { //instance method
+            return comment
+            }
+        public void printComment(){
+            System.out.println(this.comment);
+            }
+        // an object class instance toString , like __str__
+        // all classes in java are a part of the default object class 
+
+        @Override // this tells that we are over writing a method, and if we make a small typo it will tell us
+        public String toString(){
+            return getComment();
+            }
+        }
+                        
+            </code></pre>
+            <h1>main.js</h1>
+            <pre><code>
+    public class Main {
+
+        private static final String PROMPT = "please give input";
+
+        public static void main(final String[] args) {
+
+            System.err.println(PROMPT);
+            final Scanner scanner = new Scanner(System.in);
+            final string text = scanner.next();
+
+            final Note note = Note.makeNote(text);
+            if ( note == null){
+                System.err.println(PROMPT);
+
+            }else{
+                note.printComment();
+            }
+        }
+    }
+                        
+            </code></pre>
+        </section>
+        <section id="l2" class="lectures">
+            <h1>Autoboxing</h1>
+            <pre><code class = "cs hljs java">
+                    Integer x = new Integer(42)
+                    Integer x = 42 // using autoboxing
+            </code></pre>
+            <h1>Unboxing</h1>
+            <pre><code class = "cs hljs java">
+                    int y = x.intValue();
+                    Int z = x // unboxing
+            </code></pre>
+            <h1>Shallow (a == b ) and deep equality (a.equals(b))</h1>
+            <p><b>Shallow equality</b> - easy and fast to implement</p>
+            <p> <b>Deep equality </b>- if variables refer to the same value, also applies in arrays
+                Objects can point to the same value, you don’t get copies of objects that are deeply equal</p>
+            <p><b>Automatic variable </b>- declared within the method and only used in that method</p>
+                <p>Java has a wrapper class for each primitive data type, like <b>Integer</b> for int, <b>Double</b> for double</p>
+        </section>
 
 
         <h1>Java Syntax Basics</h1>
 
         <p>Some basic syntax we have covered so far: </p>
 
-        
+
     </main>
 
 
