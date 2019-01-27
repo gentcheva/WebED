@@ -28,7 +28,7 @@
         <h3>Relevant coursework can be found here</h3>
     </section>
     <section id="l1" class="lectures">
-        <h3>What is computr architecture?</h3>
+        <h3>What is computer architecture? - Lecture 1</h3>
         <p>It is the science and art of designing functioning, performance and cost effiecient hardware components
             the main computer components are:
             <ul>
@@ -66,15 +66,70 @@
                 <li> Hierarchy of memory</li>
                 <li>Performance via prediction </li>
                 <li> Dependability via redundancy  </li>
-
-
-
             </ul>
-
-
-
         </p>
-
+    </section>
+    <section id="l2" class="lectures">
+        <h3>Instruction Set Architecture - Lecture 2</h3>
+        <p>This is th ekey interface between the hardware and the low-level software. ISA defines how to write
+        machine language program, the data types, machine state, adressing mode, isntruction set and I/O model.
+        Different ISAs have different implementations, varying the performance and cost of certain actions.
+        </p>
+        <h3>Hardware Operation Overview</h3>
+        <p>
+            <ul>
+                <li>Datapath: performs operations on data.</li>
+                <li>Control: sequences datapath, memory access.</li>
+                <li>Cache memory: small,fast memory for <i>immediate</i> access to data.</li>
+            </ul>
+        </p>
+        <h3>What is computer performance and how can it be improved? </h3>
+        <p>
+            Must define performance metrics, when comparing machines - eg speed-response time, and throughput - 
+            the workload executed within a specific time frame.
+            <ul>
+                <li>Faster/powerful processor will reduce response time and increase throughput.</li>
+                <li>With 2 identical processor, response time would be the same, but the throughput would increase, 
+                the processors will take turns executing the tasks.  </li>
+            </ul>
+            <i>Time is the only complete and reliable measure of performance->response time and throughput.</i>
+        </p>
+        <h3>Performance is improved by:</h3>
+        <ul>
+            <li>Less clock cycles = better algorithm design.</li>
+            <li>Increasing the clock rate (GHz) -challenging, as all executions must be done faster, like accessing memory, processing data, arithmetic operations etc.</li>
+            <li>Instructions are allocated a certain amount of clockcycles for execution, depending on the instruction.</li>
+        </ul>
+    </section>
+    <section id="l3" class="lectures">
+        <h3>Power and MIPS - Lecture 3</h3>
+        <p><i>Power wall</i> - inability to increase the power, due to the system constraints.Power = Capacitive load x Voltage^2 x frequency.
+        Being close to power wall is not good as the chip will heat up, which overall decreases the speed of the machine, if the necessary cooling mechanisms are not in place.</p>
+        <h3>To improve performance:</h3>
+        Multicore microprocessors - increase throughput, but to gain benefits of multiple cores, you must implement parallel 
+        programming - this is hard to do:
+        <ul>
+            <li>Load balancing to processors.</li>
+            <li>Optimising communication and synchronisation to ensure program runs correctly.</li>
+        </ul>
+        <h3>MIPS ISA - registers</h3>
+        <p>32 x 32 bit register file - registers are used for frequently accessed data - there are many registers some of which are used for specific things/data/use.
+        Default MIPS data unit - word = 32-bit data.</p>
+        <h3>Fields of register instruction format</h3>
+        <p>
+        <ul>
+            <li>op - operation code, eg special</li>
+            <li>rs - register number</li>
+            <li>rt - register number</li>
+            <li>rd - destination register</li>
+            <li>shamt - shift amount</li>
+            <li>function - what you are doing, eg add</li>
+        </ul>
+            Only need to know op and function, to know what operation to do in the ALU.
+            MIPS design -<ul><li>Design principle 1:Smaller is faster - in terms of instruction size and number of registers.</li>
+                <li>Design principle 2: simplicity favours regularity - Regular actions make implementation simpler, also enables <i>higher</i> performance at <i>lower cost.</i>
+                    </li></ul>
+        </p>
     </section>
 
 
