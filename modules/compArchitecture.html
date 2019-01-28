@@ -24,7 +24,7 @@
 
 
     <section id="main">
-        <h1>Welcome, this the Computer architechture module page.</h1>
+        <h1>Welcome, this the Computer architecture module page.</h1>
         <h3>Relevant coursework can be found here</h3>
     </section>
     <section id="l1" class="lectures">
@@ -129,6 +129,42 @@
             MIPS design -<ul><li>Design principle 1:Smaller is faster - in terms of instruction size and number of registers.</li>
                 <li>Design principle 2: simplicity favours regularity - Regular actions make implementation simpler, also enables <i>higher</i> performance at <i>lower cost.</i>
                     </li></ul>
+        </p>
+    </section>
+    <section id="l4" class="lectures">
+        <h3>More MIPS - Memory Operands - Lecture 4</h3>
+        <p>
+            <ul>
+                <li>Main memory is used for <i>composite data</i> - arrays, structures, dynamic data.</li>
+                <li>Data transfer instructions - loads value from memory into register, stores result from register,
+                 to memory.</li>
+                 <li>Memory is byte-addressed - each address identifies an <i>8-bit byte</i></li>
+                 <li>Words are aligned in memory - Word address must be a multiple of 4 - the <i>offset.</i>
+                    <ul>
+                        <li>Mips is BIg Endian - most significant bit is stored at the<i>lowest address.</i></li>
+                    </ul>
+                </li>
+            </ul>
+        </p>
+        <h3>Register VS memory</h3>
+        <p>
+        <ul>
+            <li>Registers are <i>faster</i>, each register is <i>32-bits.</i></li>
+            <li>Memory data requires load and store - more instructions executed - slower.</li>
+            <li>Compiler must use registers as variables as much as possible:
+                <ul><li>register optimisation is <i>important</i></li>
+                </ul>
+            </li>
+        </ul>
+        </p>
+        <h3>Immediate Operands - one operand is a constant within the instruction</h3>
+        <p>For example, <pre><code>addi $s3,$s3, 4</code></pre>Here you are adding immediate values, thats why 
+        the i is in add.NO subtract immediate instruction exists, so you must just use a negative constant:
+        <pre><code>addi $s2,$s1, -1</code></pre>
+        The zero, $zero, register is hardwired ,cannot be overwritten, cannot change the register.
+        It is useful in common operations,moving operands between registers,for example,
+        <pre><code>add $t2, $s1, $zero.</code></pre>
+
         </p>
     </section>
 
