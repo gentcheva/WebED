@@ -164,8 +164,33 @@
         The zero, $zero, register is hardwired ,cannot be overwritten, cannot change the register.
         It is useful in common operations,moving operands between registers,for example,
         <pre><code>add $t2, $s1, $zero.</code></pre>
-
         </p>
+    </section>
+    <section id="l5" class="lectures">
+    <h3>MOre MIPS - Arithmetic - Lecture 5</h3>
+    <p>A <i>mask</i> is data used for bitwise operations.Using a mask, multiple bits can be set either on, off 
+    or inverted from on to off in a single bitwise operation - used for AND operations. <i>Set/i> used for OR operations,
+    4 bits are set to 1, keeping the remaining set to zero - these re important when designing/creating an <i>interface.</i>
+    <i>Invert</i> is used to perform NOT operations, change 0 to 1 and 1 to 0. However,in MIPS, you perform a NOP operation
+    instead of a NOT because: A NOR B == NOT (a OR b).
+    </p>
+    <h3>Branch operation: (un)conditional operations - change sequence of execution</h3>
+    <p>A <i>branch</i> is an instruction which can cause a computer to begin executing a different instruction sequence, deviating
+    from its default behaviour, instead of executing instructions in order. eg lopps, conditions, function calls.
+    For example, <pre><code>beq rs, rt, L1</code></pre> beq = branch equal, here it is checking if th eregisters are equal, if they <i>are</i>,
+    then the 'flow' goes to instruction L1.These instructions use <i>i-format</i> - they have 2 registers and a value.
+    BLT - branch less than, does not exist, because building this hardware circuit would be difficult and costly.Instead, this 
+    operation is represented with 2 basic instruction: <pre><code> Slt rd,rs,rt #set less than, if (rs less than rt) then rd = 1 , else rd =0 , uses i-format, </code></pre>
+    and <pre><code>Slti rt,rs,constant # set less than immediate , if(rs less than constant)then rt = 1 , else rt = 0 </code></pre>
+    <i>Unconditional jumping:</i> jump, allows you to go far in the code, without restraints of conditionals.
+
+
+
+</p>
+
+
+
+
     </section>
 
 

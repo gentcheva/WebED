@@ -110,11 +110,22 @@
                     sorting the list. However, in the final output you want the biggest item at the end, so we must swp the biggest item at the end.
                     <li>Complexity is O(nlogn) to build max heap and turn into a(n) (sorted) array.</li></li>
                 </ul>
-
-
             </p> 
-
-        
+    </section>
+    <section id="l5" class="lectures">
+        <h3>More Sorting - Lecture 5</h3>
+        <p>Divide and conquer strategy:
+            <ul>
+                <li>If problem is easy, do in one step.</li>
+                <li>If problem is more complex, divide it into smaller steps.</li>
+            </ul>
+        <i>Merge sort:</i>splits list into 2, list slicing, keep on splitting until len(list)==2, sort these mini sublists, then merge them together, to make a big, sorted list.
+        Very <i>difficult</i> to do in-place merge sort - increases time complexity.
+        Def merge has <i>worst</i> time complexity of O(n).
+        <i>Each level</i> of the tree has <i>decreasing complexity.</i> 
+        There is logn levels in this tree, how many times can you divide by 2 --> so complexity is O(nlogn).
+        Each cell create <i>new lists</i>, so space complexity is <i>the same</i> as time complexity.
+        </p>
     </section>
 <main>
 </body>
