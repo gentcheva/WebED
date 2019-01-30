@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <link href="../styles/main.css" rel="stylesheet" />
-    <title>intro page</title>
+    <title>Networking</title>
 </head>
 
 <body>
@@ -16,15 +16,15 @@
             <li><a href="compArchitecture.html">Architecture</a></li>
             <li><a href="networking.html">Networking</a></li>
             <li><a href="databases.html">Databases</a></li>
-            <li><a href="algorithms.html">OS</a></li>
+            <li><a href="operatingSystems.html">OS</a></li>
             <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
             <li><a href="algorithms.html">Algorithms</a></li>
         </ul>
     </nav>
 
-
+<main>
     <section class="main">
-        <h1>Welcome, this is the Network Computing module page.</h1>
+        <h1>Network Computing</h1>
         <h3>Relevant coursework can be found here</h3>
     </section>
     <section id="l1" class="lectures">
@@ -134,11 +134,34 @@
             <li>Transmission delay - time to send bits onto link = L/R , L = packet length, R = bandwidth </li>
             <li>Propagation delay  - delay = d/s, d = length of physical length, s = propagation speed medium</li>
             <li>s and R are <i>very</i> different quantities</li>
-
         </ul>
-
-
-
-
     </section>
+
+    <section id="l5" class="lectures">
+            <h1>Lecture 5</h1>
+            <p><i>Traceroute program</i> provides delay measurement from source to router along end to end internet path
+            towards destination.
+            <i>TLL - time to live</i> every time a packet goes through a router, TTl is decremented, if TTL is equal to zero,
+            the router deletes the packet and tells the sender its been deleted. To restrict where the packet goes, you set TTl to a conversation
+            amount.
+            <i>Throughput:</i> rate at which bits are transferred between sender and receiver.
+            <i>Bottlenek link:</i> link on end to end path which constraints the next end to end path.
+            </p>
+            <h3>Dealing with complexity</h3>
+            <p>There is a layered architecture, where similiar netwrok functions are grouped together in distinct layers.
+                These layers are organised in a stack, representing increasing functionality.
+                There exits a layer on layer dependency. Layering is an abstraction which enforces <i>modularity.</i>
+            </p>
+            <h3>Internet Protocol Architecture:</h3>
+            <p>
+                <ul>
+                    <li>Application layer - email, HTTP,BitTorrent.</li>
+                    <li>Transport layer - security, reliability.</li>
+                    <li>Network layer - run on the edge devices of the network.</li>
+                    <li>Link layer - deliver packets across individual link, wifi, deals with low level errors.</li>
+                    <li>Physical layer - operations of a physical communication medium, optic fibers</li>
+                </ul>
+            </p>
+        </section>
+</main>
 </body>

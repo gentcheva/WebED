@@ -6,7 +6,10 @@
 <head>
     <meta charset="utf-8" />
     <link href="../styles/main.css" rel="stylesheet" />
-    <title>intro page</title>
+    <link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
+    <script src="../highlighjs/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <title>Algorithms</title>
 </head>
 
 <body>
@@ -24,7 +27,7 @@
 
 <main>
     <section class="main">
-        <h1>Welcome, this is the Algorithms module page</h1>
+        <h1>Algorithms and Data Structures</h1>
         <h3>Relevant coursework can be found here</h3>
     </section>
     <section id="l1" class="lectures">
@@ -42,14 +45,15 @@
     <section id="l2" class="lectures">
         <h3>Recursive Code - Lecture 2</h3>
         <p>Some sample recursive code:</p>
-            <pre><code>
-            def rsum(mylist):
-            If len(mylist) == 0: - base case, this is needed for recursive code to terminate
-                Return 0
-            Endsum = rsum(mylist[1:]) - recursively calculates the sum of the rest of the list
-            Return mylist[0] + endsum
-            rsum([3,5,1,8,4])
-            </code></pre>
+<pre><code class="python">
+def rsum(mylist):
+    if len(mylist) == 0: # base case, this is needed for recursive code to terminate
+        Return 0
+    endsum = rsum(mylist[1:]) # recursively calculates the sum of the rest of the list
+    return mylist[0] + endsum
+
+rsum([3,5,1,8,4])
+</code></pre>
         <p>
         For <i>every</i> if statement/branch in your code, which produces a result, you <i>must</i>
         have a return statement.
@@ -110,11 +114,22 @@
                     sorting the list. However, in the final output you want the biggest item at the end, so we must swp the biggest item at the end.
                     <li>Complexity is O(nlogn) to build max heap and turn into a(n) (sorted) array.</li></li>
                 </ul>
-
-
             </p> 
-
-        
+    </section>
+    <section id="l5" class="lectures">
+        <h3>More Sorting - Lecture 5</h3>
+        <p>Divide and conquer strategy:
+            <ul>
+                <li>If problem is easy, do in one step.</li>
+                <li>If problem is more complex, divide it into smaller steps.</li>
+            </ul>
+        <i>Merge sort:</i>splits list into 2, list slicing, keep on splitting until len(list)==2, sort these mini sublists, then merge them together, to make a big, sorted list.
+        Very <i>difficult</i> to do in-place merge sort - increases time complexity.
+        Def merge has <i>worst</i> time complexity of O(n).
+        <i>Each level</i> of the tree has <i>decreasing complexity.</i> 
+        There is logn levels in this tree, how many times can you divide by 2 --> so complexity is O(nlogn).
+        Each cell create <i>new lists</i>, so space complexity is <i>the same</i> as time complexity.
+        </p>
     </section>
 <main>
 </body>
