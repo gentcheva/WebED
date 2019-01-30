@@ -45,14 +45,15 @@
     <section id="l2" class="lectures">
         <h3>Recursive Code - Lecture 2</h3>
         <p>Some sample recursive code:</p>
-            <pre><code>
-            def rsum(mylist):
-            If len(mylist) == 0: - base case, this is needed for recursive code to terminate
-                Return 0
-            Endsum = rsum(mylist[1:]) - recursively calculates the sum of the rest of the list
-            Return mylist[0] + endsum
-            rsum([3,5,1,8,4])
-            </code></pre>
+<pre><code class="python">
+def rsum(mylist):
+    if len(mylist) == 0: # base case, this is needed for recursive code to terminate
+        Return 0
+    endsum = rsum(mylist[1:]) # recursively calculates the sum of the rest of the list
+    return mylist[0] + endsum
+
+rsum([3,5,1,8,4])
+</code></pre>
         <p>
         For <i>every</i> if statement/branch in your code, which produces a result, you <i>must</i>
         have a return statement.
