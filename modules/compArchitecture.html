@@ -5,8 +5,12 @@
 
 <head>
     <meta charset="utf-8" />
-    <link href="../styles/main.css" rel="stylesheet" />
-    <title>intro page</title>
+    	<meta charset="utf-8" />
+	<link href="../styles/main.css" rel="stylesheet" />
+	<title>Computer Architecture</title>
+	<link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
+	<script src="../highlighjs/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <body>
@@ -23,8 +27,8 @@
     </nav>
 
 
-    <section id="main">
-        <h1>Welcome, this the Computer architecture module page.</h1>
+    <section class="main">
+        <h1>Computer architecture</h1>
         <h3>Relevant coursework can be found here</h3>
     </section>
     <section id="l1" class="lectures">
@@ -128,7 +132,7 @@
             Only need to know op and function, to know what operation to do in the ALU.
             MIPS design -<ul><li>Design principle 1:Smaller is faster - in terms of instruction size and number of registers.</li>
                 <li>Design principle 2: simplicity favours regularity - Regular actions make implementation simpler, also enables <i>higher</i> performance at <i>lower cost.</i>
-                    </li></ul>
+            </li></ul>
         </p>
     </section>
     <section id="l4" class="lectures">
@@ -158,7 +162,7 @@
         </ul>
         </p>
         <h3>Immediate Operands - one operand is a constant within the instruction</h3>
-        <p>For example, <pre><code>addi $s3,$s3, 4</code></pre>Here you are adding immediate values, thats why 
+        <p>For example, <pre><code class="MIPS">addi $s3,$s3, 4</code></pre>Here you are adding immediate values, thats why 
         the i is in add.NO subtract immediate instruction exists, so you must just use a negative constant:
         <pre><code>addi $s2,$s1, -1</code></pre>
         The zero, $zero, register is hardwired ,cannot be overwritten, cannot change the register.
