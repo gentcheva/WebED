@@ -1,4 +1,12 @@
+img {
+    width: 100%;
+}
 
+.welcome {
+    margin: 10%;
+    margin-top: 0;
+    text-align: center;
+}
 main{
     border: 1px solid black;
     margin-left:3em;
@@ -6,7 +14,7 @@ main{
 }
 
 .main{
-    background-color: turquoise;
+    background-color: #73A8D9;
     padding: 2em;
     margin:5em;
 }
