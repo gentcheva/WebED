@@ -14,5 +14,5 @@
 
 .main h1{
     grid-area: txt;
-
+    font-size: 3.5em;
 }
