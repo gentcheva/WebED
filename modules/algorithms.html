@@ -5,7 +5,12 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>intro page</title>
+    <link href="../styles/main.css" rel="stylesheet" />
+    <link href="../styles/algorithms_styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
+    <script src="../highlighjs/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <title>Algorithms</title>
 </head>
 
 <body>
@@ -15,22 +20,120 @@
             <li><a href="compArchitecture.html">Architecture</a></li>
             <li><a href="networking.html">Networking</a></li>
             <li><a href="databases.html">Databases</a></li>
-            <li><a href="algorithms.html">OS</a></li>
+            <li><a href="operatingSystems.html">OS</a></li>
             <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
             <li><a href="algorithms.html">Algorithms</a></li>
         </ul>
     </nav>
+    <header background="../images/algorithms/algorithms.png">
 
-
-    <section id="main">
-        <h1>Hi this the java module page.</h1>
+        <div>
+        <h1>Algorithms and Data Structures</h1>
         <h3>Relevant coursework can be found here</h3>
+        </div>
+    </header>
+<main>
+   
+    <section id="l1" class="lectures">
+        <h3>Overview of course - Lecture 1</h3>
+        <p>the focus of this course is mainly on the <i>algorithms</i> , as opposed
+            to the data structures,like last year - all coding is done in python again.
+            Implementing the algorithms efficiently:
+            <ul>
+                <li>Finding the shortest path</li>
+                <li>Finding trees - shortest path between nodes</li>
+            </ul>
+            Complexity and analysis, sorting and selecting are also <i>key</i> aims in this semester.
+        </p>
     </section>
+    <section id="l2" class="lectures">
+        <h3>Recursive Code - Lecture 2</h3>
+        <p>Some sample recursive code:</p>
+<pre><code class="python">
+def rsum(mylist):
+    if len(mylist) == 0: # base case, this is needed for recursive code to terminate
+        Return 0
+    endsum = rsum(mylist[1:]) # recursively calculates the sum of the rest of the list
+    return mylist[0] + endsum
 
+rsum([3,5,1,8,4])
+</code></pre>
+        <p>
+        For <i>every</i> if statement/branch in your code, which produces a result, you <i>must</i>
+        have a return statement.
+        Each recursive statement in your code must get closer to the base case, so the code itself terminates.
 
-
-
-
-
-
+        Best steps for Recursive code Analysis: you must understand whats happening as it is executing.
+        <ul>
+            <li>Count worst-case work done by a single activation, without the recursive call</li>
+            <li>Count worst case number of recursive calls</li>
+            <li>Multiply these two counts together</li>
+        </ul>
+        </p>
+    </section>
+    <section id="l3" class="lectures">
+        <h3>Complexity Analysis - Lecture 3</h3>
+        <h4>Different Notations:</h4>
+        <p>
+            <ul>
+                <li>Big Oh - O()</li>
+                <li>Big Omega - Ω()</li>
+                <li>Big Theta - θ()</li>
+            </ul>
+            <li>Big Oh - f(n) &#60;= C*g(n), where C is some constant</li>
+            Hierarchy of functions is strict, for big oh
+            Find the smallest simple function that works for …..
+            <li>Big Omega - Ω - f(n) is - Ω(g(n))</li>
+            C*g(n) &#60;= f(n), where C is some constant, and is always better than f(n)
+            <li>Big Theta - θ - f(n) is θ(g(n)) if its both big oh and big Ω</li>
+            <i>Amortized Analysis - reduce, by small gradual amounts</i>
+            The time used by the cpu,  c.
+            The 'charge' is the amortizes cost of a single append: 3,which is O(1).
+            Amortized complexity = O(1)*, the asterix shows that its the amortized complexity.
+        </p>
+    </section>
+    <section id="l4" class="lectures">
+        <h3>Sorting - Lecture 4</h3>
+        <p>
+            Bubble sort-worst case complexity and swaps is O(n2)
+            You may implement any sorting algorithm with a Priority Queue, which may improve the complexity of some sorts in some cases.
+            <ul>
+                <li>Implementing <i>selection sort</i> with th priority queue does not change its complexity,O(n2), but
+                it is still faster than bubble sort.</li>
+                <li>Implementing <i>insertion sort</i> with the PQ leaves a complexity of O(n) on a sorted list, however, on a n unsorted list, worst
+                case complexity is again O(n2).</li>
+                <li>Implementing <i>Heap sort</i> with PQ, where all action takes place with heap operations.Adding and removing items to the heap 
+                is complexity O(logn), worst case to build the heap is O(nlogn).</li>
+            </ul>    
+        </p>
+            <h3>Another  way to implement these sorting algorithms is with:</h3>
+            <p>  
+                <li>In place sorting</li>
+                This method of sorting is restrictive, as you only sort within the memory space of the list itself.
+                <ul>
+                    <li>Implementing selection sort in this manner, makes the entire list the PQ, which decreases by 1 after each swap.
+                    </li>
+                    <li>Implementing insertion sort in this manner, PQ becomes the first part of the list, the unsorted items,the PQ grows as thr list becomes sorted.</li>
+                    <li>Implementing heap sort in this manner is different to th other heaps,as you must construct a <i>max heap</i> which will grow out the PQ and shrink, when
+                    sorting the list. However, in the final output you want the biggest item at the end, so we must swp the biggest item at the end.
+                    <li>Complexity is O(nlogn) to build max heap and turn into a(n) (sorted) array.</li></li>
+                </ul>
+            </p> 
+    </section>
+    <section id="l5" class="lectures">
+        <h3>More Sorting - Lecture 5</h3>
+        <p>Divide and conquer strategy:
+            <ul>
+                <li>If problem is easy, do in one step.</li>
+                <li>If problem is more complex, divide it into smaller steps.</li>
+            </ul>
+        <i>Merge sort:</i>splits list into 2, list slicing, keep on splitting until len(list)==2, sort these mini sublists, then merge them together, to make a big, sorted list.
+        Very <i>difficult</i> to do in-place merge sort - increases time complexity.
+        Def merge has <i>worst</i> time complexity of O(n).
+        <i>Each level</i> of the tree has <i>decreasing complexity.</i> 
+        There is logn levels in this tree, how many times can you divide by 2 --> so complexity is O(nlogn).
+        Each cell create <i>new lists</i>, so space complexity is <i>the same</i> as time complexity.
+        </p>
+    </section>
+<main>
 </body>
