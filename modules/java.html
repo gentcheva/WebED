@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
     <script src="../highlighjs/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
 </head>
 
 <body>
@@ -25,12 +28,19 @@
         </ul>
     </nav>
 
+
+    <header class="main">
+        <img src="../images/java/java.png" title="Java programming language" alt="The name Java written with java code" />
+        <h1>Introduction to Java</h1>
+    </header>
+
     <main>
-        <section class="main">
-            <img src="../images/java/java.png" title="Java programming language"  alt="The name Java written with java code"  />
-            <h1>Introduction to Java</h1>
-            <p>Relevant coursework can be found here</p>
-        </section>
+        <div>
+            <input id="prev" type="image" src="..\images\utlities\arrowPrev.png"></input>
+            <span class="lectureNum">Lecture 1</span>
+            <input id="next" type="image" src="..\images\utlities\arrowNext.png"></input>
+
+        </div>
         <section id="l1" class="lectures">
             <h1>Introduction to Java</h1>
             <p>
@@ -132,7 +142,7 @@
                         
             </code></pre>
         </section>
-        <section id="l2" class="lectures">
+        <section id="l3" class="lectures">
             <h1>Autoboxing</h1>
             <pre><code class = "cs hljs java">
                     Integer x = new Integer(42)
@@ -148,16 +158,68 @@
             <p> <b>Deep equality </b>- if variables refer to the same value, also applies in arrays
                 Objects can point to the same value, you don’t get copies of objects that are deeply equal</p>
             <p><b>Automatic variable </b>- declared within the method and only used in that method</p>
-                <p>Java has a wrapper class for each primitive data type, like <b>Integer</b> for int, <b>Double</b> for double</p>
+            <p>Java has a wrapper class for each primitive data type, like <b>Integer</b> for int, <b>Double</b> for
+                double</p>
         </section>
+    </main>
 
-
+    <aside>
         <h1>Java Syntax Basics</h1>
 
         <p>Some basic syntax we have covered so far: </p>
+        <h1>Java Keywords</h1>
+        <ul>
+            <li>abstract</li>
+            <li> continue</li>
+            <li> for</li>
+            <li> new</li>
+            <li> switch</li>
+            <li> default</li>
+            <li> package</li>
+            <li> synchronized</li>
+            <li> boolean</li>
+            <li> do</li>
+            <li> if</li>
+            <li> private</li>
+            <li> this</li>
+            <li> break</li>
+            <li> double</li>
+            <li> implements</li>
+            <li> protected</li>
+            <li> throw</li>
+            <li> byte</li>
+            <li> else</li>
+            <li> import</li>
+            <li> public</li>
+            <li> throws</li>
+            <li> case</li>
+            <li> instanceof </li>
+            <li> return </li>
+            <li> transient</li>
+            <li> catch </li>
+            <li> extends </li>
+            <li> int </li>
+            <li> short</li>
+            <li> try</li>
+            <li> char </li>
+            <li> final</li>
+            <li> interface </li>
+            <li> static</li>
+            <li> void</li>
+            <li> class </li>
+            <li> finally </li>
+            <li> long</li>
+            <li> volatile</li>
+            <li> float </li>
+            <li> native </li>
+            <li> super </li>
+            <li> while</li>
+        </ul>
 
+<h3>Syntax to create a new class </h3>
+<pre><code class = "cs hljs java">ClassName variableName = new ClassName(); </code></pre>
+    </aside>
 
-    </main>
 
 
 

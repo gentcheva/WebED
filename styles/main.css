@@ -4,12 +4,6 @@
     text-align: center;
 }
 
-main{
-    border: 1px solid black;
-    margin-left:3em;
-    margin-right: 3em;
-}
-
 nav{
     border: 1px solid black;
     overflow: hidden;
@@ -32,8 +26,93 @@ nav a {
     text-decoration: none;
 }
 
+main{
+    margin-top:2.5em;
+    padding: 0.5em; 
+}
 .lectures{
-    border:2px solid black;
-    padding:2em;
-    margin:2em;
+
+    box-shadow: 3px -7px 35px 4px rgba(127,171,199,0.87);
+    padding:2.5em;
+    margin-top: 2em;
+    border-radius: 2em;
+}
+
+@media only screen and (min-width: 65em) {
+
+    body{
+        padding: 2em;
+        width: 60em;
+        margin-left:auto;
+        margin-right:auto;
+    }
+} 
+
+
+/* images */
+
+/* img{
+    width:20%;
+} */
+
+
+
+/* styling the next and prev buttons */
+
+div{
+    text-align: center;
+ }
+ 
+ #prev, #next{
+     width: 2.2em;
+     padding: 0.5em;
+ }
+ .lectureNum{
+     text-align: center;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     font-size: 1.75em;
+     padding: 1em;
+ }
+ 
+ 
+ 
+ /* styling the header info */
+
+ 
+
+.main{
+    display:grid;
+    grid-template-columns: 70% 30% ;
+    grid-template-rows: auto;
+    grid-template-areas:"txt picture";
+    height: 100%;
+    margin-top:1.5em;
+    margin:1em; 
+    box-shadow: 3px 1px 16px 10px rgba(125,116,125,1);
+}
+.main img{
+    grid-area: picture;
+    width:80%;
+    margin:1em;
+
+}
+
+.main h1{
+    grid-area: txt;
+    font-size: 3em;
+    margin: 1em;
+}
+
+
+/* aside styling */
+
+aside ul{
+    column-count: 5;
+    column-gap: 20px;
+}
+aside{
+    margin:1em;
+    padding:1em;
+    box-shadow: 0px -5px 5px 3px rgba(11,142,186,1);
+
 }

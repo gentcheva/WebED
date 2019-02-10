@@ -3,23 +3,36 @@ $(function(){
     
     var x = $("section").last().attr("id");
     var y = x[1];
-    console.log(x);
-    console.log(y);
-    $(".lectures").hide();
-    $("#l1").show();
 
+    // hide all the lecture notes
+    $(".lectures").hide(); 
+    $("#l1").show(); // shows the first lecture
     // show next 
+    
     $("#next").on("click" , function(){
         $("#l" +(id-1)).fadeOut();
         $("#l"+id).fadeIn();
-        id += 1;
+        $(".lectureNum").html("Lecture "+id);
+
+        if ( (id+1) > y){
+            id = id
+        }else{
+            id += 1;
+        }
+        
     });
 
     // hide current show next
     $("#prev").on("click" , function(){
-        id -= 1;
-        $("#l" +(id-1)).fadeIn();
-        $("#l"+id).fadeOut();
+       
+        console.log(id);
+       
+         if (id>=2){
+            $("#l"+id).fadeOut();
+            $("#l" +(id-1)).fadeIn();
+            $(".lectureNum").html("Lecture "+(id-1));
+            id -= 1;
+        }
+       
     });
-
 });
