@@ -1,3 +1,9 @@
+body,html,main,div,input,input + span{
+    background-color: #85a1bc;
+}
+section{
+    background-color: #afceed;
+}
 .welcome {
     margin: 10%;
     margin-top: 0;
@@ -57,7 +63,7 @@ main{
 
 
 
-/* styling the next and prev buttons */
+/* styling the next and prev buttons + search */
 
 div{
     text-align: center;
@@ -74,7 +80,15 @@ div{
      padding: 1em;
  }
  
- 
+ .lectureSearch{
+     float: left;
+     border-radius: 0.75em;
+     padding:0.3em;
+     margin-bottom: 2.25em;
+     background-color: white;
+     width:200px;
+
+ }
  
  /* styling the header info */
 
@@ -103,9 +117,18 @@ div{
     margin: 1em;
 }
 
+/* styling related code samples to be together */
+.related{
+    display: inline;
+
+}
+
 
 /* aside styling */
-
+aside a{
+    display: block;
+    padding:0.2em;
+}
 aside ul{
     column-count: 5;
     column-gap: 20px;

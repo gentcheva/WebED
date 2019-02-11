@@ -196,15 +196,15 @@
             </p>
         </section>
         <section id="l5" class="lectures">
-            <h3>MOre MIPS - Arithmetic - Lecture 5</h3>
+            <h3>More MIPS - Arithmetic - Lecture 5</h3>
             <p>A <i>mask</i> is data used for bitwise operations.Using a mask, multiple bits can be set either on, off
-                or inverted from on to off in a single bitwise operation - used for AND operations. <i>Set/i> used for
-                    OR operations,
-                    4 bits are set to 1, keeping the remaining set to zero - these re important when designing/creating
-                    an <i>interface.</i>
-                    <i>Invert</i> is used to perform NOT operations, change 0 to 1 and 1 to 0. However,in MIPS, you
-                    perform a NOP operation
-                    instead of a NOT because: A NOR B == NOT (a OR b).
+                or inverted from on to off in a single bitwise operation - used for AND operations. <i>Set</i> used for
+                OR operations,
+                4 bits are set to 1, keeping the remaining set to zero - these re important when designing/creating
+                an <i>interface.</i>
+                <i>Invert</i> is used to perform NOT operations, change 0 to 1 and 1 to 0. However,in MIPS, you
+                perform a NOP operation
+                instead of a NOT because: A NOR B == NOT (a OR b).
             </p>
             <h3>Branch operation: (un)conditional operations - change sequence of execution</h3>
             <p>A <i>branch</i> is an instruction which can cause a computer to begin executing a different instruction
@@ -228,11 +228,82 @@
 
 
             </p>
-
-
-
-
         </section>
+        <section  id="l6" class="lectures">
+            <h1>Lecture 6 Leaf vs Non-leaf Procedures</h1>
+            <p><b>Procedure</b>- jr/jal. Jump statements that direct the flow of the execution of a set of instructions.
+                <b>In C a procedure</b> is like a function in python, and it means the exact same thing in MIPS. Non
+                leaf make a reference to other function( recursion for example)
+            </p>
+            <p>A procedure is called a leaf procedure if it does not call another procedure.
+                If other calls are made then the procedure is <b>Non-Leaf</b>
+            </p>
 
+<pre class="related"><code class="MIPS">
+# Code to show example of leaf            # example for a non leaf procedure                  
+leaf_example:                              addi $sp, $sp, -8 # adjust stack for 2 items
+addi $sp, $sp, -4                          sw $ra, 4($sp) # save return address
+sw $s0, 0($sp)                             sw $a0, 0($sp) # save argument
+add $t0, $a0, $a1                          slti $t0, $a0, 1 # test for n < 1
+add $t1, $a2, $a3                          beq $t0, $zero, L1
+sub $s0, $t0, $t1                          addi $v0, $zero, 1 # if so, result is 1
+add $v0, $s0, $zero                        addi $sp, $sp, 8 # pop 2 items from stack
+lw $s0, 0($sp)                             jr $ra # and return
+addi $sp, $sp, 4                           L1: addi $a0, $a0, -1 # else decrement n 
+jr $ra                                     jal fact # recursive call
+                                           lw $a0, 0($sp) # restore original n
+                                           lw $ra, 4($sp) # and return address
+                                           addi $sp, $sp, 8 # pop 2 items from stack
+                                           mul $v0, $a0, $v0 # multiply to get result
+                                           jr $ra # and return                                              
+</code></pre>
+<pre class="related"><code class="python">
+# the equivalent MIPS code in Python       # equivalent python code
+def leaf_example( g, h, i, j):              def fact(n):
+    f = (g+h) - (i+j)                           if n < 1:
+    return f                                        returnf
+                                                else:
+                                                    return n* fact(n-1)
+</code></pre>
+
+<h1>Supporting large constants</h1>
+    <p>most are 16 bits, this is sufficient for most common case.
+        For occasional 32 bits constants. 
+    </p>
+        <pre><code class="MIPS">
+lui rt, constant
+ori $at, $at, 2304
+        </code></pre>
+    <p>This copies 16 bits to the left to rt, and clears right of rt to 0. Stores the right 16 bits in $at, while left 16bits are 0.</p>
+        </section>
     </main>
+    <aside>
+        <h1>Links and usefull information</h1>
+        <a href="../downloadPDFS/CS2705-Lecture-1-Introduction.pdf" download="lecture1.pdf"> Lecture 1 - readings/
+            basic Computer parts explained / 8 ideas</a>
+        <a href="../downloadPDFS/CS2705-Lecture-2-Computer Performance.pdf" download="lecture2.pdf">lecture 2-Computer
+            abstraction/ performance - formulas</a>
+        <a href="../downloadPDFs/CS2705- Lecture 3 - MIPS Instruction Set Arch 1.pdf" download="lecture3.pdf">Lecture 3
+            -Power performance / MIPS ISA / R-Format </a>
+        <a href="../downloadPDFS/CS2705- Lecture 4 - MIPS Instruction Set Arch 2.pdf" download="lecture4.pdf">Lecture 4
+            - ISA, Instruction formats, Branching and logical operations </a>
+        <a href="../downloadPDFS/CS2705- Lecture5 - MIPS Instruction Set Arch 3.pdf" download="lecture5.pdf">lecture 5
+            - AND OR NOT, branching, conditional operations, Procedure calling,stack, memory layout</a>
+        <a href="../downloadPDFS/CS2705- Lecture 6 - MIPS Instruction Set Arch 4.pdf" download="lecture6.pdf">lecture 6
+            - non/leaf procedure, examples of code</a>
+        <a href="../downloadPDFS/Optimized Multiplier-Divider Examples.pdf" download="example.pdf">Examples</a>
+        <a href="../downloadPDFS/CS2705- Lecture 7 - Computer Arithmetic 1.pdf" download="lecture7.pdf">Lecture 7 -MIPS
+            vs others , Multiplication, addition, optimizing mul, division, hardware for arithmetic ops </a>
+        <a href="../downloadPDFS/CS2705- Lecture 8 - Computer Arithmetic 2.pdf" download="lecture8.pdf">Lecture 8 -
+            Floating point, formats, Single/Double precision</a>
+        <a href="../downloadPDFS/CS2705- Lecture 9 - Computer Arithmetic 3.pdf" download="lecture9.pdf">Lecture 9 -
+            Floating point addition, Multiplication, hardware, examples</a>
+
+
+        <h1>Using MARS for MIPS</h1>
+        <p>MARS is a program we are using in the labs to write and execute MIPS instructions.</p>
+        <p> The download link can be found on moodle, once downloaded. We unpack it and run it with java.<br>
+            <b>java -jar Mars4_5.jar</b><br> </p>
+        <p>Advantages of using MARS, it has : Editor, Assembler, OS emulation, Syscalls</p>
+    </aside>
 </body>
