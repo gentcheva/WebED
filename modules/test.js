@@ -11,10 +11,10 @@ $(function(){
     // show next 
     
     $("#next").on("click" , function(){
-        $("#l" +(id)).fadeOut();
-        $("#l"+(id+1)).fadeIn();
+        $("#l" +(id)).fadeOut(600);
+        $("#l"+(id+1)).fadeIn(1600);
         $(".lectureNum").html("Lecture "+(id+1));
-        if ( (id+1) > y){
+        if ( (id+1) >= y){
             id = id
         }else{
             id += 1;
@@ -25,8 +25,8 @@ $(function(){
     // hide current show next
     $("#prev").on("click" , function(){       
          if (id>=2){
-            $("#l"+id).fadeOut();
-            $("#l" +(id-1)).fadeIn();
+            $("#l"+id).fadeOut(600);
+            $("#l" +(id-1)).fadeIn(1600);
             $(".lectureNum").html("Lecture "+(id-1));
             id -= 1;
         }
@@ -38,8 +38,8 @@ $(function(){
         value = parseInt(value);
         var lastLecture = parseInt(y);
         if (value <= lastLecture){
-            $("#l" +(id)).fadeOut();
-            $("#l"+value).fadeIn();
+            $("#l" +(id)).fadeOut(300);
+            $("#l"+value).fadeIn(600);
             $(".lectureNum").html("Lecture "+ value);
             id = value
             }

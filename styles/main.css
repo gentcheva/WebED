@@ -48,7 +48,7 @@ main{
 
     body{
         padding: 2em;
-        width: 60em;
+        width: 65em;
         margin-left:auto;
         margin-right:auto;
     }
@@ -125,6 +125,10 @@ div{
 
 
 /* aside styling */
+aside h1:first-of-type{
+    text-align: center;
+}
+
 aside a{
     display: block;
     padding:0.2em;
@@ -139,3 +143,24 @@ aside{
     box-shadow: 0px -5px 5px 3px rgba(11,142,186,1);
 
 }
+
+/* search box style */
+
+
+div{
+   text-align: center;
+}
+
+#prev, #next{
+    width: 2.2em;
+    padding: 0.5em;
+}
+.lectureNum{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.75em;
+    padding: 1em;
+}
+
+
+

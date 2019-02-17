@@ -30,7 +30,8 @@
 
 
     <header class="main">
-        <img src="../images/java/java.png" title="Java programming language" alt="The name Java written with java code" />
+        <img src="../images/java/java.png" title="Java programming language"
+            alt="The name Java written with java code" />
         <h1>Introduction to Java</h1>
     </header>
 
@@ -40,6 +41,9 @@
             <span class="lectureNum">Lecture 1</span>
             <input id="next" type="image" src="..\images\utlities\arrowNext.png"></input>
 
+        </div>
+        <div>
+            <input class="lectureSearch" type="text">
         </div>
         <section id="l1" class="lectures">
             <h1>Introduction to Java</h1>
@@ -161,12 +165,120 @@
             <p>Java has a wrapper class for each primitive data type, like <b>Integer</b> for int, <b>Double</b> for
                 double</p>
         </section>
+        <section id="l4" class="lectures">
+            <h1>Creating instances of a class</h1>
+            <p>To use an object you must construct it first, by calling its <b>Constructor</b>:</p>
+            <pre><code  class = "cs hljs java">
+final Rectangle bar = new Rectangle(x, y, width, height);
+
+Classname variablename = new Classname(constructorParams);
+            </code></pre>
+
+            <h2>Method declarations</h2>
+            <p>has to have: </p>
+            <ul>
+                <li>public/private</li>
+                <li>Return type</li>
+                <li>Name of the method</li>
+                <li>names and types of formal parameters if applicable</li>
+            </ul>
+            <pre><code  class = "cs hljs java">
+public int getValue(){
+    return this.value
+}    
+            </code></pre>
+            <h2>Encapsulation</h2>
+            <p> Objects should be self governing. They should control their own instance variables.
+                Hiding instance variables prevents direct access because direct access is unsafe / dangerous.
+                Encapsulation
+                Makes learning/using the API easier</p>
+        </section>
+
+        <section id="l5" class="lectures">
+            <h1>Arrays</h1>
+            <p> In java arrays are Objects which contain other things. They can only have things of a single data type.
+                You can have an array of primitive type reference values or an array with an object reference values.
+                When creating an array, Java assigns default values:
+                <ul>
+                    <li>For int array - numeric 0</li>
+                    <li>For boolean - false</li>
+                    <li>For char - unicode for 0</li>
+                    <li>For object - null</li>
+                </ul>
+            </p>
+
+            <pre><code  class = "cs hljs java">
+    final int[] numbers = new int[10];
+    numbers.length;  // gets the length of the array
+
+    final String[] words = new String[5];
+
+    Dog[] dogs = new Dog[3];
+    dogs[1].bark()
+            </code></pre>
+
+        </section>
+        <section id="l6" class="lectures">
+            <h1>Loops in Java</h1>
+            <pre><code  class = "cs hljs java">
+            x = 0
+            while ( x &#60; 10){
+                System.out.println(x);
+                x++;
+            }      
+        
+            for (int x = 0; x &#60; 10; x++){ 
+            System.out.println(x)); 
+            } 
+        
+            x = 1
+            do {
+                System.out.println(x);
+            }
+            while (x &#60; 10);
+        
+            </code></pre>
+
+
+        </section>
+
+        <section id="l7" class="lectures">
+            <h1>Inheritance</h1>
+            <p>
+                Inheritance - is designed for maintainability of code , for reuse of general code, to avoid duplication,
+                for a constant design.
+                They follow is_a relationship.
+                Class names should be nouns, so it makes sense grammatically.
+                put common code into a Superclass.
+            </p>
+            <h2>Implements vs Extends</h2>
+            <p>
+                <b>Java Extends:</b> used for Inheritance, when using a Superclass to inherit(extend) its
+                functionality.<br>
+                <b>Java implements:</b> used for implementing interfaces (a class that can only contain method
+                signatures and fields, used for polymorphism)
+            </p>
+            <p>
+                Noun analysis : to find out the classes, who is the actor. What should be the main class (superclass)
+                There is a special loop for iterating through a list of objects
+                When designing UML diagrams should have a tree like structure, not a flat design.
+                Calling a superclass constructor
+                <pre><code>
+public  Canine (final String Picture , int hungerLevel){
+    Super( picture, EATS_GRASS, hungerLevel);
+}          
+            </code></pre>
+                There is two types of accessing methods / attributes: <br>
+                <b>Direct and Indirect</b><br>
+                Direct -> example.method1()<br>
+                Indirect -> this.method1() or just method1()
+            </p>
+
+        </section>
     </main>
 
     <aside>
-        <h1>Java Syntax Basics</h1>
-
-        <p>Some basic syntax we have covered so far: </p>
+        <h1>Useful Information and Syntax</h1>
         <h1>Java Keywords</h1>
         <ul>
             <li>abstract</li>
@@ -216,8 +328,35 @@
             <li> while</li>
         </ul>
 
-<h3>Syntax to create a new class </h3>
-<pre><code class = "cs hljs java">ClassName variableName = new ClassName(); </code></pre>
+        <h3>Syntax to create a new class </h3>
+        <pre><code class = "cs hljs java">ClassName variableName = new ClassName(); </code></pre>
+
+        <h1>Loops in Java</h1>
+        <pre><code  class = "cs hljs java">
+    x = 0
+    while ( x &#60; 10){
+        System.out.println(x);
+        x++;
+    }      
+
+    for (int x = 0; x &#60; 10; x++){ 
+    System.out.println(x)); 
+    } 
+
+    x = 1
+    do {
+        System.out.println(x);
+    }
+    while (x &#60; 10);
+
+    </code></pre>
+
+
+        <pre><code class = "cs hljs java">
+            return (eatsGrass ? "grass" : "meat";
+            // if true it returns grass, else meat
+            final ArrayList&#60;Animal&#62;	 animals = new ArrayList&#60;Animal&#62;();
+                            </code></pre>
     </aside>
 
 
