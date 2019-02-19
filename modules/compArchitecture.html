@@ -5,12 +5,16 @@
 
 <head>
     <meta charset="utf-8" />
-    	<meta charset="utf-8" />
-	<link href="../styles/main.css" rel="stylesheet" />
-	<title>Computer Architecture</title>
-	<link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
-	<script src="../highlighjs/highlight.pack.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
+    <meta charset="utf-8" />
+    <link href="../styles/main.css" rel="stylesheet" />
+    <title>Computer Architecture</title>
+    <link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
+    <script src="../highlighjs/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+    <script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
 </head>
 
 <body>
@@ -26,176 +30,282 @@
         </ul>
     </nav>
 
-<main>
-    <section class="main">
+
+    <header class="main">
+        <img src="../images/architecture/architecture.jpg" title="Computer Motherboard" alt="background theme for Computer Architecture showing a Motherboard">
         <h1>Computer architecture</h1>
-        <h3>Relevant coursework can be found here</h3>
-    </section>
-    <section id="l1" class="lectures">
-        <h3>What is computer architecture? - Lecture 1</h3>
-        <p>It is the science and art of designing functioning, performance and cost effiecient hardware components
-            the main computer components are:
-            <ul>
-                <li>Memory and storage</li>
-                <li>I/O devices</li>
-                <li>Processors</li>
-            </ul>
-        </p>
-        <h3>Memory</h3>
-        <p>
-            <ul>
-                <li>Volatile main memory - RAM and cache, loses instructions ad data when power is off.</li>
-                <li>Non-volatile secondary memory </li>
-                <li>Flash memory</li>
-                <li>Magnetic disk - cheaper, more durable, but slower.</li>
-            </ul>
-            Must decide carefully which type of memory you will use/need.
-        </p>
-        <h3>I/O - Networks</h3>
-        <p>
-            <ul>
-                <li>Communication - wifi, bluetooth.
-                </li>
-                <li>Resource sharing - printers and cloud computing</li>
-            </ul>
-        </p>
-        <h3>8 Great ideas for improving design</h3>
-        <p>
-            <ul>
-                <li>Design for Moore's Law </li>
-                <li>Use abstraction to simplify design </li>
-                <li> Make the common case fast</li>
-                <li>Performance via pipelining</li>
-                <li> Performance via parallelism</li>
-                <li> Hierarchy of memory</li>
-                <li>Performance via prediction </li>
-                <li> Dependability via redundancy  </li>
-            </ul>
-        </p>
-    </section>
-    <section id="l2" class="lectures">
-        <h3>Instruction Set Architecture - Lecture 2</h3>
-        <p>This is th ekey interface between the hardware and the low-level software. ISA defines how to write
-        machine language program, the data types, machine state, adressing mode, isntruction set and I/O model.
-        Different ISAs have different implementations, varying the performance and cost of certain actions.
-        </p>
-        <h3>Hardware Operation Overview</h3>
-        <p>
-            <ul>
-                <li>Datapath: performs operations on data.</li>
-                <li>Control: sequences datapath, memory access.</li>
-                <li>Cache memory: small,fast memory for <i>immediate</i> access to data.</li>
-            </ul>
-        </p>
-        <h3>What is computer performance and how can it be improved? </h3>
-        <p>
-            Must define performance metrics, when comparing machines - eg speed-response time, and throughput - 
-            the workload executed within a specific time frame.
-            <ul>
-                <li>Faster/powerful processor will reduce response time and increase throughput.</li>
-                <li>With 2 identical processor, response time would be the same, but the throughput would increase, 
-                the processors will take turns executing the tasks.  </li>
-            </ul>
-            <i>Time is the only complete and reliable measure of performance->response time and throughput.</i>
-        </p>
-        <h3>Performance is improved by:</h3>
-        <ul>
-            <li>Less clock cycles = better algorithm design.</li>
-            <li>Increasing the clock rate (GHz) -challenging, as all executions must be done faster, like accessing memory, processing data, arithmetic operations etc.</li>
-            <li>Instructions are allocated a certain amount of clockcycles for execution, depending on the instruction.</li>
-        </ul>
-    </section>
-    <section id="l3" class="lectures">
-        <h3>Power and MIPS - Lecture 3</h3>
-        <p><i>Power wall</i> - inability to increase the power, due to the system constraints.Power = Capacitive load x Voltage^2 x frequency.
-        Being close to power wall is not good as the chip will heat up, which overall decreases the speed of the machine, if the necessary cooling mechanisms are not in place.</p>
-        <h3>To improve performance:</h3>
-        Multicore microprocessors - increase throughput, but to gain benefits of multiple cores, you must implement parallel 
-        programming - this is hard to do:
-        <ul>
-            <li>Load balancing to processors.</li>
-            <li>Optimising communication and synchronisation to ensure program runs correctly.</li>
-        </ul>
-        <h3>MIPS ISA - registers</h3>
-        <p>32 x 32 bit register file - registers are used for frequently accessed data - there are many registers some of which are used for specific things/data/use.
-        Default MIPS data unit - word = 32-bit data.</p>
-        <h3>Fields of register instruction format</h3>
-        <p>
-        <ul>
-            <li>op - operation code, eg special</li>
-            <li>rs - register number</li>
-            <li>rt - register number</li>
-            <li>rd - destination register</li>
-            <li>shamt - shift amount</li>
-            <li>function - what you are doing, eg add</li>
-        </ul>
-            Only need to know op and function, to know what operation to do in the ALU.
-            MIPS design -<ul><li>Design principle 1:Smaller is faster - in terms of instruction size and number of registers.</li>
-                <li>Design principle 2: simplicity favours regularity - Regular actions make implementation simpler, also enables <i>higher</i> performance at <i>lower cost.</i>
-            </li></ul>
-        </p>
-    </section>
-    <section id="l4" class="lectures">
-        <h3>More MIPS - Memory Operands - Lecture 4</h3>
-        <p>
-            <ul>
-                <li>Main memory is used for <i>composite data</i> - arrays, structures, dynamic data.</li>
-                <li>Data transfer instructions - loads value from memory into register, stores result from register,
-                 to memory.</li>
-                 <li>Memory is byte-addressed - each address identifies an <i>8-bit byte</i></li>
-                 <li>Words are aligned in memory - Word address must be a multiple of 4 - the <i>offset.</i>
-                    <ul>
-                        <li>Mips is BIg Endian - most significant bit is stored at the<i>lowest address.</i></li>
-                    </ul>
-                </li>
-            </ul>
-        </p>
-        <h3>Register VS memory</h3>
-        <p>
-        <ul>
-            <li>Registers are <i>faster</i>, each register is <i>32-bits.</i></li>
-            <li>Memory data requires load and store - more instructions executed - slower.</li>
-            <li>Compiler must use registers as variables as much as possible:
-                <ul><li>register optimisation is <i>important</i></li>
+    </header>
+
+    <main>
+        <div>
+            <input id="prev" type="image" src="..\images\utlities\arrowPrev.png"></input>
+            <span class="lectureNum">Lecture 1</span>
+            <input id="next" type="image" src="..\images\utlities\arrowNext.png"></input>
+
+        </div>
+        <div>
+                <input class="lectureSearch" type="text">
+            </div>
+        <section id="l1" class="lectures">
+            <h3>What is computer architecture?</h3>
+            <p>It is the science and art of designing functioning, performance and cost effiecient hardware components
+                the main computer components are:
+                <ul>
+                    <li>Memory and storage</li>
+                    <li>I/O devices</li>
+                    <li>Processors</li>
                 </ul>
-            </li>
-        </ul>
-        </p>
-        <h3>Immediate Operands - one operand is a constant within the instruction</h3>
-        <p>For example, <pre><code class="MIPS">addi $s3,$s3, 4</code></pre>Here you are adding immediate values, thats why 
-        the i is in add.NO subtract immediate instruction exists, so you must just use a negative constant:
-        <pre><code>addi $s2,$s1, -1</code></pre>
-        The zero, $zero, register is hardwired ,cannot be overwritten, cannot change the register.
-        It is useful in common operations,moving operands between registers,for example,
-        <pre><code>add $t2, $s1, $zero.</code></pre>
-        </p>
-    </section>
-    <section id="l5" class="lectures">
-    <h3>MOre MIPS - Arithmetic - Lecture 5</h3>
-    <p>A <i>mask</i> is data used for bitwise operations.Using a mask, multiple bits can be set either on, off 
-    or inverted from on to off in a single bitwise operation - used for AND operations. <i>Set/i> used for OR operations,
-    4 bits are set to 1, keeping the remaining set to zero - these re important when designing/creating an <i>interface.</i>
-    <i>Invert</i> is used to perform NOT operations, change 0 to 1 and 1 to 0. However,in MIPS, you perform a NOP operation
-    instead of a NOT because: A NOR B == NOT (a OR b).
+            </p>
+            <h3>Memory</h3>
+            <p>
+                <ul>
+                    <li>Volatile main memory - RAM and cache, loses instructions ad data when power is off.</li>
+                    <li>Non-volatile secondary memory </li>
+                    <li>Flash memory</li>
+                    <li>Magnetic disk - cheaper, more durable, but slower.</li>
+                </ul>
+                Must decide carefully which type of memory you will use/need.
+            </p>
+            <h3>I/O - Networks</h3>
+            <p>
+                <ul>
+                    <li>Communication - wifi, bluetooth.
+                    </li>
+                    <li>Resource sharing - printers and cloud computing</li>
+                </ul>
+            </p>
+            <h3>8 Great ideas for improving design</h3>
+            <p>
+                <ul>
+                    <li>Design for Moore's Law </li>
+                    <li>Use abstraction to simplify design </li>
+                    <li> Make the common case fast</li>
+                    <li>Performance via pipelining</li>
+                    <li> Performance via parallelism</li>
+                    <li> Hierarchy of memory</li>
+                    <li>Performance via prediction </li>
+                    <li> Dependability via redundancy </li>
+                </ul>
+            </p>
+        </section>
+        <section id="l2" class="lectures">
+            <h3>Instruction Set Architecture</h3>
+            <p>This is th ekey interface between the hardware and the low-level software. ISA defines how to write
+                machine language program, the data types, machine state, adressing mode, isntruction set and I/O model.
+                Different ISAs have different implementations, varying the performance and cost of certain actions.
+            </p>
+            <h3>Hardware Operation Overview</h3>
+            <p>
+                <ul>
+                    <li>Datapath: performs operations on data.</li>
+                    <li>Control: sequences datapath, memory access.</li>
+                    <li>Cache memory: small,fast memory for <i>immediate</i> access to data.</li>
+                </ul>
+            </p>
+            <h3>What is computer performance and how can it be improved? </h3>
+            <p>
+                Must define performance metrics, when comparing machines - eg speed-response time, and throughput -
+                the workload executed within a specific time frame.
+                <ul>
+                    <li>Faster/powerful processor will reduce response time and increase throughput.</li>
+                    <li>With 2 identical processor, response time would be the same, but the throughput would increase,
+                        the processors will take turns executing the tasks. </li>
+                </ul>
+                <i>Time is the only complete and reliable measure of performance->response time and throughput.</i>
+            </p>
+            <h3>Performance is improved by:</h3>
+            <ul>
+                <li>Less clock cycles = better algorithm design.</li>
+                <li>Increasing the clock rate (GHz) -challenging, as all executions must be done faster, like accessing
+                    memory, processing data, arithmetic operations etc.</li>
+                <li>Instructions are allocated a certain amount of clockcycles for execution, depending on the
+                    instruction.</li>
+            </ul>
+        </section>
+        <section id="l3" class="lectures">
+            <h3>Power and MIPS</h3>
+            <p><i>Power wall</i> - inability to increase the power, due to the system constraints.Power = Capacitive
+                load x Voltage^2 x frequency.
+                Being close to power wall is not good as the chip will heat up, which overall decreases the speed of
+                the machine, if the necessary cooling mechanisms are not in place.</p>
+            <h3>To improve performance:</h3>
+            Multicore microprocessors - increase throughput, but to gain benefits of multiple cores, you must implement
+            parallel
+            programming - this is hard to do:
+            <ul>
+                <li>Load balancing to processors.</li>
+                <li>Optimising communication and synchronisation to ensure program runs correctly.</li>
+            </ul>
+            <h3>MIPS ISA - registers</h3>
+            <p>32 x 32 bit register file - registers are used for frequently accessed data - there are many registers
+                some of which are used for specific things/data/use.
+                Default MIPS data unit - word = 32-bit data.</p>
+            <h3>Fields of register instruction format</h3>
+            <p>
+                <ul>
+                    <li>op - operation code, eg special</li>
+                    <li>rs - register number</li>
+                    <li>rt - register number</li>
+                    <li>rd - destination register</li>
+                    <li>shamt - shift amount</li>
+                    <li>function - what you are doing, eg add</li>
+                </ul>
+                Only need to know op and function, to know what operation to do in the ALU.
+                MIPS design -<ul>
+                    <li>Design principle 1:Smaller is faster - in terms of instruction size and number of registers.</li>
+                    <li>Design principle 2: simplicity favours regularity - Regular actions make implementation
+                        simpler, also enables <i>higher</i> performance at <i>lower cost.</i>
+                    </li>
+                </ul>
+            </p>
+        </section>
+        <section id="l4" class="lectures">
+            <h3>More MIPS - Memory Operands</h3>
+            <p>
+                <ul>
+                    <li>Main memory is used for <i>composite data</i> - arrays, structures, dynamic data.</li>
+                    <li>Data transfer instructions - loads value from memory into register, stores result from
+                        register,
+                        to memory.</li>
+                    <li>Memory is byte-addressed - each address identifies an <i>8-bit byte</i></li>
+                    <li>Words are aligned in memory - Word address must be a multiple of 4 - the <i>offset.</i>
+                        <ul>
+                            <li>Mips is BIg Endian - most significant bit is stored at the<i>lowest address.</i></li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <h3>Register VS memory</h3>
+            <p>
+                <ul>
+                    <li>Registers are <i>faster</i>, each register is <i>32-bits.</i></li>
+                    <li>Memory data requires load and store - more instructions executed - slower.</li>
+                    <li>Compiler must use registers as variables as much as possible:
+                        <ul>
+                            <li>register optimisation is <i>important</i></li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <h3>Immediate Operands - one operand is a constant within the instruction</h3>
+            <p>For example,
+                <pre><code class="MIPS">addi $s3,$s3, 4</code></pre>Here you are adding immediate values, thats why
+                the i is in add.NO subtract immediate instruction exists, so you must just use a negative constant:
+                <pre><code>addi $s2,$s1, -1</code></pre>
+                The zero, $zero, register is hardwired ,cannot be overwritten, cannot change the register.
+                It is useful in common operations,moving operands between registers,for example,
+                <pre><code>add $t2, $s1, $zero.</code></pre>
+            </p>
+        </section>
+        <section id="l5" class="lectures">
+            <h3>More MIPS - Arithmetic</h3>
+            <p>A <i>mask</i> is data used for bitwise operations.Using a mask, multiple bits can be set either on, off
+                or inverted from on to off in a single bitwise operation - used for AND operations. <i>Set</i> used for
+                OR operations,
+                4 bits are set to 1, keeping the remaining set to zero - these re important when designing/creating
+                an <i>interface.</i>
+                <i>Invert</i> is used to perform NOT operations, change 0 to 1 and 1 to 0. However,in MIPS, you
+                perform a NOP operation
+                instead of a NOT because: A NOR B == NOT (a OR b).
+            </p>
+            <h3>Branch operation: (un)conditional operations - change sequence of execution</h3>
+            <p>A <i>branch</i> is an instruction which can cause a computer to begin executing a different instruction
+                sequence, deviating
+                from its default behaviour, instead of executing instructions in order. eg lopps, conditions, function
+                calls.
+                For example,
+                <pre><code>beq rs, rt, L1</code></pre> beq = branch equal, here it is checking if th eregisters are
+                equal, if they <i>are</i>,
+                then the 'flow' goes to instruction L1.These instructions use <i>i-format</i> - they have 2 registers
+                and a value.
+                BLT - branch less than, does not exist, because building this hardware circuit would be difficult and
+                costly.Instead, this
+                operation is represented with 2 basic instruction:
+                <pre><code> Slt rd,rs,rt #set less than, if (rs less than rt) then rd = 1 , else rd =0 , uses i-format, </code></pre>
+                and
+                <pre><code>Slti rt,rs,constant # set less than immediate , if(rs less than constant)then rt = 1 , else rt = 0 </code></pre>
+                <i>Unconditional jumping:</i> jump, allows you to go far in the code, without restraints of
+                conditionals.
+
+
+
+            </p>
+        </section>
+        <section  id="l6" class="lectures">
+            <h1>Leaf vs Non-leaf Procedures</h1>
+            <p><b>Procedure</b>- jr/jal. Jump statements that direct the flow of the execution of a set of instructions.
+                <b>In C a procedure</b> is like a function in python, and it means the exact same thing in MIPS. Non
+                leaf make a reference to other function( recursion for example)
+            </p>
+            <p>A procedure is called a leaf procedure if it does not call another procedure.
+                If other calls are made then the procedure is <b>Non-Leaf</b>
+            </p>
+
+<pre class="related"><code class="MIPS">
+# Code to show example of leaf            # example for a non leaf procedure                  
+leaf_example:                              addi $sp, $sp, -8 # adjust stack for 2 items
+addi $sp, $sp, -4                          sw $ra, 4($sp) # save return address
+sw $s0, 0($sp)                             sw $a0, 0($sp) # save argument
+add $t0, $a0, $a1                          slti $t0, $a0, 1 # test for n < 1
+add $t1, $a2, $a3                          beq $t0, $zero, L1
+sub $s0, $t0, $t1                          addi $v0, $zero, 1 # if so, result is 1
+add $v0, $s0, $zero                        addi $sp, $sp, 8 # pop 2 items from stack
+lw $s0, 0($sp)                             jr $ra # and return
+addi $sp, $sp, 4                           L1: addi $a0, $a0, -1 # else decrement n 
+jr $ra                                     jal fact # recursive call
+                                           lw $a0, 0($sp) # restore original n
+                                           lw $ra, 4($sp) # and return address
+                                           addi $sp, $sp, 8 # pop 2 items from stack
+                                           mul $v0, $a0, $v0 # multiply to get result
+                                           jr $ra # and return                                              
+</code></pre>
+<pre class="related"><code class="python">
+# the equivalent MIPS code in Python       # equivalent python code
+def leaf_example( g, h, i, j):              def fact(n):
+    f = (g+h) - (i+j)                           if n < 1:
+    return f                                        returnf
+                                                else:
+                                                    return n* fact(n-1)
+</code></pre>
+
+<h1>Supporting large constants</h1>
+    <p>most are 16 bits, this is sufficient for most common case.
+        For occasional 32 bits constants. 
     </p>
-    <h3>Branch operation: (un)conditional operations - change sequence of execution</h3>
-    <p>A <i>branch</i> is an instruction which can cause a computer to begin executing a different instruction sequence, deviating
-    from its default behaviour, instead of executing instructions in order. eg lopps, conditions, function calls.
-    For example, <pre><code>beq rs, rt, L1</code></pre> beq = branch equal, here it is checking if th eregisters are equal, if they <i>are</i>,
-    then the 'flow' goes to instruction L1.These instructions use <i>i-format</i> - they have 2 registers and a value.
-    BLT - branch less than, does not exist, because building this hardware circuit would be difficult and costly.Instead, this 
-    operation is represented with 2 basic instruction: <pre><code> Slt rd,rs,rt #set less than, if (rs less than rt) then rd = 1 , else rd =0 , uses i-format, </code></pre>
-    and <pre><code>Slti rt,rs,constant # set less than immediate , if(rs less than constant)then rt = 1 , else rt = 0 </code></pre>
-    <i>Unconditional jumping:</i> jump, allows you to go far in the code, without restraints of conditionals.
+        <pre><code class="MIPS">
+lui rt, constant
+ori $at, $at, 2304
+        </code></pre>
+    <p>This copies 16 bits to the left to rt, and clears right of rt to 0. Stores the right 16 bits in $at, while left 16bits are 0.</p>
+        </section>
+    </main>
+    <aside>
+        <h1>Links and usefull information</h1>
+        <a href="../downloadPDFS/CS2705-Lecture-1-Introduction.pdf" download="lecture1.pdf"> Lecture 1 - readings/
+            basic Computer parts explained / 8 ideas</a>
+        <a href="../downloadPDFS/CS2705-Lecture-2-Computer Performance.pdf" download="lecture2.pdf">lecture 2-Computer
+            abstraction/ performance - formulas</a>
+        <a href="../downloadPDFs/CS2705- Lecture 3 - MIPS Instruction Set Arch 1.pdf" download="lecture3.pdf">Lecture 3
+            -Power performance / MIPS ISA / R-Format </a>
+        <a href="../downloadPDFS/CS2705- Lecture 4 - MIPS Instruction Set Arch 2.pdf" download="lecture4.pdf">Lecture 4
+            - ISA, Instruction formats, Branching and logical operations </a>
+        <a href="../downloadPDFS/CS2705- Lecture5 - MIPS Instruction Set Arch 3.pdf" download="lecture5.pdf">lecture 5
+            - AND OR NOT, branching, conditional operations, Procedure calling,stack, memory layout</a>
+        <a href="../downloadPDFS/CS2705- Lecture 6 - MIPS Instruction Set Arch 4.pdf" download="lecture6.pdf">lecture 6
+            - non/leaf procedure, examples of code</a>
+        <a href="../downloadPDFS/Optimized Multiplier-Divider Examples.pdf" download="example.pdf">Examples</a>
+        <a href="../downloadPDFS/CS2705- Lecture 7 - Computer Arithmetic 1.pdf" download="lecture7.pdf">Lecture 7 -MIPS
+            vs others , Multiplication, addition, optimizing mul, division, hardware for arithmetic ops </a>
+        <a href="../downloadPDFS/CS2705- Lecture 8 - Computer Arithmetic 2.pdf" download="lecture8.pdf">Lecture 8 -
+            Floating point, formats, Single/Double precision</a>
+        <a href="../downloadPDFS/CS2705- Lecture 9 - Computer Arithmetic 3.pdf" download="lecture9.pdf">Lecture 9 -
+            Floating point addition, Multiplication, hardware, examples</a>
 
 
-
-</p>
-
-
-
-
-    </section>
-
-</main>
+        <h1>Using MARS for MIPS</h1>
+        <p>MARS is a program we are using in the labs to write and execute MIPS instructions.</p>
+        <p> The download link can be found on moodle, once downloaded. We unpack it and run it with java.<br>
+            <b>java -jar Mars4_5.jar</b><br> </p>
+        <p>Advantages of using MARS, it has : Editor, Assembler, OS emulation, Syscalls</p>
+    </aside>
 </body>

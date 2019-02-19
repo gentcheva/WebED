@@ -6,9 +6,15 @@
 <head>
     <meta charset="utf-8" />
     <link href="../styles/main.css" rel="stylesheet" />
+    <link href="../styles/algorithms_styles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
     <script src="../highlighjs/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
+   
+    <script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
+
     <title>Algorithms</title>
 </head>
 
@@ -24,14 +30,24 @@
             <li><a href="algorithms.html">Algorithms</a></li>
         </ul>
     </nav>
+    <header background="../images/algorithms/algorithms.png">
 
-<main>
-    <section class="main">
+        <div>
         <h1>Algorithms and Data Structures</h1>
-        <h3>Relevant coursework can be found here</h3>
-    </section>
+        </div>
+    </header>
+<main>
+    <div>
+        <input id="prev" type="image" src="..\images\utlities\arrowPrev.png"></input>
+        <span class="lectureNum">Lecture 1</span>
+        <input id="next" type="image" src="..\images\utlities\arrowNext.png"></input>
+
+    </div>
+    <div>
+            <input class="lectureSearch" type="text">
+        </div>
     <section id="l1" class="lectures">
-        <h3>Overview of course - Lecture 1</h3>
+        <h3>Overview of course</h3>
         <p>the focus of this course is mainly on the <i>algorithms</i> , as opposed
             to the data structures,like last year - all coding is done in python again.
             Implementing the algorithms efficiently:
@@ -43,7 +59,7 @@
         </p>
     </section>
     <section id="l2" class="lectures">
-        <h3>Recursive Code - Lecture 2</h3>
+        <h3>Recursive Code</h3>
         <p>Some sample recursive code:</p>
 <pre><code class="python">
 def rsum(mylist):
@@ -68,7 +84,7 @@ rsum([3,5,1,8,4])
         </p>
     </section>
     <section id="l3" class="lectures">
-        <h3>Complexity Analysis - Lecture 3</h3>
+        <h3>Complexity Analysis</h3>
         <h4>Different Notations:</h4>
         <p>
             <ul>
@@ -89,7 +105,7 @@ rsum([3,5,1,8,4])
         </p>
     </section>
     <section id="l4" class="lectures">
-        <h3>Sorting - Lecture 4</h3>
+        <h3>Sorting</h3>
         <p>
             Bubble sort-worst case complexity and swaps is O(n2)
             You may implement any sorting algorithm with a Priority Queue, which may improve the complexity of some sorts in some cases.
@@ -117,7 +133,7 @@ rsum([3,5,1,8,4])
             </p> 
     </section>
     <section id="l5" class="lectures">
-        <h3>More Sorting - Lecture 5</h3>
+        <h3>More Sorting</h3>
         <p>Divide and conquer strategy:
             <ul>
                 <li>If problem is easy, do in one step.</li>

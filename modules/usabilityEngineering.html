@@ -6,6 +6,8 @@
 <head>
     <meta charset="utf-8" />
     <link href="../styles/main.css" rel="stylesheet" />
+    <script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
     <title>Usability Engineering</title>
 </head>
 
@@ -22,13 +24,23 @@
         </ul>
     </nav>
 
+
+    <header class="main">
+        <h1>Usability Engineering</h1>
+    </header>
     <main>
-        <section class="main">
-            <h1>Usability Engineering</h1>
-            <h3>Relevant coursework can be found here</h3>
-        </section>
+
+        <div>
+            <input id="prev" type="image" src="..\images\utlities\arrowPrev.png"></input>
+            <span class="lectureNum">Lecture 1</span>
+            <input id="next" type="image" src="..\images\utlities\arrowNext.png"></input>
+
+        </div>
+        <div>
+                <input class="lectureSearch" type="text">
+            </div>
         <section id="l1" class="lectures">
-            <h2>Human Computer Interaction - Lecture 1</h2>
+            <h2>Human Computer Interaction</h2>
             <p>In the past,usability was <b>not</b> a concern, people interacted with the machines
                 in their own language, in binary. People did not think that computers could be used for anything else
                 a apart from work or calculations.
@@ -40,7 +52,7 @@
             </p>
         </section>
         <section id="l2" class="lectures">
-            <h2>Changes in HCI - Lecture 2</h2>
+            <h2>Changes in HCI</h2>
             <p>Over the years, software become more <i>complex</i>, it became <b>context-aware.</b>
                 <li>Its like a <i>gps system</i>, it is aware of where you are and when you're on the move.</li>
                 <li>Some software has been adapted for visually impaired/blind people - <b>screenreaders.</b></li>
@@ -52,7 +64,7 @@
             </p>
         </section>
         <section id="l3" class="lectures">
-            <h2>Interfaces - Lecture 3</h2>
+            <h2>Interfaces</h2>
             <h3>The question is, what <i>makes</i> a good interface?</h3>
             <p>
                 <li>A <i>good</i> interface must be easy to use, learn and remember, low execution time and user
@@ -69,14 +81,15 @@
             </p>
         </section>
         <section id="l4" class="lectures">
-            <h2>Human Memory - Lecture 4</h2>
+            <h2>Human Memory</h2>
             <p>Humans receive data in different forms, via senses such as <i>sight, sound</i> and <i>touch.</i>
                 <li>Humans store this data in <b>two</b> types of memory - short-term and long-term memory.</li>
                 <li>In <i>STM,</i> data is stored in very short periods of time, however, these periods of time may
                     be increased in the absense of other stimuli/distractions.</li>
                 Info passes from the STM into the LTM, due to repitition and the meaning of the info.
                 If the short term memory is i any way damaged, then the data will be stored for an even sorter amount
-                of time,and no new long term memories would be created. Basically, you could'nt learn any new info or skills.
+                of time,and no new long term memories would be created. Basically, you could'nt learn any new info or
+                skills.
             </p>
 
 

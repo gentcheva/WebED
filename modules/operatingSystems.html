@@ -6,6 +6,8 @@
 <head>
 	<meta charset="utf-8" />
 	<link href="../styles/main.css" rel="stylesheet" />
+	<script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
 	<title>Operating Systems</title>
 </head>
 
@@ -21,11 +23,21 @@
 			<li><a href="algorithms.html">Algorithms</a></li>
 		</ul>
 	</nav>
+
+	<header class="main">
+		<h1>Operating Systems</h1>
+	</header>
+
 	<main>
-		<section class="main">
-			<h1>Operating Systems</h1>
-			<h3>Relevant coursework can be found here</h3>
-		</section>
+		<div>
+			<input id="prev" type="image" src="..\images\utlities\arrowPrev.png"></input>
+			<span class="lectureNum">Lecture 1</span>
+			<input id="next" type="image" src="..\images\utlities\arrowNext.png"></input>
+
+		</div>
+		<div>
+				<input class="lectureSearch" type="text">
+			</div>
 		<section id="l1" class="lectures">
 			<h1>Lecture 1</h1>
 			<p>
@@ -129,7 +141,7 @@
 				fashion that will minimize shared resource content, maximize shared resource utilization, and exploit the advantage
 				of shared resources between cores.
 			</p>
-			<p>Scheduler needs to be aware of:</p>	
+			<p>Scheduler needs to be aware of:</p>
 
 			<ul>
 				<li> Shared resource topology,</li>

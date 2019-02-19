@@ -6,6 +6,9 @@
 <head>
     <meta charset="utf-8" />
     <link href="../styles/main.css" rel="stylesheet" />
+
+    <script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
     <title>Networking</title>
 </head>
 
@@ -22,13 +25,24 @@
         </ul>
     </nav>
 
-<main>
-    <section class="main">
+
+    <header class="main">
+        <img src="../images/comp_networking/networking.jpg" title="Web servers" alt="Room with web servers" />
         <h1>Network Computing</h1>
-        <h3>Relevant coursework can be found here</h3>
-    </section>
-    <section id="l1" class="lectures">
-        <h3>Overview - Lecture 1</h3>
+    </header>
+
+    <main>
+        <div>
+            <input id="prev" type="image" src="..\images\utlities\arrowPrev.png"></input>
+            <span class="lectureNum">Lecture 1</span>
+            <input id="next" type="image" src="..\images\utlities\arrowNext.png"></input>
+
+        </div>
+        <div>
+                <input class="lectureSearch" type="text">
+            </div>
+        <section id="l1" class="lectures">
+            <h3>Overview - Lecture 1</h3>
             <p>
                 <ul>
                     <li>Section 1: networking basics</li>
@@ -37,118 +51,130 @@
                     <li>Section 4: network management</li>
                 </ul>
             </p>
-        <h3>What is the internet? - Lecture 2</h3>
-        <p>
-            <ul>
-                <li>Millions of connected devices</li>
-                <li>Communication links - optic fibers, copper radio</li>
-                <li>Protocols - TCP/IP, HTTP and Skype</li>
-                <li>Network of networks: loose hierarchy - public internet vs intranet</li>
-                <li>Internet Standards - standardized by IETF</li>
-            </ul>
-        </p>
-        <h3>Internet as a service</h3>
-        <p>Communication infrastructure which enables:
-            <ul>
-                <li>Emails, games, e-commerce, file sharing</li>
-                Communcation services provided to apps: reliability, security, speed, streaming - continuity
-                <li>reliable data delivery</li>
-            </ul>
-        </p>
-        <h3>What is a protocol?</h3>
-        <p>Rules governing the exchange or transmission of data. Creates no ambiguity in communications.</p>
-        <h3>Network structure</h3>
-        <p><i>Network edge</i> contains useful devices, with processors and memory, whereas the core of the netwrok contains
-            dumb machines, due to their proximity to the <i>central office</i></p>
-    </section>
-    <section id="l2" class="lectures">
-        <h3>How to connect end systems to edge router?</h3>
+            <h3>What is the internet? - Lecture 2</h3>
+            <p>
+                <ul>
+                    <li>Millions of connected devices</li>
+                    <li>Communication links - optic fibers, copper radio</li>
+                    <li>Protocols - TCP/IP, HTTP and Skype</li>
+                    <li>Network of networks: loose hierarchy - public internet vs intranet</li>
+                    <li>Internet Standards - standardized by IETF</li>
+                </ul>
+            </p>
+            <h3>Internet as a service</h3>
+            <p>Communication infrastructure which enables:
+                <ul>
+                    <li>Emails, games, e-commerce, file sharing</li>
+                    Communcation services provided to apps: reliability, security, speed, streaming - continuity
+                    <li>reliable data delivery</li>
+                </ul>
+            </p>
+            <h3>What is a protocol?</h3>
+            <p>Rules governing the exchange or transmission of data. Creates no ambiguity in communications.</p>
+            <h3>Network structure</h3>
+            <p><i>Network edge</i> contains useful devices, with processors and memory, whereas the core of the netwrok
+                contains
+                dumb machines, due to their proximity to the <i>central office</i></p>
+        </section>
+        <section id="l2" class="lectures">
+            <h3>How to connect end systems to edge router?</h3>
             <ul>
                 <li>Residential access nets</li>
                 <li>Institutional access networks, ie uni</li>
                 <li>Mobile access networks - must keep in mind the bandwidth - amount of data per unit of time</li>
                 <li>measured in bits, not bytes</li>
             </ul>
-        <h3>Connecting to the internet</h3>
-        <p>Internet connection is done via the telephone network, its the most logical thing to do, seeing as the telephone network 
-        is already set up. Voice is converted to digital, on different frequencies to the data, so there is no interferance.
-        Data rate and width frequencies are proportionate - <i>this</i>i> is the <i>bandwidth</i>
-        Signal fades/decays over distance - the closer you are to the central office, the better the connection.
-        </p>
-    </section>
-    <section id="l3" class="lectures">
-        <h3>Network Core</h3>
-        <p>
-        <ul>
-            <li>mesh of interconnected routers</li>
-            <li>The fundamental question: How is data transferred through thr network:</li>
-            <li>Circuit switching: used in telephone network</li>
-            <li>Packet switching: used for internet</li>
-        </ul>
-        </p>
-        <h3>Circuit switching - Lecture 3</h3>
-        <p>
-            A call/session, no dedicated resources.Finds path in the network, reserves <i>capacity</i> at <i>each</i> link
-            as it passes through, for good call quality. Must have a <i>call set up</i> ie this computer  and that computer
-            want to 'talk'.
-            How to divide the capacity?
-	        Must divide into pieces, if its not used, it is an idle piece -  frequency and time division.
-	        May divide frequency based on users, or on time - FDM and TDM.
-            Every slot needs 64kbits so the conversation seems to be <i>continuous.</i>
-        </p>
-        <h3>Packet switching - reliable network.</h3>
-        <p>
-            You don't tell the network that 2 machines wish to communicate, the network does not know what you want to do.
-           <ul>
-            <li>No pieces - resources used as needed.</li>
-            <li>Congestion - When the amount of data sent into network may exceed the network capacity</li>
-            <li>Statistical multiplexing - Share link among packet statistically, based on demand</li>
-            </ul>
-        </p>
-        <h3>Packet vs circuit switching</h3>
-        <p>
-        Packet switching allows more users to use the network.Circuit switching limits the number of users.
-        For data that comes in bursts, when you're not sure how much data there is, and how many users there are and you don’t know their demand, 
-        packet switching is ideal.Congestion occurs in packet switching - not a reliable network.
-        </p>
-    </section>
-    <section id="l4" class="lectures">
-        <h3>Network of networks - Lecture 4</h3>
-        <p>	Roughly hierarchical 
+            <h3>Connecting to the internet</h3>
+            <p>Internet connection is done via the telephone network, its the most logical thing to do, seeing as the
+                telephone network
+                is already set up. Voice is converted to digital, on different frequencies to the data, so there is no
+                interferance.
+                Data rate and width frequencies are proportionate - <i>this</i>i> is the <i>bandwidth</i>
+                Signal fades/decays over distance - the closer you are to the central office, the better the
+                connection.
+            </p>
+        </section>
+        <section id="l3" class="lectures">
+            <h3>Network Core</h3>
+            <p>
+                <ul>
+                    <li>mesh of interconnected routers</li>
+                    <li>The fundamental question: How is data transferred through thr network:</li>
+                    <li>Circuit switching: used in telephone network</li>
+                    <li>Packet switching: used for internet</li>
+                </ul>
+            </p>
+            <h3>Circuit switching - Lecture 3</h3>
+            <p>
+                A call/session, no dedicated resources.Finds path in the network, reserves <i>capacity</i> at <i>each</i>
+                link
+                as it passes through, for good call quality. Must have a <i>call set up</i> ie this computer and that
+                computer
+                want to 'talk'.
+                How to divide the capacity?
+                Must divide into pieces, if its not used, it is an idle piece - frequency and time division.
+                May divide frequency based on users, or on time - FDM and TDM.
+                Every slot needs 64kbits so the conversation seems to be <i>continuous.</i>
+            </p>
+            <h3>Packet switching - reliable network.</h3>
+            <p>
+                You don't tell the network that 2 machines wish to communicate, the network does not know what you want
+                to do.
+                <ul>
+                    <li>No pieces - resources used as needed.</li>
+                    <li>Congestion - When the amount of data sent into network may exceed the network capacity</li>
+                    <li>Statistical multiplexing - Share link among packet statistically, based on demand</li>
+                </ul>
+            </p>
+            <h3>Packet vs circuit switching</h3>
+            <p>
+                Packet switching allows more users to use the network.Circuit switching limits the number of users.
+                For data that comes in bursts, when you're not sure how much data there is, and how many users there
+                are and you don’t know their demand,
+                packet switching is ideal.Congestion occurs in packet switching - not a reliable network.
+            </p>
+        </section>
+        <section id="l4" class="lectures">
+            <h3>Network of networks - Lecture 4</h3>
+            <p> Roughly hierarchical
+                <ul>
+                    <li>Tier 1 ISPs is at the center</li>
+                    <li>Tier 1 providers interconnect, peer, privately</li>
+                    <li>SLA - service level agreement</li>
+                    <li>2 ISPs: smaller companies - offer internet services on a regional basis.</li>
+                    Connect to one or more tier 1 ISPs, possibly other tier 2 ISPs
+                </ul>
+            </p>
+            <h3>Network performance</h3>
+            How do loss and delay/latency occur?
+            <p>Packets queue in router buffers.
+                Packets are ready to send, they just must be pushed onto the link.</p>
+            <h3>4 Sources if packets delay</h3>
             <ul>
-                <li>Tier 1 ISPs is at the center</li>
-                <li>Tier 1 providers interconnect, peer, privately</li> 
-                <li>SLA - service level agreement</li>
-                <li>2 ISPs: smaller companies - offer internet services on a regional basis.</li>
-            Connect to one or more tier 1 ISPs, possibly other tier 2 ISPs
+                <li>Nodal processing - checking bit errors, determine output link </li>
+                <li>Queuing - time waiting at output link for transmission </li>
+                <li>Transmission delay - time to send bits onto link = L/R , L = packet length, R = bandwidth </li>
+                <li>Propagation delay - delay = d/s, d = length of physical length, s = propagation speed medium</li>
+                <li>s and R are <i>very</i> different quantities</li>
             </ul>
-        </p>
-        <h3>Network performance</h3>
-        How do loss and delay/latency occur?
-        <p>Packets queue in router buffers.
-        Packets are ready to send, they just must be pushed onto the link.</p>
-        <h3>4 Sources if packets delay</h3>
-        <ul>
-            <li>Nodal processing - checking bit errors, determine output link </li>
-            <li>Queuing - time waiting at output link for transmission </li>
-            <li>Transmission delay - time to send bits onto link = L/R , L = packet length, R = bandwidth </li>
-            <li>Propagation delay  - delay = d/s, d = length of physical length, s = propagation speed medium</li>
-            <li>s and R are <i>very</i> different quantities</li>
-        </ul>
-    </section>
+        </section>
 
-    <section id="l5" class="lectures">
+        <section id="l5" class="lectures">
             <h1>Lecture 5</h1>
-            <p><i>Traceroute program</i> provides delay measurement from source to router along end to end internet path
-            towards destination.
-            <i>TLL - time to live</i> every time a packet goes through a router, TTl is decremented, if TTL is equal to zero,
-            the router deletes the packet and tells the sender its been deleted. To restrict where the packet goes, you set TTl to a conversation
-            amount.
-            <i>Throughput:</i> rate at which bits are transferred between sender and receiver.
-            <i>Bottlenek link:</i> link on end to end path which constraints the next end to end path.
+            <p><i>Traceroute program</i> provides delay measurement from source to router along end to end internet
+                path
+                towards destination.
+                <i>TLL - time to live</i> every time a packet goes through a router, TTl is decremented, if TTL is
+                equal to zero,
+                the router deletes the packet and tells the sender its been deleted. To restrict where the packet goes,
+                you set TTl to a conversation
+                amount.
+                <i>Throughput:</i> rate at which bits are transferred between sender and receiver.
+                <i>Bottlenek link:</i> link on end to end path which constraints the next end to end path.
             </p>
             <h3>Dealing with complexity</h3>
-            <p>There is a layered architecture, where similiar netwrok functions are grouped together in distinct layers.
+            <p>There is a layered architecture, where similiar netwrok functions are grouped together in distinct
+                layers.
                 These layers are organised in a stack, representing increasing functionality.
                 There exits a layer on layer dependency. Layering is an abstraction which enforces <i>modularity.</i>
             </p>
@@ -163,5 +189,5 @@
                 </ul>
             </p>
         </section>
-</main>
+    </main>
 </body>

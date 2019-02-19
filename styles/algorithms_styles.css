@@ -1,0 +1,10 @@
+header{
+    background-image:url(../images/algorithms/algorithms.jpg);
+    margin:1em;
+    padding:0.5em;
+}
+header div{
+    color:white; 
+    font-size: 2em;
+    text-align: center;
+}

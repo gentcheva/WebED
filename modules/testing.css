@@ -1,0 +1,17 @@
+div{
+   text-align: center;
+}
+
+#prev, #next{
+    width: 2.2em;
+    padding: 0.5em;
+}
+.lectureNum{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.75em;
+    padding: 1em;
+}
+
+
+
