@@ -125,6 +125,7 @@ div{
 
 
 /* aside styling */
+
 aside h1:first-of-type{
     text-align: center;
 }
@@ -133,9 +134,23 @@ aside a{
     display: block;
     padding:0.2em;
 }
-aside ul{
+
+aside ul {
+    column-count: 2;
+
+}
+@media only screen and (min-width: 20em) {
+    aside ul {
+    column-count: 3;
+
+}
+}
+
+@media only screen and (min-width: 45em) {
+    aside ul {
     column-count: 5;
-    column-gap: 20px;
+
+}
 }
 aside{
     margin:1em;
@@ -143,6 +158,8 @@ aside{
     box-shadow: 0px -5px 5px 3px rgba(11,142,186,1);
 
 }
+
+
 
 /* search box style */
 
@@ -162,5 +179,51 @@ div{
     padding: 1em;
 }
 
+#rows{
+    text-align: left;
+}
+
+#diagram{
+    grid-area: picture;
+    padding:2em 2em 0em 0em;
+    width: 25em;
+}
+
+@media only screen and (min-width: 62em) {
+#rows{
+    display:grid;
+    grid-template-columns: 50% 50% ;
+    grid-template-rows: auto;
+    grid-template-areas:"table picture";
+}
+#diagram{
+    width: 95%;
+}
+}
 
 
+/* styling the table */
+table {
+    grid-area: table;
+    margin:1.5em;
+    border-collapse: collapse;
+}
+caption{
+    font-weight: bold;
+    font-size: 1.5em;
+    padding:0.5em;
+}
+td {
+    text-align: center;
+}
+
+th {
+    padding:0.3em;
+    text-align: center;
+    font-size: 1.25em;
+
+}
+
+td, th {
+    border: 2px solid black;   
+}
