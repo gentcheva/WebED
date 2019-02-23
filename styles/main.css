@@ -1,29 +1,61 @@
-body,html,main,div,input,input + span{
-    background-color: #85a1bc;
+/* black shade #272727
+    gray shade #747474
+    orange shade #FF652F
+    yellow shade #FFE400
+    green shade #14A76C
+
+*/
+
+/* General look and feel of the website */
+
+/* do a gradient here for background */
+body{
+    background: rgb(110,110,110);
+    background: linear-gradient(90deg, rgba(110,110,110,1) 0%, rgba(59,59,59,1) 20%, rgba(36,36,36,1) 50%, rgba(59,59,59,1) 80%, rgba(110,110,110,1) 100%);
+
+
+}
+nav,header{
+    background-color: #272727
 }
 section{
-    background-color: #afceed;
+    background-color: #272727;
 }
+*{
+    color:white;
+}
+
+h1,h2,h3,caption{
+    color: #FF652F;
+
+}
+b{
+color:#14A76C;
+}
+
 .welcome {
     margin: 10%;
     margin-top: 0;
     text-align: center;
 }
+pre{
+    border: 1px solid #14A76C;
+}
 
+/* Menu styling -------------- */
 nav{
-    border: 1px solid black;
-    overflow: hidden;
+    border: 0.125em solid #FFE400;
+    border-radius: 1em;
     width: 100%;
 }
 
 nav ul {
-    
     list-style: none;
     margin-right: auto;
     margin-left: auto;
     display: inline-flex;
-    
 }
+
 nav li{
     margin:1em;
 }
@@ -32,23 +64,27 @@ nav a {
     text-decoration: none;
 }
 
+/* ------------------------------------------ */
+
+/* lecture slides styling ------------------ */
 main{
     margin-top:2.5em;
     padding: 0.5em; 
 }
 .lectures{
 
-    box-shadow: 3px -7px 35px 4px rgba(127,171,199,0.87);
+    box-shadow: 3px -5px 20px 3px #FFE400;
     padding:2.5em;
     margin-top: 2em;
     border-radius: 2em;
 }
+/* ------------------------------------ */
 
 @media only screen and (min-width: 65em) {
 
     body{
         padding: 2em;
-        width: 65em;
+        width: 60em;
         margin-left:auto;
         margin-right:auto;
     }
@@ -56,11 +92,6 @@ main{
 
 
 /* images */
-
-/* img{
-    width:20%;
-} */
-
 
 
 /* styling the next and prev buttons + search */
@@ -78,23 +109,23 @@ div{
      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
      font-size: 1.75em;
      padding: 1em;
+     background: transparent;
  }
  
  .lectureSearch{
+     background-color: #272727;
      float: left;
      border-radius: 0.75em;
      padding:0.3em;
      margin-bottom: 2.25em;
-     background-color: white;
      width:200px;
+     border:0.125em #FF652F solid;
 
  }
+ /* -------------------------------- */
  
  /* styling the header info */
-
- 
-
-.main{
+header{
     display:grid;
     grid-template-columns: 70% 30% ;
     grid-template-rows: auto;
@@ -104,18 +135,33 @@ div{
     margin:1em; 
     box-shadow: 3px 1px 16px 10px rgba(125,116,125,1);
 }
-.main img{
+header img{
     grid-area: picture;
     width:80%;
     margin:1em;
 
 }
 
-.main h1{
+header h1{
     grid-area: txt;
     font-size: 3em;
     margin: 1em;
 }
+
+#algo{
+    background-image:url(../images/algorithms/algorithms.jpg);
+    margin:1em;
+    padding:0.5em;
+}
+#algo div{
+    color:white; 
+    font-size: 2em;
+    text-align: center;
+    background: transparent;
+}
+
+/* ----------------------------------------- */
+
 
 /* styling related code samples to be together */
 .related{
@@ -158,12 +204,9 @@ aside{
     box-shadow: 0px -5px 5px 3px rgba(11,142,186,1);
 
 }
-
-
+/* ---------------------------------------------------- */
 
 /* search box style */
-
-
 div{
    text-align: center;
 }
@@ -188,6 +231,11 @@ div{
     padding:2em 2em 0em 0em;
     width: 25em;
 }
+
+/* ----------------------------------- */
+
+
+
 
 @media only screen and (min-width: 62em) {
 #rows{
@@ -225,5 +273,5 @@ th {
 }
 
 td, th {
-    border: 2px solid black;   
+    border: 2px solid #FFE400;   
 }
