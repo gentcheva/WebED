@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <meta charset="utf-8" />
     <meta charset="utf-8" />
@@ -33,9 +32,15 @@
             alt="background theme for Computer Architecture showing a Motherboard">
         <h1>CA Overview</h1>
     </header>
+    <div style="text-align: center; padding:0.5em; font-size: 1.3em;">
+    <a href="../downloadPDFS/Review-1.pdf" download="Review1.pdf">Questions and answers - Review 1 - MIPS code</a><br>
+    <a href="../downloadPDFS/Review-2.pdf" download="Review2.pdf">Questions and answers - Review 2 - Pipelined processor, Direct mapped cache</a>
+    </div>
     <main class="overview">
-        <h1>Introduction</h1>
+        <h1>Introduction &#8691;</h1>
         <section>
+            <img src="../images/architecture/designPrinciple.JPG" alt="describes MIPS design principle" width="500px">
+
             <h2>Computer abstraction</h2>
             <ol class="overviewLists">
                 <li>Design for <b>Moore's law </b>- rapid change</li>
@@ -47,6 +52,7 @@
                 <li>Performance via <b>prediction</b>, good guesses</li>
                 <li>Dependability via <b>redundancy</b>, redundant components incase failure</li>
             </ol>
+
             <ul class="overviewLists">
                 <li><b>Datapath</b> - performs operations on data</li>
                 <li><b>Control</b> - sequences datapath, memory access</li>
@@ -54,7 +60,7 @@
             </ul>
         </section>
 
-        <h1>Computer performance</h1>
+        <h1>Computer performance &#8691;</h1>
         <section>
             <h1>Metrics</h1>
             <ul class="overviewLists">
@@ -67,6 +73,8 @@
                 <li><b>Clock period:</b> duration of a clock cycle</li>
                 <li><b>Clock frequency (rate)</b>: cycles per second</li>
             </ul>
+            <h2>Key Metrics</h2>
+            <p><b>Response time and Throughput</b></p>
             <h2>Relative performance = 1/Execution time</h2>
             <p>X is n time faster than Y --- Y/X = n</p>
             <p>ex. time A = 10s , time B = 15s, 15/10 = 1.5 times is A faster than B</p>
@@ -76,15 +84,100 @@
                 measured in GHz, 1 GHz is 1 x 10^9, clock cycles are calculated - time x GHx x 10^9 , eg. 10 x 2 x 10^9
             </p>
             <p>total Clock cycles is (how many clock cycles per instruction ) X ( execution time ) x ( GHz) </p>
+            <h2>Instruction count and cycles per instruction</h2>
+            <p><b>IC = Instruction count</b></p>
+            <p><b>Clock cycle </b> = IC X cycles per instruction </p>
+            <p>CPU time = IC X CPI X Clock Cycle Time = IC X CPI / Clock Rate</p>
+            <h2>Performance</h2>
+            <p>CPU time = ( IC / program ) X (Clock cycles / IC ) X (seconds / clock cycle) </p>
+            <p>Performance depends on : <br><b>Algorithm, language, compiler ISA </b>-- ( all affect IC and CPI )</p>
+            <h2>Power</h2>
+            <p>Power wall - to avoid drastically increasing power demand for a system they lowered voltage to 1V, then
+                they struggled to reduce it further.</p>
+            <p>Power = Capacitive load X voltage^2 X frequency </p>
 
+            <p> <a href="https://www.igi-global.com/dictionary/power-wall/38994">power wall</a> - Is used to describe
+                the limitation of CPU clock rate, CPU design, and CPU performance improvements due to
+                the thermal and electrical power constraints, i.e., technological inability to use higher clock rates,
+                more transistor switching elements, to use higher volumes of electrical energy and inability to maintain
+                overall thermal stability</p>
         </section>
-        <h1>MIPS ISA</h1>
-        <h1>Computer Arithmetics</h1>
-        <h1>The Processor</h1>
-        <h1>The memory</h1>
-        <h1>Parallel processing</h1>
-    </main>
 
+        <h1>MIPS ISA &#8691;</h1>
+        <section>
+            <img src="../images/architecture/CAobjective.JPG"
+                alt="identify, understand and determine objectives for MIPS ISA" width="350px">
+
+            <h2>MIPS registers 32 registers 32Bits each</h2>
+            <ul class="overviewLists">
+                <li>$zero - constant 0</li>
+                <li>$v0 - $v1 - Syscall codes go here</li>
+                <li>$a0 - $a3 - Arguments, $a0 hold values for printing</li>
+                <li>$t0 -$t9 - temporary registers / general purpose</li>
+                <li>$s0-$s7 - Saved </li>
+                <li>$gp ( global p.), $sp(stack p.), $fp(frame p.), $ra(return address)</li>
+            </ul>
+
+            <h2>Study logical and conditional instructions - slt, ori, sll, srl....</h2>
+            <img src="../images/architecture/MIPS.JPG" alt="table view of most of MIPS ISA commands " width="750px">
+
+            <h2>Memory operands</h2>
+            <p>MIPS is Big Endian ( most significant byte last ), words are aligned in memory ( multiples of 4 ),
+                byte-addressed , register are faster to access than memory.</p>
+
+            <p> <b>Make common case fast</b> -addi ( immediate ) ( adding 1 ) for loops</p>
+            <p><b>Smaller is faster</b> - fast clock cycle time, smaller instruction size, num of registers all aid speed</p>
+            <p><b>Simplicity favours regularity </b>- implementation is simpler and it enables higher performance at lower cost
+            </p>
+            <h2>R-Format Instructions 32 Bits</h2>
+            <table>
+                <tr>
+                    <th>op</th>
+                    <th>rs</th>
+                    <th>rt</th>
+                    <th>rd</th>
+                    <th>shamt</th>
+                    <th>funct</th>
+                </tr>
+                <tr>
+                    <td>6bit operation code</td>
+                    <td>5bit first source register</td>
+                    <td>5bit second source register</td>
+                    <td>5bit destination register</td>
+                    <td>5bit Shift amount</td>
+                    <td>6bit function code - extends opcode</td>
+                </tr>
+            </table>
+
+            <h2>I-Format Instructions 32 Bits</h2>
+            <table>
+                <tr>
+                    <th>op</th>
+                    <th>rs</th>
+                    <th>rt</th>
+                    <th>Constant or address</th>
+                </tr>
+                <tr>
+                    <td>6bit operation code</td>
+                    <td>5bit first source register</td>
+                    <td>5bit second source register</td>
+                    <td>16bit constant/address</td>
+                </tr>
+            </table>
+        </section>
+        <h1>Computer Arithmetics &#8691;</h1>
+
+        <section>
+            <h2>Unsigned / Two's Complement</h2>
+            <p>unsigned 0 - 2^32 -1 <br> signed - 2^31 to + 2^31<br> <b>bit 31 is the sign bit - 1 negative, 0
+                    positive</b></p>
+            <p><b>Non-negative numbers have the same unsigned
+                    and 2s-complement representation</b></p>
+        </section>
+        <h1>The Processor &#8691;</h1>
+        <h1>The memory &#8691;</h1>
+        <h1>Parallel processing &#8691;</h1>
+    </main>
 </body>
 
 </html>

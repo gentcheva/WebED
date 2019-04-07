@@ -85,6 +85,9 @@ main{
     margin-top: 2em;
     border-radius: 2em;
 }
+ .overview td {
+    padding:0.7em;
+}
 .overviewLists li{
     padding-bottom:0.5em;
 }
