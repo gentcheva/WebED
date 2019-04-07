@@ -13,7 +13,6 @@ body{
     background: rgb(110,110,110);
     background: linear-gradient(90deg, rgba(110,110,110,1) 0%, rgba(59,59,59,1) 20%, rgba(36,36,36,1) 50%, rgba(59,59,59,1) 80%, rgba(110,110,110,1) 100%);
 
-
 }
 nav,header{
     background-color: #272727
@@ -62,7 +61,9 @@ nav li{
 nav a {
     font-size: 1.5em;
     text-decoration: none;
+    
 }
+
 
 /* ------------------------------------------ */
 
@@ -72,11 +73,20 @@ main{
     padding: 0.5em; 
 }
 .lectures{
-
     box-shadow: 3px -5px 20px 3px #FFE400;
     padding:2.5em;
     margin-top: 2em;
     border-radius: 2em;
+}
+
+.overview section {
+    box-shadow: 3px -5px 20px 3px #FFE400;
+    padding:2.5em;
+    margin-top: 2em;
+    border-radius: 2em;
+}
+.overviewLists li{
+    padding-bottom:0.5em;
 }
 /* ------------------------------------ */
 

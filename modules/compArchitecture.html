@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-</html>
-
 <head>
     <meta charset="utf-8" />
     <meta charset="utf-8" />
@@ -32,11 +30,13 @@
 
 
     <header>
-        <img src="../images/architecture/architecture.jpg" title="Computer Motherboard" alt="background theme for Computer Architecture showing a Motherboard">
+        <img src="../images/architecture/architecture.jpg" title="Computer Motherboard"
+            alt="background theme for Computer Architecture showing a Motherboard">
         <h1>Computer architecture</h1>
     </header>
 
     <main>
+            <h3><a href="CAoverview.html">Module overview</a></h3>
         <div>
             <input id="prev" type="image" src="..\images\utlities\arrowPrev.png"></input>
             <span class="lectureNum">Lecture 1</span>
@@ -44,8 +44,8 @@
 
         </div>
         <div>
-                <input class="lectureSearch" type="text">
-            </div>
+            <input class="lectureSearch" type="text">
+        </div>
         <section id="l1" class="lectures">
             <h3>What is computer architecture?</h3>
             <p>It is the science and art of designing functioning, performance and cost effiecient hardware components
@@ -90,7 +90,7 @@
         </section>
         <section id="l2" class="lectures">
             <h3>Instruction Set Architecture</h3>
-            <p>This is th ekey interface between the hardware and the low-level software. ISA defines how to write
+            <p>This is the key interface between the hardware and the low-level software. ISA defines how to write
                 machine language program, the data types, machine state, adressing mode, isntruction set and I/O model.
                 Different ISAs have different implementations, varying the performance and cost of certain actions.
             </p>
@@ -152,7 +152,8 @@
                 </ul>
                 Only need to know op and function, to know what operation to do in the ALU.
                 MIPS design -<ul>
-                    <li>Design principle 1:Smaller is faster - in terms of instruction size and number of registers.</li>
+                    <li>Design principle 1:Smaller is faster - in terms of instruction size and number of registers.
+                    </li>
                     <li>Design principle 2: simplicity favours regularity - Regular actions make implementation
                         simpler, also enables <i>higher</i> performance at <i>lower cost.</i>
                     </li>
@@ -231,7 +232,7 @@
 
             </p>
         </section>
-        <section  id="l6" class="lectures">
+        <section id="l6" class="lectures">
             <h1>Leaf vs Non-leaf Procedures</h1>
             <p><b>Procedure</b>- jr/jal. Jump statements that direct the flow of the execution of a set of instructions.
                 <b>In C a procedure</b> is like a function in python, and it means the exact same thing in MIPS. Non
@@ -241,7 +242,7 @@
                 If other calls are made then the procedure is <b>Non-Leaf</b>
             </p>
 
-<pre class="related"><code class="MIPS">
+            <pre class="related"><code class="MIPS">
 # Code to show example of leaf            # example for a non leaf procedure                  
 leaf_example:                              addi $sp, $sp, -8 # adjust stack for 2 items
 addi $sp, $sp, -4                          sw $ra, 4($sp) # save return address
@@ -259,7 +260,7 @@ jr $ra                                     jal fact # recursive call
                                            mul $v0, $a0, $v0 # multiply to get result
                                            jr $ra # and return                                              
 </code></pre>
-<pre class="related"><code class="python">
+            <pre class="related"><code class="python">
 # the equivalent MIPS code in Python       # equivalent python code
 def leaf_example( g, h, i, j):              def fact(n):
     f = (g+h) - (i+j)                           if n < 1:
@@ -268,15 +269,16 @@ def leaf_example( g, h, i, j):              def fact(n):
                                                     return n* fact(n-1)
 </code></pre>
 
-<h1>Supporting large constants</h1>
-    <p>most are 16 bits, this is sufficient for most common case.
-        For occasional 32 bits constants. 
-    </p>
-        <pre><code class="MIPS">
+            <h1>Supporting large constants</h1>
+            <p>most are 16 bits, this is sufficient for most common case.
+                For occasional 32 bits constants.
+            </p>
+            <pre><code class="MIPS">
 lui rt, constant
 ori $at, $at, 2304
         </code></pre>
-    <p>This copies 16 bits to the left to rt, and clears right of rt to 0. Stores the right 16 bits in $at, while left 16bits are 0.</p>
+            <p>This copies 16 bits to the left to rt, and clears right of rt to 0. Stores the right 16 bits in $at,
+                while left 16bits are 0.</p>
         </section>
     </main>
     <aside>
@@ -300,7 +302,34 @@ ori $at, $at, 2304
             Floating point, formats, Single/Double precision</a>
         <a href="../downloadPDFS/CS2705- Lecture 9 - Computer Arithmetic 3.pdf" download="lecture9.pdf">Lecture 9 -
             Floating point addition, Multiplication, hardware, examples</a>
+        <a href="../downloadPDFS/CS2705- Lecture 10 - The Processor.pdf" download="lecture10.pdf">Lecture 10- The
+            Processor, CPU overview, Datapath, instruction fetching </a>
+        <a href="../downloadPDFS/CS2705- Lecture 11 - The Processor 2.pdf" download="lecture11.pdf">Lecture 11-
+            Pipelining, branching, Diagrams for datapath (I, R, load), performance</a>
+        <a href="../downloadPDFS/CS2705- Lecture 12 - The Processor 3.pdf" download="lecture12.pdf">Lecture 12- 5
+            pipeline stages, performance, pipeline/structure/data hazards, solutions</a>
+        <a href="../downloadPDFS/CS2705- Lecture 13 - The Processor 4.pdf" download="lecture13.pdf">Lecture 13-
+            Stalling, optimizing branch stall, branch prediction, Diagrams, Forwarding hardware</a>
+        <a href="../downloadPDFS/CS2705- Lecture 14 - The Processor 5.pdf" download="lecture14.pdf">Lecture 14- Pipeline
+            control, When to forward/conditions,branch/data hazards,2-bit predictor</a>
+        <a href="../downloadPDFS/CS2705- Lecture 15 - The Processor 6.pdf" download="lecture15.pdf">Lecture
+            15-Exceptions, Interrupts,handling, special registers -Status Cause, Co-proc 0, eret</a>
 
+        <a href="../downloadPDFS/CS2705- Lecture 16 - The Memory 1.pdf" download="lecture16.pdf">Lecture 16-Exceptions
+            in pipeline, example diagrams, Computer memory, Hierarchy,fundamental design questions,cache size,direct
+            mapped</a>
+        <a href="../downloadPDFS/CS2705- Lecture 17 - The Memory 2.pdf" download="lecture17.pdf">Lecture 17- block
+            sizes, cache miss/hit, cache performance -> calculations</a>
+
+        <a href="../downloadPDFS/CS2705- Lecture 18 - The Memory 3.pdf" download="lecture18.pdf">Lecture 18- Improving
+            cache performance, examples, Fully associative cache, replacement policies, reducing miss penalty,Matrix
+            storage</a>
+        <a href="../downloadPDFS/CS2705- Lecture 19 - The Virtual Memory.pdf" download="lecture19.pdf">Lecture 19-
+            Virtual memory, Address translation,page faults, TLB,Replacement and writes</a>
+        <a href="../downloadPDFS/2019-Lecture 20 - Parallel processing 1.pdf" download="lecture20.pdf">Lecture 20-
+            Parallel processing, powerwall, hardware and software parallelism,SISD, MISD, SIMD, MIMD , ILP</a>
+        <a href="../downloadPDFS/Lecture 21 - Parallel processing 2.pdf" download="lecture21.pdf">Lecture 21-Vector
+            processors, vector instructions, multithreading -> different approaches, GPU architecture/operation</a>
 
         <h1>Using MARS for MIPS</h1>
         <p>MARS is a program we are using in the labs to write and execute MIPS instructions.</p>
@@ -309,3 +338,4 @@ ori $at, $at, 2304
         <p>Advantages of using MARS, it has : Editor, Assembler, OS emulation, Syscalls</p>
     </aside>
 </body>
+</html>

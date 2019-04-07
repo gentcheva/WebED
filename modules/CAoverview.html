@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <link href="../styles/main.css" rel="stylesheet" />
+    <title>Computer Architecture</title>
+    <link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
+    <script src="../highlighjs/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+    <script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="java.html">Java</a></li>
+            <li><a href="compArchitecture.html">Architecture</a></li>
+            <li><a href="networking.html">Networking</a></li>
+            <li><a href="databases.html">Databases</a></li>
+            <li><a href="operatingSystems.html">OS</a></li>
+            <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
+            <li><a href="algorithms.html">Algorithms</a></li>
+        </ul>
+    </nav>
+    <header>
+        <img src="../images/architecture/architecture.jpg" title="Computer Motherboard"
+            alt="background theme for Computer Architecture showing a Motherboard">
+        <h1>CA Overview</h1>
+    </header>
+    <main class="overview">
+        <h1>Introduction</h1>
+        <section>
+            <h2>Computer abstraction</h2>
+            <ol class="overviewLists">
+                <li>Design for <b>Moore's law </b>- rapid change</li>
+                <li>Use <b>abstraction</b> to simplify design</li>
+                <li>Make <b>common case fast</b>, on simple cases</li>
+                <li>performance via <b>pipelining</b>, sequential pattern of parallelism</li>
+                <li>performance via <b>Parallelism</b></li>
+                <li>arrange into a <b>Hierarchy of memory</b></li>
+                <li>Performance via <b>prediction</b>, good guesses</li>
+                <li>Dependability via <b>redundancy</b>, redundant components incase failure</li>
+            </ol>
+            <ul class="overviewLists">
+                <li><b>Datapath</b> - performs operations on data</li>
+                <li><b>Control</b> - sequences datapath, memory access</li>
+                <li><b>Cache memory</b></li>
+            </ul>
+        </section>
+
+        <h1>Computer performance</h1>
+        <section>
+            <h1>Metrics</h1>
+            <ul class="overviewLists">
+                <li><b>Response time</b> - time taken for task to complete</li>
+                <li><b>Throughput </b>- total work done per unit time</li>
+                <li><b>Elapsed time </b>- total time to complete a task, including processing, I/O, OS overhead idle
+                    time</li>
+                <li><b>CPU time</b> - time processing a given job no - I/O,other job shares</li>
+                <li><b>CPU clocking </b>- clock cycle, within you should execute 1 instruction</li>
+                <li><b>Clock period:</b> duration of a clock cycle</li>
+                <li><b>Clock frequency (rate)</b>: cycles per second</li>
+            </ul>
+            <h2>Relative performance = 1/Execution time</h2>
+            <p>X is n time faster than Y --- Y/X = n</p>
+            <p>ex. time A = 10s , time B = 15s, 15/10 = 1.5 times is A faster than B</p>
+            <h2>CPU performance</h2>
+            <p> CPU time = CPU clock cycles X clock cycle time = CPU clock cycles/ clock rate</p>
+            <p>Improved performance by reducing clock cycles and increasing clock rate , clock rate is clock speed
+                measured in GHz, 1 GHz is 1 x 10^9, clock cycles are calculated - time x GHx x 10^9 , eg. 10 x 2 x 10^9
+            </p>
+            <p>total Clock cycles is (how many clock cycles per instruction ) X ( execution time ) x ( GHz) </p>
+
+        </section>
+        <h1>MIPS ISA</h1>
+        <h1>Computer Arithmetics</h1>
+        <h1>The Processor</h1>
+        <h1>The memory</h1>
+        <h1>Parallel processing</h1>
+    </main>
+
+</body>
+
+</html>
