@@ -33,8 +33,10 @@
         <h1>CA Overview</h1>
     </header>
     <div style="text-align: center; padding:0.5em; font-size: 1.3em;">
-    <a href="../downloadPDFS/Review-1.pdf" download="Review1.pdf">Questions and answers - Review 1 - MIPS code</a><br>
-    <a href="../downloadPDFS/Review-2.pdf" download="Review2.pdf">Questions and answers - Review 2 - Pipelined processor, Direct mapped cache</a>
+        <a href="../downloadPDFS/Review-1.pdf" download="Review1.pdf">Questions and answers - Review 1 - MIPS
+            code</a><br>
+        <a href="../downloadPDFS/Review-2.pdf" download="Review2.pdf">Questions and answers - Review 2 - Pipelined
+            processor, Direct mapped cache</a>
     </div>
     <main class="overview">
         <h1>Introduction &#8691;</h1>
@@ -126,8 +128,10 @@
                 byte-addressed , register are faster to access than memory.</p>
 
             <p> <b>Make common case fast</b> -addi ( immediate ) ( adding 1 ) for loops</p>
-            <p><b>Smaller is faster</b> - fast clock cycle time, smaller instruction size, num of registers all aid speed</p>
-            <p><b>Simplicity favours regularity </b>- implementation is simpler and it enables higher performance at lower cost
+            <p><b>Smaller is faster</b> - fast clock cycle time, smaller instruction size, num of registers all aid
+                speed</p>
+            <p><b>Simplicity favours regularity </b>- implementation is simpler and it enables higher performance at
+                lower cost
             </p>
             <h2>R-Format Instructions 32 Bits</h2>
             <table>
@@ -164,15 +168,88 @@
                     <td>16bit constant/address</td>
                 </tr>
             </table>
-        </section>
-        <h1>Computer Arithmetics &#8691;</h1>
 
+            <h2>I-Format Instructions 32 Bits</h2>
+            <table>
+                <tr>
+                    <th>op</th>
+                    <th>Address</th>
+                </tr>
+                <tr>
+                    <td>6bit operation code</td>
+                    <td>26bit address</td>
+                </tr>
+            </table>
+            <h2>AND OR, NOT</h2>
+            <p>And- useful to mask bits ( selecting some bits and setting rest to 0 ) <br>OR - sets bits to 1 and leaves
+                other unchanged <br>NOT- inverts bits</p>
+
+            <h2>Branching</h2>
+            <p>Why not BLT - its too complicated and would require extra clock cycles per instruction, instead it uses
+                two basic instructions to implement the logic , e.g blt is translated to  slti and bne , bge - slt/i( depending if comparing with register or immediate) and beq</p>
+            <p>The more complex branch statements are composed of bne, beq, slt, sltu, slti, sltiu,  </p>
+            <p> e.g beq with immediate value -  beq $t6, 1 , procedure -- add $1 , $0,1 and beq $1, $t6</p>
+            <p><b>Signed vs Unsigned</b> (slt - set on less than ). slt/slti - signed, sltu/sltui unsigned. They yield
+                different results as values differ whether they are interpreted as signed/unsigned</p>
+            <h2>Procedure calling</h2>
+            <p><b>jal - jump and link</b> address of this instruction is in $ra so it can be used to return, jr $ra
+                returns to the place jal was called from</p>
+            <p><b>Leaf procedure</b> - when no calls/links are made to the procedure <br> <b>Non-leaf procedure</b> -
+                when its calling another procedure ( jal ) </p>
+            <h2>Supporting large constants</h2>
+            <p>up to 16 bit constants are supported ( make common case fast ), but sometimes 32 bits are needed.
+                Combination of lui and ori commands are used. <br> lui - copies 16bits to the left of rt ( from R/I
+                format) and clears the right 16 bits <br> ori- combines the 2 16bits</p>
+            <h2>Key differences between RISC and CISC</h2>
+            <ul class="overviewLists">
+                <li>The way memory is addressed</li>
+                <li>Branches are executed</li>
+                <li>Exceptions are handled</li>
+                <li>RISC use less power ( in embedded systems )</li>
+            </ul>
+        </section>
+
+        <h1>Computer Arithmetics &#8691;</h1>
         <section>
+            <a href="../downloadPDFS/Optimized Multiplier-Divider Examples.pdf"> Examples of optimized multiplier and
+                optimized divider</a>
             <h2>Unsigned / Two's Complement</h2>
             <p>unsigned 0 - 2^32 -1 <br> signed - 2^31 to + 2^31<br> <b>bit 31 is the sign bit - 1 negative, 0
                     positive</b></p>
             <p><b>Non-negative numbers have the same unsigned
                     and 2s-complement representation</b></p>
+            <p> <b>To convert to Twos compliment</b> invert each binary digit, and then add 1 to the total</p>
+            <h2>Addition</h2>
+            <p>0+0 = 0 , overflow 0 || 0+1 = 1 , overflow = 0 || 1+1 = 0 , overflow = 1 || 0 + 1 + 1 = 1 + 1 || 1+1+1 =
+                1 , overflow = 1</p>
+            <h2>Subtraction twos complement</h2>
+            <p>Change the number to Twos Complement, then perform addition e.g 6 - 2 will become 6 + (-2) <br> the
+                result, if beginning with 0 is a positive answer,<br> if 1 then its negative ( you would need to compute
+                twos complement again to find the magnitude of that number) </p>
+            <a href="https://www.youtube.com/watch?v=h_fY-zSiMtY">
+                <h2> Normal binary Subtraction ( used for division ) | video</h2>
+            </a>
+            <p> <b> Borrow - </b> when 0-1 occurs, find next 1 in the top num, change it to a 0 ( every 0 we skipped get
+                two 1s ) the operation we borrowed for now becomes (1 + 1) - 1 = 1 </p>
+            <p>1 - 0 = 1 || 0 - 1 = ( borrow ) 1 || 1-1 = 0 || 0 - 0 = 0</p>
+            <h2>Multiplication</h2>
+            <a href="https://www.youtube.com/watch?v=IeRm--sokdg"> Implementing Multiplication video</a><br>
+            <a href="https://www.youtube.com/watch?v=-QghzKWAZ6o"> Improving Multiplication hardware video</a> <br>
+
+            <p>terminology - multiplicand ( top num ) x multiplier . <br> looking at the <b>multiplier from right to
+                    left</b>.
+                if it is a 1, <b>copy</b> the multiplicand down, <b>shift</b> 1 bit to left. <br> If it <b> is a 0</b>,
+                just shift
+                1 but to left</p>
+            <p>Then add the results ( make sure to keep add them correctly keeping the shifted layout ) </p>
+
+            <h2>Division</h2>
+            <a href="https://www.youtube.com/watch?v=gNEm5QCe0eU">Implementing division video</a>
+            <a href="https://www.youtube.com/watch?v=7m6I7_3XdZ8">Improving division hardware</a>
+            <p>the basic idea - "keep shifting to the right untill you can subtract to get a positive number"</p>
+            <p>If you can perform normal subtraction ( as above ) so result is positive <br> - the result ( with 1 bit
+                carried down from dividend) becomes the new dividend,<br> repeat the process until you cannot subtract
+                to get a positive number anymore, thats the remainder</p>
         </section>
         <h1>The Processor &#8691;</h1>
         <h1>The memory &#8691;</h1>

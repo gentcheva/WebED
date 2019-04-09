@@ -50,7 +50,7 @@ $(function(){
         console.log("not on lecture slides page")
     }
     try{
-    
+        $(".overview h1 + section").toggle();
         $(".overview h1").click(function () {
                     $(this).next("section").toggle("slow")
             });
