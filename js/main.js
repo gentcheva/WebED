@@ -55,11 +55,12 @@ $(function(){
                     $(this).next("section").toggle("slow")
             });
         
+        $(".overview img").css("width","100px");
         $(".overview img").click(function(){
             if($(this).width() > 100){
-            $(this).css("width","100px")
+            $(this).css("width","100px");
             } else{
-                $(this).css("width","auto")
+                $(this).css("width","auto");
             }
         });
     }

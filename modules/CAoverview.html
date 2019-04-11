@@ -31,8 +31,13 @@
         <img src="../images/architecture/architecture.jpg" title="Computer Motherboard"
             alt="background theme for Computer Architecture showing a Motherboard">
         <h1>CA Overview</h1>
+
     </header>
     <div style="text-align: center; padding:0.5em; font-size: 1.3em;">
+        <a href="https://www.youtube.com/channel/UC4ls2cPrXHfEO_oTHZcCclA/playlists">CHANNEL THAT HAS THE WHOLE
+            COURSE</a><br>
+        <a href="https://www.youtube.com/watch?v=ftek1dFpxxU">Video explaining the sample question with percentages of
+            ALU BEQ, LW and SW</a><br>
         <a href="../downloadPDFS/Review-1.pdf" download="Review1.pdf">Questions and answers - Review 1 - MIPS
             code</a><br>
         <a href="../downloadPDFS/Review-2.pdf" download="Review2.pdf">Questions and answers - Review 2 - Pipelined
@@ -112,12 +117,12 @@
 
             <h2>MIPS registers 32 registers 32Bits each</h2>
             <ul class="overviewLists">
-                <li>$zero - constant 0</li>
-                <li>$v0 - $v1 - Syscall codes go here</li>
-                <li>$a0 - $a3 - Arguments, $a0 hold values for printing</li>
-                <li>$t0 -$t9 - temporary registers / general purpose</li>
-                <li>$s0-$s7 - Saved </li>
-                <li>$gp ( global p.), $sp(stack p.), $fp(frame p.), $ra(return address)</li>
+                <li>&#36;zero - constant 0</li>
+                <li>&#36;v0 - &#36;v1 - Syscall codes go here</li>
+                <li>&#36;a0 - &#36;a3 - Arguments, &#36;a0 hold values for printing</li>
+                <li>&#36;t0 -&#36;t9 - temporary registers / general purpose</li>
+                <li>&#36;s0-&#36;s7 - Saved </li>
+                <li>&#36;gp ( global p.), &#36;sp(stack p.), &#36;fp(frame p.), &#36;ra(return address)</li>
             </ul>
 
             <h2>Study logical and conditional instructions - slt, ori, sll, srl....</h2>
@@ -153,60 +158,69 @@
                 </tr>
             </table>
 
-            <h2>I-Format Instructions 32 Bits</h2>
-            <table>
-                <tr>
-                    <th>op</th>
-                    <th>rs</th>
-                    <th>rt</th>
-                    <th>Constant or address</th>
-                </tr>
-                <tr>
-                    <td>6bit operation code</td>
-                    <td>5bit first source register</td>
-                    <td>5bit second source register</td>
-                    <td>16bit constant/address</td>
-                </tr>
-            </table>
+            <p>I format is for immediate arithmetics and load/store, j- format is for jump, so every other command that
+                isn't i or j , will fall into R-Format/p>
+                <h2>I-Format Instructions 32 Bits</h2>
+                <table>
+                    <tr>
+                        <th>op</th>
+                        <th>rs</th>
+                        <th>rt</th>
+                        <th>Constant or address</th>
+                    </tr>
+                    <tr>
+                        <td>6bit operation code</td>
+                        <td>5bit first source register</td>
+                        <td>5bit second source register</td>
+                        <td>16bit constant/address</td>
+                    </tr>
+                </table>
 
-            <h2>I-Format Instructions 32 Bits</h2>
-            <table>
-                <tr>
-                    <th>op</th>
-                    <th>Address</th>
-                </tr>
-                <tr>
-                    <td>6bit operation code</td>
-                    <td>26bit address</td>
-                </tr>
-            </table>
-            <h2>AND OR, NOT</h2>
-            <p>And- useful to mask bits ( selecting some bits and setting rest to 0 ) <br>OR - sets bits to 1 and leaves
-                other unchanged <br>NOT- inverts bits</p>
+                <h2>I-Format Instructions 32 Bits</h2>
+                <table>
+                    <tr>
+                        <th>op</th>
+                        <th>Address</th>
+                    </tr>
+                    <tr>
+                        <td>6bit operation code</td>
+                        <td>26bit address</td>
+                    </tr>
+                </table>
+                <h2>AND OR, NOT</h2>
+                <p>And- useful to mask bits ( selecting some bits and setting rest to 0 ) <br>OR - sets bits to 1 and
+                    leaves
+                    other unchanged <br>NOT- inverts bits</p>
 
-            <h2>Branching</h2>
-            <p>Why not BLT - its too complicated and would require extra clock cycles per instruction, instead it uses
-                two basic instructions to implement the logic , e.g blt is translated to  slti and bne , bge - slt/i( depending if comparing with register or immediate) and beq</p>
-            <p>The more complex branch statements are composed of bne, beq, slt, sltu, slti, sltiu,  </p>
-            <p> e.g beq with immediate value -  beq $t6, 1 , procedure -- add $1 , $0,1 and beq $1, $t6</p>
-            <p><b>Signed vs Unsigned</b> (slt - set on less than ). slt/slti - signed, sltu/sltui unsigned. They yield
-                different results as values differ whether they are interpreted as signed/unsigned</p>
-            <h2>Procedure calling</h2>
-            <p><b>jal - jump and link</b> address of this instruction is in $ra so it can be used to return, jr $ra
-                returns to the place jal was called from</p>
-            <p><b>Leaf procedure</b> - when no calls/links are made to the procedure <br> <b>Non-leaf procedure</b> -
-                when its calling another procedure ( jal ) </p>
-            <h2>Supporting large constants</h2>
-            <p>up to 16 bit constants are supported ( make common case fast ), but sometimes 32 bits are needed.
-                Combination of lui and ori commands are used. <br> lui - copies 16bits to the left of rt ( from R/I
-                format) and clears the right 16 bits <br> ori- combines the 2 16bits</p>
-            <h2>Key differences between RISC and CISC</h2>
-            <ul class="overviewLists">
-                <li>The way memory is addressed</li>
-                <li>Branches are executed</li>
-                <li>Exceptions are handled</li>
-                <li>RISC use less power ( in embedded systems )</li>
-            </ul>
+                <h2>Branching</h2>
+                <p>Why not BLT - its too complicated and would require extra clock cycles per instruction, instead it
+                    uses
+                    two basic instructions to implement the logic , e.g blt is translated to slti and bne , bge - slt/i(
+                    depending if comparing with register or immediate) and beq</p>
+                <p>The more complex branch statements are composed of bne, beq, slt, sltu, slti, sltiu, </p>
+                <p> e.g beq with immediate value - beq &#36;t6, 1 , procedure -- add &#36;1 , &#36;0,1 and beq &#36;1,
+                    &#36;t6</p>
+                <p><b>Signed vs Unsigned</b> (slt - set on less than ). slt/slti - signed, sltu/sltui unsigned. They
+                    yield
+                    different results as values differ whether they are interpreted as signed/unsigned</p>
+                <h2>Procedure calling</h2>
+                <p><b>jal - jump and link</b> address of this instruction is in &#36;ra so it can be used to return, jr
+                    &#36;ra
+                    returns to the place jal was called from</p>
+                <p><b>Leaf procedure</b> - when no calls/links are made to the procedure <br> <b>Non-leaf procedure</b>
+                    -
+                    when its calling another procedure ( jal ) </p>
+                <h2>Supporting large constants</h2>
+                <p>up to 16 bit constants are supported ( make common case fast ), but sometimes 32 bits are needed.
+                    Combination of lui and ori commands are used. <br> lui - copies 16bits to the left of rt ( from R/I
+                    format) and clears the right 16 bits <br> ori- combines the 2 16bits</p>
+                <h2>Key differences between RISC and CISC</h2>
+                <ul class="overviewLists">
+                    <li>The way memory is addressed</li>
+                    <li>Branches are executed</li>
+                    <li>Exceptions are handled</li>
+                    <li>RISC use less power ( in embedded systems )</li>
+                </ul>
         </section>
 
         <h1>Computer Arithmetics &#8691;</h1>
@@ -250,11 +264,378 @@
             <p>If you can perform normal subtraction ( as above ) so result is positive <br> - the result ( with 1 bit
                 carried down from dividend) becomes the new dividend,<br> repeat the process until you cannot subtract
                 to get a positive number anymore, thats the remainder</p>
+
+            <h2>Decimal to binary</h2>
+            <p>divide the number by 2 and add 1 if necessary , the goal is to find a number that can be multiplied by 2
+                and added with 1 or 0 to get the original number.<br> e.g 76 = 38 * 2 + 0 ... 38 = 19 *2 + 0 .... 19 = 9
+                * 2 + 1 ...</p>
+            <p> Read the result ( the added 0s and 1s ) from the bottom up, that forms the binary number of the decimal
+            </p>
+
+            <h2>Decimal floating point to binary</h2>
+            <p>turn the number before the point as above</p>
+            <p>multiply the decimal point by 2 ( e,g 0.45 * 2 = 0.9 ) take the result and multiply it by 2.
+                (0.9 * 2 = 1.8). if the result is 1.x , ignore the 1 when taking the result to next line. ( 0.8 * 2 =
+                1.6).
+            </p>
+            <p>read the result from top down. Image below shows the steps</p>
+            <img src="../images/architecture/decimal_to_binary.png" alt="method to convert decimal to binary">
+
+            <h2>Single precision IEEE 754 Conversion</h2>
+            <a href="https://www.youtube.com/watch?v=tx-M_rqhuUA">Video on how to convert, shows the two methods
+                above</a>
+            <p><b>Sign</b> - first bit , 0 if positive 1 if negative<br><b>Mantissa</b>- everything after the decimal
+                point<br><b>Exponent</b> - the power value ( 2^5 , exponent is 5 ), the exponent comes from moving the
+                decimal point to the front, the exponent value is how many places it was moved.<br><b>bias</b> - 2^8 -1
+                = 255, -127 to 128</p>
+            <p>Now add 127 plus the exponent and change it to binary <br> this is the exponent, copy the mantissa and
+                add the sign bit at the front. Thats IEE 754</p>
+
+            <table>
+                <tr>
+                    <th>S</th>
+                    <th>Exponent - 8bits</th>
+                    <th>fraction/mantissa 23bits</th>
+                </tr>
+            </table>
+
+            <h2>Floating point addition</h2>
+            <a href="https://www.youtube.com/watch?v=mKJiD2ZAlwM">Video on how to add fps</a>
+            <p>Change it to scientific notation. Make the exponents equal. add them together. convert to binary
+                representation if necessary.</p>
+            <p>example: 1.000 x 2^-1 + -1.110 x 2^-2 <br> shift exponents:1.000 x 2^-1 + -0.111 x 2^-1 <br>add
+                significands: 0.001 x 2^-1 <br> normalize: 1.000 x 2^-4 </p>
+
+            <h2>Floating point multiplication</h2>
+            <img src="../images/architecture/fp_multiplication.JPG" />
+            <img src="../images/architecture/fp_binary_mul.JPG" />
+            <img src="../images/architecture/fp_hardware.JPG" />
+            <h2>FP commands</h2>
+            <p>These operation are made on &#36;f0...&#36;f1... registers <br> <b>Commands:</b> - add.s , sub.s, mul.s,
+                div.s ..
+                add.d, sub.d, mul.d, div.d</p>
+
+            <img src="../images/architecture/fp_discussion.JPG" />
         </section>
         <h1>The Processor &#8691;</h1>
+        <section>
+            <h2>CPU overview</h2>
+            <p><b>Two steps for instruction execution:</b> - instruction fetch and execution<br>
+                <b>Instruction fetch-</b> PC &harr; instruction memory, PC &larr; target address <br>
+                <b>Execution - </b> Read/write to registers, and use ALU to calculate for arithmetics or branching</p>
+
+            <img src="../images/architecture/processor_components.JPG"
+                alt="diagram showing different components in the processor" />
+            <p><b>Clocking methodology </b>- transforms data druing clock cycles, between clock edges, the longest delay
+                determines clock period </p>
+
+            <h2>Datapath - components that process data and addresses in the CPU</h2>
+            <p>datapath composes of ALUs registers, muxes, control, memories, PC, buses</p>
+            <p>Load/store ( i format) - read/write values from registers.</p>
+            <p><b>Branch instructions</b> i format, needs to read from registers and compare, and calculate target
+                address.</p>
+
+            <img src="../images/architecture/diagram.JPG" alt="diagram of datapath control" />
+            <p>Different parts are turned on/off depending on what instruction is used (format and what the instruction
+                does)</p>
+            <p><b>Jumps - </b> they use word addresses, update the PC, opcode contains extra control signal that is set
+                when opcode is 2.</p>
+            <p> The instruction that is taking the longest time to execute, load instruction - critical path. It
+                dictates the clock cycle
+                <br> To improve Performance use pipelining</p>
+            <h2>Pipelining 5 stages</h2>
+            <ul class="overviewLists">
+                <li>IF - instruction fetch from memory</li>
+                <li>ID - instruction decode and register read</li>
+                <li>EX - execute operation/calculate address</li>
+                <li>MEM - access memory operand [not always ]</li>
+                <li>WB - write result back to register [not always ]</li>
+            </ul>
+
+            <p><b>Pipeline design - </b> 32bit instruction size, few and regular formats, simple addressing for
+                load/store and alignment of memory operands.</p>
+            <p><b>Critical stage</b> - longest time operation is considered the critical stage
+            </p>
+            <p> if all stages are balanced - speedup = (time between instructions)pipelined / (time between
+                instructions) single-cycle = number of pipeline stages</p>
+            <p>if the stages aren't balanced the speed up is less, speedup increases Throughput</p>
+            <h2>Pipeline Hazards</h2>
+            <p><b>Structure hazard - </b> when two instructions need to access the same resource at the same time <br>
+                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <i>Solution</i> - separate hardware (memory) for
+                fetching ( they cause stalls/bubbles) <br>
+                <b>Data hazard - </b> Data needed for an instruction but the instruction is still being processed <br>
+                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <i>Solution</i> - forwarding- getting the result to
+                the next instruction as soon as its done ( by hardware) ,avoids waiting for it to be stored in a
+                register <br>
+                <b> Control hazard - </b>Changing of execution flow disrupts the pipeline sequence<br>
+                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<i>Solution</i> - branch predictions </p>
+            <p>Forwarding doesn't always work, e.g when the value isn't computed when we need, still causes
+                stalls/bubbles. <br><b>Software solution -</b> reorder code where stalls might occur. try not to use the
+                same values ones if you can place another instruction in-between to make sure the value is computed by
+                the time its needed</p>
+            <p><b>Forwarding hardware -</b> to forward you read ALU operands from source other than register file
+                registers, Multiplexers are needed at the ALU I/P, and a forwarding unit determines the multiplexor
+                control signal</p>
+            <img src="../images/architecture/table.JPG" alt="table explaining control codes" />
+            <h2>Branch predictions - Control hazard solution</h2>
+            <p>Important as for longer pipelines, the stall penalty is very high.</p>
+            <p>With predictions you only stall when the prediction is wrong.In MIPS predict branches not taken</p>
+            <p><a href="https://www.youtube.com/watch?v=71wplOXpQko&list=PL1C2GgOjAF-IWC1AEXqWKFmAgZdQRJfZ6&index=2"><b>Static
+                        branch prediction</b></a>- based on the branch itself, simplest is to never take the branch, or
+                always assume its taken.<br>Other options are - always take backwards branches, and not take forward
+                branches. </p>
+            <p><a href="https://www.youtube.com/watch?v=T8_Jvt2T6d0&list=PL1C2GgOjAF-IWC1AEXqWKFmAgZdQRJfZ6&index=3"><b>Dynamic
+                        branch prediction </b></a>- making the prediction based on what happened last time.(requires
+                hardware) and hope that it will continue the trend. Dynamic prediction also switches between static and
+                dynamic, depending on the data it gather or a specific scenario </p>
+            <p>Dynamic predictors are very popular as they are very accurate, sometimes over 90% accuracy.</p>
+
+            <h2>Pipelined datapath hardware</h2>
+            <img src="../images/architecture/datapath_pipelie.JPG"
+                alt="picture shows diagram of the datapath pipeline hardware" />
+        </section>
+
+        <h1>The Processor (2) &#8691;</h1>
+        <section>
+            <h2>Forwarding, when to forward?</h2>
+            <p> ID/EX.registerRs/Rt - instruction decode register ( RS is first source register ) stored in ID/EX (1)
+            </p>
+            <p></p>
+            <p><b>When to forward - </b> ID/EX.RegisterRs/Rt = EX/MEM.RegisterRd or MEM/WB.Register.Rd <br> </p>
+            <img src="../images/architecture/forwarding.JPG" alt="diagram showing stages in the pipeline" />
+            <p>You should only forward when the instruction will write to a register, and if RD for instruction is not
+                &#36;zero</p>
+            <p><b>Double data hazard</b>- e.g add x ,X, y .. add X,x,z .. add x,X,w (capital X is where the double
+                hazard occurs). In that case we need to use the most recent MEM stage result. <br> Only forward if EX
+                hazard condition isn't true</p>
+            <img src="../images/architecture/equations.JPG" alt="conditions on when to branch" />
+
+            <h2>Memory load data hazard - hazard detection unit</h2>
+            <p>ALU operand register numbers are given by IF/ID.RegisterRs/Rt. Load hazard occurs when <br>
+                ID/EX.MemRead and <br>
+                ((ID/EX.RegisterRt = IF/ID.RegisterRs) or <br>
+                (ID/EX.RegisterRt = IF/ID.RegisterRt)) <br>
+                if its detected a bubble is inserted
+            </p>
+            <p><b>How to stall the pipeline </b> - EX, MEM and WB perform a nop (no operation), PC and IF/ID are
+                prevented from updating</p>
+            <h2>Branch hazards Implementation ( hardware optimization )</h2>
+            <p>Additional hardware is added to make branching decision at the instruction decode (ID) stage. <br>
+
+            </p>
+            <img src="../images/architecture/hazard_detection.JPG"
+                alt="hazard detection unit diagram inside datapath pipeline diagram" />
+            <img src="../images/architecture/hazard_examples.JPG" alt="data hazard stall examples for branches" />
+
+            <h2>2bit predictor</h2>
+            <img src="../images/architecture/2bit_predictor.JPG" alt="state diagram showing 2 bit predictor flow" />
+            <p>it only changes prediction after two successive miss-predictions </p>
+            <p><b>Calculating target address</b> The target buffers are in the cache, indexed by PC when instruction is
+                fetched ( if branch taken, target addressed can be fetched immediately )</p>
+
+            <h2>Exceptions and Interrupts</h2>
+            <p><b>Exceptions -</b> arise within the CPU ( divide by 0, overflow, syscall, bad opcode ) <br> <b>Interrupt
+                    -</b> from an external I/O. <br> Handling exceptions reduces performance</p>
+            <p><b>Arithmetic overflow -</b> resulting value too large for the format <br>
+                <b>Arithmetic underflow -</b> resulting value too small for the format <br>
+                <b>Illegal instruction</b> - happens when Pc or memory was corrupted <br>
+                <b>Bus error</b>- inaccessible resources <br>
+                <b>Segmentation fault-</b> accessing memory in illegal ways</p>
+            <p>Interrupts have a hardware-based solution for handling IO, When a device requires service it raises a
+                flag, added hardware checks the flag. After detection the software decides whether to actually perform
+                IO transaction</p>
+            <h3>Interrupt Service routine (ISR)</h3>
+            <p>Special OS program that is executed in the event of exception or interrupt. It stops the running of a
+                program with a fatal program ( and report the problem)<br> for recoverable it resumes the running after
+                handling the exception</p>
+            <h3>Handling Exceptions/Interrupts , In the Kernel OS</h3>
+            <ul class="overviewLists">
+                <li>Saves current PC in special register</li>
+                <li>Jumps to exception handler</li>
+                <li>Saves the processor state</li>
+                <li>deals with the exception/interrupt</li>
+                <li>Resumes the processor state</li>
+            </ul>
+            <h3>Special registers - Co-processor 0</h3>
+            <p><b>VAddr-</b> $8, offending memory reference <br>
+                <b>Status</b>- $12, what interrupts are enabled | has an exception bit, to prevent the handler being
+                interrupted <br>
+                <b>Cause-</b> $13, Exception type and pending interrupts <br>
+                <img src="../images/architecture/exceptions.JPG" /> <br>
+                <b>EPC</b> - $14, PC - where the exception occurred.</p>
+            <p>Handler always at address 0x80000180 in kernel memory <br>
+                only $k0 and $k1 can be used freely, dont use the stack ( can point to invalid memory ). <br>
+                Control to the user program can be restored with <b>eret</b></p>
+
+            <img src="../images/architecture/pipeline_exception.JPG" />
+        </section>
         <h1>The memory &#8691;</h1>
+        <section>
+            <h2>terminology</h2>
+            <p><b>Non-Volatile memory</b>- keeps data without electrical power</p>
+            <p>The list below is order from fastest to slowest</p>
+            <ul class="overviewLists">
+
+                <li><b>SRAM -</b>[CPU Cache] Static ram, keeps data as long as its powered</li>
+                <li><b>DRAM - </b>[Main Memory] Dynamic RAM, Requires periodic refreshes to keep data | DDR double data
+                    rate</li>
+                <li><b>Flash memory- </b>retains data without power[EEPROM], USB drives and such </li>
+                <li><b>Magnetic disc-</b> longest access time, large data</li>
+            </ul>
+            <h2>Memory Hierarchy</h2>
+            <p>AS data is accessed from the disk, where everything is stored, the most recently accessed items are
+                firstly stored on DRAM main memory, and then on cache ( smallest memory) <br>
+                <b>DISK &#8594; Main Memory &#8594; Cache</b></p>
+
+            <h2>principle of Locality</h2>
+            <p>Programs access a small proportion of their address at any time.<br>
+                <b>Temporal Locality</b> recently accessed items are likely to be accessed again <br>
+                <b>Spatial locality</b> data closely together is likely to be accessed next. e.g processing an array</p>
+
+            <h3>Four fundamental design questions</h3>
+
+            <ol class="overviewLists">
+                <li>Where can a block be placed?</li>
+                <li>How is a block found?</li>
+                <li>What block is replaced on a miss?</li>
+                <li>How are writes handled?</li>
+            </ol>
+            <h2>Direct mapped cache</h2>
+            <p>Data location in the cache is determined by Memory address <br>
+                tags - high-order bits of the memory address used as index for the cache data table. <br>
+                <b>Valid bit </b> when a block has valid data this bit is 1, else its 0.</p>
+            <p><b>Cache size</b>- the cache stores data + tag + valid bit for every block <br>
+                cache size = number of block x (block size + tag size + valid field size ) <br>tag size = address size -
+                index size which is (n+m) | in mips = 32 - (n+m+2)</p>
+            <p>Reported cache size is the data part only, omitting the space required for address and flags</p>
+            <img src="../images/architecture/cache_example.JPG" />
+
+            <h2>Block sizes / Cache miss or Hit</h2>
+            <p>Larger block size &#8594; less blocks overall ( cache is small) &#8594; also bigger penalty ( more data
+                to move ) <br> so whats the best block size to reduce cache miss. <br></p>
+            <p><b>Cache miss - </b>
+                <ol>
+                    <li>Stall the CPU , PC - 4</li>
+                    <li>Fetch the block from lower level Hierarchy (updates cache the tag and valid bit is 1) </li>
+                    <li>Resume (if instruction cache miss, restart instruction fetch , if data miss complete the data
+                        access)</li>
+                </ol> <br>
+                <b>Cache write - </b> <br><br>cache hit <br> <b>write-Through</b>(update both cache and next level
+                memory)<br> <b>write-back</b>(update
+                slower memory level when block is replaced , most complicated to implement but fastest) <br> <br> cache
+                miss <br> <b> Write-allocate</b> (load the
+                block in the cache and update the cache) <br>
+                <b>no write allocate </b>- update the written address using write-through without loading the block.
+                <br> <br> <b>Speeding up -</b> to speed things up ( as writing to memory takes around 100 cycles) , a
+                write buffer is used, which holds the data, the CPU continues and only stalls if the buffer is already
+                full. <br>
+                <b> Dirty bit ( modified bit )</b> - hardware solution to tell if a block has been modified or not, its
+                set when the processor writes to that block. This bit signifies that it needs to be updated across the
+                hierarchy. <b> Page replacement</b> is closely related to the dirty bit.
+            </p>
+            <h2>Measuring Cache performance </h2>
+            <img src="../images/architecture/performanceCache.JPG">
+            <img src="../images/architecture/exampleCachePerformance.JPG">
+            <p>Ideally we like , Small hit time, low miss ratio, small miss penalty <br>
+                Avarage Memory access time ( AMAT ) | AMAT = hit time + miss rate X miss penalty <br>
+            </p>
+
+            <p>CPU clock = 1ns, Hit time = 1 cycle <br> miss penalty = 20 cycles, cache miss rate = 5% <br>
+                AMAT = 1 + 0.05 X 20 = 2ns </p>
+            <p><b>Performance concerns -</b> CPU performance increase can cause miss penalty to be more significant,
+                decreasing CPI could increase STALLS.</p>
+
+            <h2>Improving cache performance</h2>
+            <p><b>Fully associative cache -</b> allow a given block to go in any cache entry( reduces competition), it
+                increases search time unfortunately. <br>
+                <b>N-way set-associative cache</b>- sets of n entries, block number determines which set, searches all
+                entries in a given set ( less expensive to search)</p>
+            <a href="https://en.wikipedia.org/wiki/Cache_placement_policies">Wikipedia page explaining direct, n-way and
+                fully associative cache policies</a>
+            <p>Increasing associativity decreases miss rate with diminishing returns <br>
+                <b> Page Replacement policies </b>- Random / Least recently used (hard beyond 4-way as.) in set
+                associative. Theres no choice in direct mapped.</p>
+            <p><b>Reducing miss penalty</b>- Multi-level cache ( many cache hardware with different speeds (faster
+                closer to CPU) but all faster than main memory) <br>
+                Focus of L2 cache is to reduce access to main memory, overall reduces penalty. <br>
+                Miss rates depend on software/algorithm/program behaviours and memory access patterns.</p>
+            <img src="../images/architecture/MultilevelCache_example.JPG">
+        </section>
+        <h1>Virtual Memory &#8691;</h1>
+        <section>
+            <p>Using the main memory as "cache" for secondary disk storage <br>
+                This is managed by CPU hardware and OS <br>
+                Each program gets a share of the main memory ( private virtual address space holding its frequently used
+                code ) <br>
+                CPU and OS translate virtual addresses to physical addresses</p>
+            <h2>Address translation</h2>
+            <p>Disk is very slow, if a <b>Page fault occurs</b>(Virtual memory pages are blocks ) then it takes millions
+                of clock cycles to get the data. <br> Page fault have to minimized ( fully associative placement,
+                replacement algorithms ran by OS)</p>
+            <p><b>Page Tables</b>- array of page table entries , each program has its own table.<br> if a page is in
+                memory it stores physical page number + its status bits, if not reference to location on disk is kept
+            </p>
+            <img src="../images/architecture/PageTranslation.JPG" />
+            <p><b>Replacement and writes</b> - least recently used (checking reference bit ),<br> disk writes use
+                write-back ( as write through is impractical) when replacing a page ( dirty bit is set when a page is
+                written)</p>
+            <p><b>Translation Look-aside buffer (TLB)</b>- cache of Page table entries within the CPU</p>
+            <img src="../images/architecture/TLB.JPG" />
+            <p><b>Page fault handler (OS) -</b> finds PTE, locates page on disk, replaces a page(LRU), read page into
+                memory and update table, run the process again ( restart from the faulting instruction)</p>
+            <img src="../images/architecture/TLB_discussion.JPG" />
+
+        </section>
         <h1>Parallel processing &#8691;</h1>
+        <section>
+            <h2>Power wall</h2>
+            <p>Power wall refers to the inability to improve the performance and maintain
+                low power consumption due to leak current in CMOS <br><br>
+                Performance is improved by increasing the processor throughput
+                (parallel processors) rather than response time (speeding the clock)</p>
+            <h2>Hardware and software Parallelism</h2>
+            <p>Sequential/concurrent software can run on serial/parallel hardware, the challenge is to make effective
+                use of parallel hardware<br>
+                it is difficult to make parallel programs - hard to partition the work into parallel pieces, Scheduling
+                fairly, synchronization, minimal overhead</p>
+            <img src="../images/architecture/parallel_example.JPG" />
+
+            <img src="../images/architecture/parallelism_table.JPG" /><br>
+
+            <a href="https://en.wikipedia.org/wiki/Flynn%27s_taxonomy">Flynn's taxonomy - SISD, MISD, SIMD, MIMD</a>
+            <br>
+            <h2>Instruction-level Parallelism (ILP)</h2>
+            <p>Execution of multiiple instruction in parallel is ILP <br>
+                <br> <b>Multiple issue: </b> <br>
+                To get this we replicate the pipeline stages - multiple pipelines <br>
+                multiple instructions per clock cycle <br>
+                CPI becomes less than 1, so we use Instruction per cycle (IPC)
+            </p>
+            <p><b>Static Multiple issue -</b> [compiler based] detects and avoids hazards, packages into "issue
+                slots"<br>
+                <b>Dynamic multiple issue</b>[hardware based] CPU examines the instruction stream and chooses which
+                instructions to issue each cycle , compiler helps by reordering instructions, hazards resolved with
+                advanced techniques at runtime</p>
+
+                <a href="../downloadPDFS/Lecture 21 - Parallel processing 2.pdf" download="lecture21.pdf">Lecture 21-Vector
+                    processors, vector instructions, multithreading -> different approaches, GPU architecture/operation</a>
+        
+        </section>
+
     </main>
+
+    <aside>
+        <h1>Things to remember</h1>
+        <ol class="overviewLists">
+            <li>if an instruction isn't i or j , the catch all is R-format</li>
+            <li>128 is 1000 0000 , which is 1 more than the 127 bias.</li>
+            <li>Response time and Throughput are the key metrics</li>
+            <li>regularity of instructions allows Simplicity in datapath and controller</li>
+            <li>32bit registers , regular instructions, simple load/store addresses, alignment of memory operand -
+                <b>how MIPS is designed for pipelining</b></li>
+            <li>Double data hazard and hazard detection unit are a thing ( processor 2)</li>
+        </ol>
+    </aside>
 </body>
 
 </html>
