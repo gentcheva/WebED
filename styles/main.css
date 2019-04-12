@@ -65,6 +65,7 @@ nav a {
 }
 
 
+
 /* ------------------------------------------ */
 
 /* lecture slides styling ------------------ */
@@ -85,11 +86,22 @@ main{
     margin-top: 2em;
     border-radius: 2em;
 }
+
+.overview div{
+    text-align: unset;
+}
+
  .overview td {
     padding:0.7em;
 }
 .overviewLists li{
     padding-bottom:0.5em;
+}
+
+.Topic{
+    text-align: center;
+    font-size: 3em;
+    color:royalblue;
 }
 /* ------------------------------------ */
 
@@ -108,7 +120,6 @@ main{
 
 
 /* styling the next and prev buttons + search */
-
 div{
     text-align: center;
  }
@@ -220,9 +231,6 @@ aside{
 /* ---------------------------------------------------- */
 
 /* search box style */
-div{
-   text-align: center;
-}
 
 #prev, #next{
     width: 2.2em;

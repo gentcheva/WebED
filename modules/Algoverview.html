@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8" />
+    <link href="../styles/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
+    <script src="../highlighjs/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+    <script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
+
+    <title>Algorithms</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="java.html">Java</a></li>
+            <li><a href="compArchitecture.html">Architecture</a></li>
+            <li><a href="networking.html">Networking</a></li>
+            <li><a href="databases.html">Databases</a></li>
+            <li><a href="operatingSystems.html">OS</a></li>
+            <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
+            <li><a href="algorithms.html">Algorithms</a></li>
+        </ul>
+    </nav>
+    <div id="algo" background="../images/algorithms/algorithms.png">
+
+        <div>
+            <h1>Algorithms Overview</h1>
+        </div>
+    </div>
+    <a href="http://www.cs.ucc.ie/~kb11/teaching/CS2516/Lectures/"> Module Website </a>
+    <main class="overview">
+        <h1 class="Topic">Fundamentals</h1>
+        <div>
+            <h1>Recursion &#8691;</h1>
+
+            <section>
+                <h2>Recursive call- call to the same function with params nearing base case</h2>
+                <h2>There must be a base case</h2>
+                <h2>If a value is returned, every path must have a return value</h2>
+                <h2>Activation records</h2>
+                <p><b>Activation record -</b> holds parameters, progress in the function code, and local variables. Its
+                    pushed onto a stack when a function is called. Deleted off the stack when a function finishes
+                    executing<br>
+                    Recursion calls use the exact same mechanism as every other function
+                </p>
+                <h2>Analysing Recursive functions</h2>
+                <ol>
+                    <li>Count the worst-case work done by a single activation, without the Recursive call</li>
+                    <li>Count the worst-case number of recursive calls</li>
+                    <li>Multiply the two counts together</li>
+                </ol>
+                <p><b>Linear Recursion-</b> only one recursive call per activation <br>
+                    <img src="../images/algorithms/recusrion.JPG" /> <br>
+                    <b>Binary recursion</b>- 2 recursive calls per activation ONLY 1 taken <br>
+                    <b>Multiple recursion - </b> many calls per activation <br>
+                </p>
+
+            </section>
+
+            <h1>Complexity Analysis &#8691;</h1>
+            <section>
+                <h2>Worst case</h2>
+                <p>Measuring how bad an algorithm can be and using that as a performance guarantee</p>
+                <img src="../images/algorithms/Complexity.JPG" />
+                <h2>Lower Bounds - Big Omega - best case running scenario</h2>
+                <p>C*g(n) ≤ F(n)</p>
+
+                <h2>Tight bound: Big Theta</h2>
+                <p>When an algorithm is big theta, it is both big Omega and big-O in a given function</p>
+                <p>C1*g(n) ≤ f(n) ≤ C2*g(n)</p>
+                <p> This follows since big-Omega is C*g(n) ≤ F(n) <br>
+                    and big-O is f(n) ≤ C*g(n) </p>
+
+                <img src="../images/algorithms/amortization.JPG" />
+
+            </section>
+        </div>
+
+        <h1 class="Topic">Sorting</h1>
+        <div>
+            <h1>Basic sorts &#8691;</h1>
+            <section>
+                <p><b>Bubble sort</b> compare with the next item, if item is smaller swap continue comparing ( repeat
+                    for each element, bubbling it up)</p>
+                <pre><code class="python">
+def bubble_sort(mylist):
+    n = len(mylist)
+    for i in range(n-1):
+        for j in range(0,n-i-1):
+            if mylist[j] > mylist[j+1]:
+                mylist[j],mylist[j+1] = mylist[j+1], mylist[j]           
+                       </code></pre>
+                <p><b>Insertion sort</b>- For each item, "insert it" into the correct position into the sublist<br> keep
+                    comparing as long as the item being inserted is less than ( if its greater insert it) </p>
+                <pre><code class="python">
+def insertionSort(arr): 
+    for i in range(1, len(arr)): 
+        key = arr[i] 
+        j = i-1
+        while j >= 0 and key < arr[j] : 
+        # this swaps as it goes, would be better to find the place and swap only once
+                arr[j + 1] = arr[j] 
+                j -= 1
+        arr[j + 1] = key 
+    </code></pre>
+                <p><b>Selection sort</b> - Find min element in the array and place it at the start, reduce the view of
+                    the array and redefine start, find min....</p>
+                <pre><code class="python">
+def selectionSort(list):
+    for i in range(len(list)): 
+        min_idx = i 
+        for j in range(i+1, len(list)): 
+            # find min
+            if list[min_idx] > list[j]: 
+                min_idx = j 
+            #swap       
+            list[i], list[min_idx] = list[min_idx], list[i] 
+                        </code></pre>
+            </section>
+            <h1>In-place sorting &#8691;</h1>
+            <section>
+                <h2>In-place selection sort and insertion sort </h2>
+                <p>The exact same as above "in basic sort" <br>
+                    Its in place as it <b>swaps</b> rather than removing and inserting into another list</p>
+            </section>
+            <h1>HeapSort &#8691;</h1>
+            <section>
+                <h2>Pseudo-code</h2>
+                <ol>
+                    <li>Build the MAX Heap</li>
+                    <li>"remove/swap" max item(thats at the front) and put it at the end</li>
+                    <li>Update the end ( reducing the view of the heap (in place) )</li>
+                    <li>Re-balance the tree</li>
+                    <li>Repeat step 2, 3, 4 </li>
+                </ol>
+                <p><b>Bubbling Down -</b> While index of the item is within range. <br>
+                    pick the larger child of the item ( that is larger than item) <br>
+                    swap the child with the item <br>
+                    repeat</p>
+                <h2>HeapSort using Bubble Down only</h2>
+                <pre><code class="python">
+def bubbleDown(l, item, end):
+    # iterative version about 20% faster than recursive
+    while (item * 2 + 1) < end:
+        # if it ever enters the loop then left child exits, position is left child, position +1 is rightchild
+        position = (2 * item) + 1
+        lchild = l[position]
+
+        # if right child exists compare left with right and decide
+        if end > position:
+            rchild = l[position + 1]  # right child exists
+            if lchild >= rchild:
+                if l[item] < lchild:  # if the item we are bubbling is smaller swap
+                    l[position], l[item] = l[item], l[position]
+                    item = position  # position updated for the next loop iteration
+                else:  # the item isn't smaller its in the right place so break out
+                    break
+            else:  # same as above but for rightchild
+                if l[item] < rchild:
+                    l[position + 1], l[item] = l[item], l[position + 1]
+                    item = position + 1
+                else:
+                    break
+        # if there isn't a rightchild, only check left child
+        else:
+            if l[item] < lchild:
+                l[position], l[item] = l[item], l[position]
+                item = position
+            else:
+                break  # must be in the right position so break out
+        </code></pre>
+                <p>When looking at the tree, the last row does not need to be checked when bubbling down( they don't
+                    have any children ) ,
+                    and since a heap is a balanced tree it reduces the number of swaps <br>
+                    <b>heaplist[len(heaplist) - 1 - math.ceil(len(heaplist)/2)] </b></p>
+                <p>Otherwise the for loop would iterate for each last row item, and go into BubbleDown and quit as there
+                    is no left or right child to swap with</p>
+                <pre><code class="python">
+def heapsort(toSort):
+    # the other version where you bubble items down  instead of bubbling them up.
+    end = len(toSort) - 1
+    for x in range(len(toSort) - 1 - math.ceil(len(toSort) / 2), -1, -1):  
+    # loop to build the max heap sort
+        bubbleDown(toSort, x, end)
+
+    last = len(toSort) - 1
+    for y in range(len(toSort)):
+     # this loop removes the biggest item and places it at the end of the list accordingly
+        toSort[last], toSort[0] = toSort[0], toSort[last]
+        last -= 1
+        bubbleDown(toSort, 0, last)  # makes sure the swapped item is in the correct place
+
+    # Sometimes the loop goes 1 too many times, and mixes up 0 and 1 index
+    if toSort[0] > toSort[1]:
+        toSort[0], toSort[1] = toSort[1], toSort[0]
+
+    return toSort
+</code></pre>
+                <h2>Bubble Up iterative</h2>
+                <p><b>Bubble up -</b> while you didn't reach the top <br>
+                    if the item is bigger than parent -- swap -- else stop (correct place) <br>
+                    repeat</p>
+                <pre><code class="python">
+def bubbleUp(i):
+    parent = (i - 1) // 2
+    while parent > 0:
+        parent = (i - 1) // 2
+        if list[i] > list[parent]:
+            #swap the elements in the list
+            list[parent], list[i] = list[i], list[parent]
+            i = parent
+        else: # if there was no swap it means its in the right place -  quit
+            break
+        </code></pre>
+
+                <h2>Complexity Analysis O( n log n )</h2>
+                <p> <b>Building the heap - </b> adding an item into a heap of n items takes, O(log n). So adding n items
+                    would take <b>O( n log n)</b> <br>
+                    <b>Removing top </b> - removing an item from n heap takes O( log n ) , so removing n items <b> O( n
+                        log n )</b></p>
+            </section>
+            <h1>MergeSort &#8691;</h1>
+            <section>
+                <h2>Divide and conquer</h2>
+                <p>If a problem is too difficult to solve in a single step, break it down, solve individual pieces, and
+                    comibe/merge them together</p>
+                <pre><code class="python">
+def mergeTwoLists(mergedLists, firstList, secondList):
+    i1 = 0
+    i2 = 0
+
+    # save them in variables rather than calculating them all the time
+    lenFirst = len(firstList)
+    lenSecond = len(secondList)
+
+    # as long as i1 and i2 are not outside their index range
+    # merge them together accordingly
+    while i1 < lenFirst and i2 < lenSecond:
+        if secondList[i2] >= firstList[i1]:
+            mergedLists += [firstList[i1]]
+            i1 += 1
+        else:
+            mergedLists += [secondList[i2]]
+            i2 += 1
+
+    # if either of the lists were not fully added to the merged lists check and add them
+    if i1 < lenFirst:
+        mergedLists += firstList[i1:]  # add the remaining of the list to the merged result
+    if i2 < lenSecond:
+        mergedLists += secondList[i2:]  # add the remaining of the list to the merged result
+    return mergedLists
+
+
+def mergeSort(list):
+    if len(list) <= 1:
+        return list
+
+    midPoint = len(list) // 2  # calculate the middle of the list
+    firstList = list[:midPoint]
+    secondList = list[midPoint:]
+
+    # recursive call to break it down untill its a single length list
+    firstList = mergeSort(firstList)
+    secondList = mergeSort(secondList)
+
+    mergedLists = []  # where the result will be stored
+    return mergeTwoLists(mergedLists, firstList, secondList)
+</code></pre>
+                <h2>Pseudo-code</h2>
+                <ol>
+                    <li>Divide the list into 2 - recursively ( will stop when list is length 1, and work backwards )
+                    </li>
+                    <li>Merge the two lists ( first merge - 2 lists of 1 element each - this result is now either
+                        "firstList" or "secondList")</li>
+                </ol>
+                <p>"firstlist" (as its working backwards) becomes progressively sorted <br>
+                    in the last recursive call (before returning final value) "firstlist" hold fully sorted first half
+                    of the list (secondlist hold the other sorted half) <br>
+                    the last "mergeTwoLists" merges two sorted lists together</p>
+                <h2>Complexity Analysis</h2>
+                <p>Dividing the lists recursively takes n assignments and O(n) for each call of mergeTwoLists <br>
+                    each mergeTwoLists is done on list half in size O(n/2) Therefore O(n log n) as theres O(n) at each
+                    level in the call tree <br>
+                    and the depth of the tree is log n</p>
+                <p>Merging two sorted lists is also less expensive</p>
+                <p><b>Space Complexity</b>- each call creates a new smaller list, O(n log n) is the space complexity</p>
+                <img src="../images/algorithms/mergeSortAnalysis.JPG" />
+                <h2>Bottom Up merge sort ( in Place ) 2 x n lists space Complexity</h2>
+                <img src="../images/algorithms/bottomUpMergeSort.JPG" />
+            </section>
+
+            <h1>QuickSort &#8691;</h1>
+            <section>
+                <h2>Pseudo-code</h2>
+                <ol>
+                    <span>Pivot ( initially first item)</span>
+                    <li>Search for a <b>bigger</b> item than pivot (from the right)</li>
+                    <li>Search for a <b>smaller</b> item than pivot (from the left)</li>
+                    <li>If searches didn't cross, <b>swap</b> ( Continue 1 and 2)</li> <br>
+                    <li>If searches crossed , <b>swap pivot with th smaller</b> item found</li>
+                    <li>Recursively sort the 2 "sublists" created to the left of the pivot, and right of pivot</li><br>
+                    <li>left sub-list range - left to the index of pivot from prev sort</li>
+                    <li>right sub-list range - pivot(index) + 1 to right</li> <br>
+                    <span>
+                        quicksort(list, left, pivot) # recursive call to sort left side <br>
+                        quicksort(list, pivot + 1, right) # recursive call to sort left side <br>
+                    </span>
+
+
+                </ol>
+                <img src="../images/algorithms/quickSortExample1.JPG" />
+                <img src="../images/algorithms/quickSortExample2.JPG" />
+                <pre><code class="python">      
+def quicksort(list, left, right):
+    if left < right:
+        # get pivot, while sorting the sublists (inplace)
+        pivot = sortSubList(list, left, right)
+
+        quicksort(list, left, pivot)  # recursive call to sort left side
+        quicksort(list, pivot + 1, right)  # recursive call to sort left side
+        return list
+
+def sortSubList(list, left, right):
+    pivot = list[left]  # the first element of the sublist as pivot
+    while True:
+        # search to the left until you get a bigger item
+        while list[left] < pivot:
+            left += 1
+        # search to the right until you get a smaller item
+        while list[right] > pivot:
+            right -= 1
+        if left >= right:  # if the searches have crossed
+            return right  # this is the pivot for the next sub lists
+        # if the searches did not cross, swap the found items
+        list[left], list[right] = list[right], list[left]
+        left += 1
+        right -= 1
+    </code></pre>
+
+                <h2>Complexity Analysis</h2>
+                <p> <b>n comparisons </b> at each level of the tree <br>
+                    and at most n/2 swaps <br>
+                    worst case depth of the tree (if fully sorted) is <b>n</b> <br>
+                    because of this <b> n x n = n^2 </b>is the worst case complexity, in practice its closer to <b>O( n
+                        log n ) </b> </p>
+                <p>
+                    each time a pivot is placed into position, the <b>list splits into two parts</b> (ideally 2 equal
+                    parts).
+                    a balanced tree has log n depth. this means that runtime would be O(n log n)
+                </p>
+                <p>If given a fully sorted list, quicksort takes O(n^2) to sort it. Because of this <b>shuffling the
+                        list</b> prior helps to reduce it to O( n log n )</p>
+            </section>
+            <h1>Sorting limits - Bucket Sort &#8691;</h1>
+            <section>
+                <h2>Comparison sorts</h2>
+                <p>So far we have only done sorts that rely on comparing items and placing them accordingly. Comparisons
+                    seem to take up the bulk of the work, and additionally they also perform other tasks ( like list
+                    splitting )</p>
+                <h2>Bucket Sort - Pseudo-code</h2>
+                <p>Bucket sort work when you know the the input range</p>
+                <ol>
+                    <span>N = the upper range of the list ( max item )</span>
+                    <li>Create buckets 0 to N</li>
+                    <li>For each element in the list : add it to a bucket based on its key</li>
+                    <span><b>key could be -</b> value * ( n / N + 1)</span>
+                    <li>Empty the buckets 1 by 1 to form a sorted list</li>
+                </ol>
+                <p>Bucket sort is O(n) ( actually O(N + 2n) but you takes highest order so O(n)) if <b> N isn't big </b>
+                    compared to n.
+                    <br> if N is big its O(n^2) <br>
+                    <b>Space complexity - </b> O(N + n)
+
+                </p>
+            </section>
+            <h1>Stable sorting (radix/lexicographic order) &#8691;</h1>
+            <section>
+                <h2>What is a stable sort</h2>
+                <p>Stable sort - keeps the original order of items that have equivalent value/key<br>
+                    if sorting a list [1,3,2,2,4] - the two 2s will be in the same order <br>
+                    this is useful if they are keys that represent something else and the order matters
+                </p>
+                <table>
+                    <tr>
+                        <th style="color:red">Stable</th>
+                        <th style="color:red">Not stable</th>
+                    </tr>
+                    <tr>
+                        <td>bubbleSort</td>
+                        <td>SelectionSort</td>
+                    </tr>
+                    <tr>
+                        <td>InsertionSort</td>
+                        <td>HeapSort</td>
+                    </tr>
+                    <tr>
+                        <td>MergeSort</td>
+                        <td>QuickSort</td>
+                    </tr>
+                    <tr>
+                        <td>BucketSort</td>
+                        <td>----------</td>
+                    </tr>
+                </table>
+
+                <img src="../images/algorithms/lexicographicalOrder.JPG" />
+
+                <h2>Radix sort</h2>
+                <p>Does it even appear on the exam ?, barely explained in notes</p>
+            </section>
+            <h1>Ordered selection &#8691;</h1>
+
+            <section>
+                <h2>Kth percentile</h2>
+                <p>Value which K% of items are ranked after it. <br>
+                    1,3,4,6,6,8,9,12,15,18 <br>
+                    "4" is the 70th percentile as 7/10 values come after it<br>
+                    "15" is 10th percentile as 10% (1/10) values comes after it
+                </p>
+                <p>25th is lower quartile, 75th is upper quartile</p>
+                <h2>Modified QuickSort</h2>
+                <p>When you fix the pivot, only sort the side that has/will have the Kth percentile <br>
+                    as soon as you find the Kth value, you can quit ( so basically if you have fixed the pivot and the
+                    pivot is the Kth)<br>
+                    by only sorting the one side (rather than 2) every time the average expected complexity drops down
+                    to O(n) <br>
+                    <b>O(n + n/2 + n/4 + n/8 ... + 1) == O(n)</b>
+                </p>
+                <h2>Other ways</h2>
+                <ol>
+                    <li>for i in range(k): find biggest item; replace with none //// report the last item found</li>
+                    <li>for each element add it to a sorted list, then go to Kth position</li>
+                    <li>just sort the list and go to Kth position</li>
+                </ol>
+
+            </section>
+        </div>
+        <h1 class="Topic">Graphs and Algorithms</h1>
+        <div>
+            <h1>Graph ADT &#8691;</h1>
+            <h1>Depth-First search &#8691;</h1>
+            <h1>Breadth first search &#8691;</h1>
+            <h1>Transitive closure &#8691;</h1>
+            <h1>Directed Acyclic Graphs &#8691;</h1>
+            <h1>Adaptable priority Queue &#8691;</h1>
+            <h1>Dijkstra's Algorithm &#8691;</h1>
+            <h1>Prim's Algorithm &#8691;</h1>
+            <h1>Kruskal's Algorithm &#8691;</h1>
+            <h1>All-pairs shortest path &#8691;</h1>
+        </div>
+        <h1 class="Topic">Assorted Algorithms</h1>
+        <div>
+            <h1>Substring Searching &#8691;</h1>
+            <h1>Longest common Subsequence &#8691;</h1>
+        </div>
+        <main>
+            <aside>
+                <h1>Things to remember</h1>
+                <ol>
+                    <li>Python list slicing make a new copy of a list, expensive</li>
+                    <li>Avoid doing pointless work every Recursive call</li>
+                    <li>Depth of a balanced binary tree is log n</li>
+
+                </ol>
+            </aside>
+</body>
+
+</html>
