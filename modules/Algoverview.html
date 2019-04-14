@@ -42,8 +42,8 @@
 
             <section>
                 <h2>Recursive call- call to the same function with params nearing base case</h2>
-                <h2>There must be a base case</h2>
-                <h2>If a value is returned, every path must have a return value</h2>
+                <p>There must be a<b> base case</b> <br>
+                If a <b>value is returned</b>, every path <b>must have a return value</b></p>
                 <h2>Activation records</h2>
                 <p><b>Activation record -</b> holds parameters, progress in the function code, and local variables. Its
                     pushed onto a stack when a function is called. Deleted off the stack when a function finishes
@@ -383,7 +383,7 @@ def sortSubList(list, left, right):
             <h1>Stable sorting (radix/lexicographic order) &#8691;</h1>
             <section>
                 <h2>What is a stable sort</h2>
-                <p>Stable sort - keeps the original order of items that have equivalent value/key<br>
+                <p>Stable sort - keeps the <b>original order of items</b> that have equivalent value/key<br>
                     if sorting a list [1,3,2,2,4] - the two 2s will be in the same order <br>
                     this is useful if they are keys that represent something else and the order matters
                 </p>
@@ -444,30 +444,784 @@ def sortSubList(list, left, right):
         </div>
         <h1 class="Topic">Graphs and Algorithms</h1>
         <div>
+            <a href="https://visualgo.net/en/dfsbfs">Algorithm animations</a>
+
             <h1>Graph ADT &#8691;</h1>
+            <section>
+                <h2>ADT</h2>
+                <p>
+                    Vertex Methods: <br>
+                    <b>element()</b> return data for vertex <br> <br>
+                    Edge Methods: <br>
+                    <b> vertices()</b> return ordered pair of vertices <br>
+                    <b> start()</b> return first vertex in ordered pair <br>
+                    <b> end()</b> return second vertex in ordered pair <br>
+                    <b> opposite(v)</b> return opposite vertex to v in ordered pair <br>
+                    <b> element()</b> return element for this edge <br>
+                    <br>The graph Methods: <br>
+                    <b> vertices(): </b>return a list of all vertices<br>
+                    <b>edges(): </b>return a list of all edges<br>
+                    <b> num_vertices():</b> return the number of vertices<br>
+                    <b> num_edges(): </b>return the number of edges<br>
+                    <b> get_edge(x,y): </b>return the edge between x and y (if it exists)<br>
+                    <b>degree(x):</b> return the degree of vertex x<br>
+                    <b> get_edges(x):</b> return a list of all edges incident on x<br>
+                    <b> add_vertex(elt):</b> add a new vertex with element = elt<br>
+                    <b>add_edge(x, y, elt)</b> a new edge between x and y, with element elt<br>
+                    <b> remove_vertex(x):</b> remove vertex and all incident edges<br>
+                    <b> remove_edge(e): </b>remove edge e<br>
+                </p>
+                <h2>Implementing The graph</h2>
+                <p>Main operations for a graph include retrieving vertices and edges, updating is relatively rare</p>
+                <ol>
+                    <li>A <b>list of edges and vertices</b>-lists point to edge/vertex objects - each edge object point
+                        to its 2 vertices and back to its position in the list, vertex object points to its position in
+                        the list </li>
+                    <li><b>Adjacency list</b>- each vertex you store a list of edges incident on it</li>
+                    <li><b>Adjacency map</b> - each edge has a map of edges with vertex references ( what we used )</li>
+                    <li><b>Adjacency Matrix</b> - 2D array, matrix[i][j] == edge joining i and j </li>
+                </ol>
+                <div style="overflow:auto;">
+                    <table>
+                        <caption>Complexities n = vertices, m = edges</caption>
+                        <tr>
+                            <td>-</td>
+                            <th>get_edge(x,y)</th>
+                            <th>get_edges(x)</th>
+                            <th>degree(x)</th>
+                            <th>Space Complexity</th>
+                            <th>add_vertex(elt)</th>
+                            <th>add_edge(x,y,elt)</th>
+                            <th>remove_vertex(v)</th>
+                            <th>remove_edge(e)</th>
+                        </tr>
+                        <tr>
+                            <th>Edge List</th>
+                            <td>O(m)</td>
+                            <td>O(m)</td>
+                            <td>O(m)</td>
+                            <td>O(n + m )</td>
+                            <td>O(1)</td>
+                            <td>O(1)</td>
+                            <td>O(1)</td>
+                            <td>O(m)</td>
+                        </tr>
+                        <tr>
+                            <th>Adjacency List</th>
+                            <td>O(min(degree(x),degree(y)</td>
+                            <td>O(degree(x))</td>
+                            <td>O(1)</td>
+                            <td>O(n+m)</td>
+                            <td>O(1)</td>
+                            <td>O(1)</td>
+                            <td>O(degree(v)</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <th>Adjacency Map</th>
+                            <td>O(1)</td>
+                            <td>O(degree(x))</td>
+                            <td>O(1)</td>
+                            <td>O(n + m) </td>
+                            <td>O(1)</td>
+                            <td>O(1)</td>
+                            <td>O(degree(x))</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <th>Adjacency Matrix</th>
+                            <td>O(1)</td>
+                            <td>O(n)</td>
+                            <td>O(n)</td>
+                            <td>O(n^2)</td>
+                            <td>O(n^2)</td>
+                            <td>O(1)</td>
+                            <td>O(n^2)</td>
+                            <td>O(1)</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
             <h1>Depth-First search &#8691;</h1>
+            <section>
+                <h2>Pseudo-code</h2>
+                <p>
+                    Mark first vertex <br>
+                    choose an edge and go to opposite vertex; mark it.<br>
+                    If all vertices (spanning from current vertex) are marked ; backtrack and try other edges<br>
+                    if you backtracked to original vertex stop;
+                    <br><br>
+                    <b> do no visit any vertices that have been marked</b>
+                </p>
+                <pre><code>#pseudocode
+depthfirstsearch(graph, v):
+    mark v
+    for each edge (v,w)
+        if w has not been marked
+            mark w
+            depthfirstsearch(graph, w)</code></pre>
+
+                <pre><code class="python">def depthfirstsearch(self, v):
+    #Return a DFS tree from v.
+    marked = {v: None}
+    self._depthfirstsearch(v, marked)
+    return marked
+
+def _depthfirstsearch(self, v, marked):
+    #Do a recursive DFS from v, storing nodes in a dictionary 'marked'.
+    for e in self.get_edges(v):
+        w = e.opposite(v)
+        if w not in marked:
+            marked[w] = e
+            self._depthfirstsearch(w, marked)
+            </code></pre>
+                <h2>Properties</h2>
+                <ol>
+                    <li>Vertices marked = <b>connected component</b> of G containing v </li>
+                    <li>Set of marked vertices and edges == <b>Rooted spanning tree</b> ( root at V )</li>
+                    <li>Worst case = <b> O( n + m ) - assuming Adjacency map</b></li>
+                </ol>
+                <p>
+                    In graph theory, a component, sometimes called a <b>connected component</b>, of an <b>undirected
+                        graph</b> is a
+                    subgraph in which any two vertices are connected to each other by<b> paths</b>, and which is
+                    connected to
+                    <b> no additional vertices in the supergraph.</b>
+                </p>
+                <p><b>Proof by contradiction -</b> if we assume there is a vertex x that has not been marked in a v
+                    connected
+                    compenent, we can prove that its not possible as if a path P from v to x exists, node x could only
+                    have<b> been rejected if it was marked</b>, therefore contradicting it not being marked and proving
+                    that it
+                    contains connected components containing v </p>
+
+            </section>
             <h1>Breadth first search &#8691;</h1>
-            <h1>Transitive closure &#8691;</h1>
+            <section>
+                <p>From the starting node, consider only the edges judging by the number of hop. lowest hops are
+                    considered first</p>
+                <h2>Pseudo-code</h2>
+                <p>from starting vertex, each time you visit a vertex <b>add it to a QUEUE</b>;<br> start loop if all
+                    edges
+                    considered (1 hop away) <br> <br>
+                    while queue not empty <br>
+                    &emsp; pop a vertex off the Queue,
+                    <br>&emsp; consider each vertex <b>opposite it</b>;
+                    <br>&emsp; if unvisited add it to queue <br>
+                    <br>&emsp; if queue is empty, you are done
+                </p>
+
+                <pre><code class="python">def breadthfirstsearch(self, v):
+    """ Return a BFS tree from v. """
+    marked = {v:None}
+    level = [v]
+    while len(level) > 0:
+        nextlevel = []
+        for w in level:
+            for e in self.get_edges(w):
+                x = e.opposite(w)
+                if x not in marked:
+                    marked[x] = e
+                    nextlevel.append(x)
+        level = nextlevel
+    return marked
+                </code></pre>
+                <h2>Properties</h2>
+                <ol>
+                    <li>Computes the <b>path from the starting vertex to any vertex</b> ( with fewest edges )</li>
+                    <li>worst case == O(n +m) - same as DFS each edge is visited at most twice</li>
+                </ol>
+            </section>
+            <h1>Directed Graphs ADT &#8691;</h1>
+            <section>
+                <p>Essentially like Directed graph but we treat the order of edges as significant</p>
+                <p> Edge class - <b>get_start() , get_end()</b> <br>
+                    Graph class - in_degree(x) # return the number of edges<b> pointing to</b> vertex X <br>
+                    <b> out_degree(x)</b> # return the number of edges <b>pointing out of</b> vertex X <br>
+                    <b> get_in_edges(x)</b> # return a list of all edges pointing <b>in</b> to x <br>
+                    <b> get_out_edges(x)</b> # return a list of all edges pointing <b>away/out</b> of x</p>
+            </section>
+            <h1>Transitive closure | Floyd–Warshall &#8691;</h1>
+            <section>
+                <h2>What is it?</h2>
+                <p>If there is a path from A to B, than edge(A,B) exists in transitive closure</p>
+                <p> <b>Formal definition</b> <br>
+                    Given a graph G = (V,E), the transitive closure G* = (V,t(E))
+                    where an edge (x,y) is an element of t(E) if and only if there is a path from x to y in G</p>
+
+                <h2>Algorithms</h2>
+                <p>One way (not efficient) would be to run DFS each iteration: <br> <br>
+                    for every vertex V <br>
+                    &emsp; &emsp; tree = <b>DFS(V)</b> <br>
+                    &emsp; &emsp; for every vertex X in tree <br>
+                    &emsp; &emsp; &emsp; &emsp; add <b>edge(V,X)</b> to the graph <br><br>
+                    <b>Complexity : O(n(n+m))</b> </p>
+
+                <h2>Floyd Warshall algorithm</h2>
+                <p>
+                    Floyd–Warshall algorithm is an algorithm for <b>finding shortest paths</b> in a weighted graph with
+                    positive. A single execution of the
+                    algorithm will find the<b> lengths</b> (summed weights) of shortest paths between <b>all pairs of
+                        vertices</b>.
+                    Although it does not return details of the paths themselves, it is possible to <b>reconstruct the
+                        paths</b>
+                    with simple modifications to the algorithm.
+                </p>
+
+                <img src="../images/algorithms/TransitiveClosure.JPG" />
+                <pre><code class="python">
+def floydwarshall(self):
+    gstar = copy.deepcopy(self)
+    vs = gstar.vertices()
+    n = len(vs)
+    for k in range(n):
+
+        for i in range(n):
+            if (i != k and gstar.get_edge(vs[i],vs[k]) != None):
+
+                for j in range(n):
+                    if (i != j and k != j
+                    and gstar.get_edge(vs[k],vs[j]) is not None):
+
+                        if gstar.get_edge(vs[i],vs[j]) == None:
+                            gstar.add_edge(vs[i],vs[j],1)
+    return gstar
+</code></pre>
+
+                <h2>Analysis</h2>
+                <ul class="overviewLists">
+                    <li>Transitive closure algorithm O(n(n + m ) )</li>
+                    <li> Floyd Warshall - O(n^3)</li>
+                    <li>For dense graphs both have same O(n^3 ) , but floyd warshall performs better</li>
+                    <li> For sparse graphs simple algorithm is faster.</li>
+                    <li> Floyd Warshall is represented with adjacency matrix - lots of space</li>
+                    <li> Simple algorithm is implemented with adjecency list or map - less space. </li>
+                </ul>
+            </section>
             <h1>Directed Acyclic Graphs &#8691;</h1>
+            <section>
+                <p>
+                    a<b> path</b> in a directed graph is such that edge(vi, vi+1) is a directed edge for each i from 0
+                    to k-1 <br>
+                    <b> length of a path</b> in a directed graph is num of vertices in the path - 1<br>
+                    <b>Cycle</b> has length >= 1 and it starts and ends at the same vertex <br> </p>
+
+                <h2>Acyclic directed graph</h2>
+                <p>A graph that has no cycles and is directed. <br>
+                    there must be at least one vertex with in-degree == 0 </p>
+                <img src="../images/algorithms/acyclicgraph.JPG" />
+            </section>
+            <h1>Topological sort &#8691;</h1>
+            <section>
+                <h2>Remember</h2>
+
+                <p> directed acyclic graph DAG is A graph that has no cycles and is directed. <br>
+                    there must be at least one vertex with in-degree == 0 </p>
+                <h2>What is it</h2>
+                <p>Given a DAG, a <b>topological sort</b> is an<b> ordered </b>sequence of all
+                    vertices in the graph such that if two vertices x and y in the graph
+                    have a directed edge (x,y), then <b>x appears before y</b> in the sequence.</p>
+                <p>There is many topological sorts for graph</p>
+
+                <h2>Pseudo-code</h2>
+                <p><b>inedgecount</b>- dictionary: <b>key</b> = vertex,<b> value</b> = in_degree(key) </p>
+                <p><b>available </b>- list of vertices that have an in<b> degree of 0,</b> when a vertex is removed from
+                    here, other
+                    vertices <b>in_degree count is updated</b>, if it reaches<b> 0 they are added to the list</b></p>
+
+                <p>populate the 2 data structures accordingly <br>
+                    <br>while available not empty <br>
+                    <b> remove a vertex from available</b> add it to tsort, <br>
+                    and <b>for all edges</b> it has update the<b> opposing vertex in_degree count</b> (in inedgecount
+                    dictionary);
+                </p>
+                <pre><code class="python">
+def topological_sort(self):
+    """ Return a list of the vertices of the graph in topological sort order.
+
+        If the graph is not a DAG, return None.
+    """
+    inedgecount = {} #map of v:id, where id is the number of inedges in
+                        #for v from vertices not in tsort
+    tsort = []       #t-sorted list of vertices
+    available = []   #list of vertices with no in-edges left from non tsort
+
+    #initialise the inedgecount map
+    for v in self._structure:
+        v_incount = self.in_degree(v)
+        inedgecount[v] = v_incount
+        if v_incount == 0:
+            available.append(v)
+
+    #repeat: take next available vertex, and append to tsort; update        
+    while len(available) > 0:
+        w = available.pop()
+        tsort.append(w)
+        for e in self.get_edges(w):
+            u = e.opposite(w)
+            inedgecount[u] -= 1
+            if inedgecount[u] == 0:
+                available.append(u)
+
+    #if tsort is not same length as num_vertices, return None
+    if len(tsort) == self.num_vertices():
+        return tsort
+    else:
+        return None
+    </code></pre>
+                <h2>If a topological sort exists then a graph is a DAG</h2>
+                <h2>Proof</h2>
+                <img src="../images/algorithms/topologicalsortproof.JPG" />
+
+
+
+            </section>
             <h1>Adaptable priority Queue &#8691;</h1>
+            <section>
+                <h2>ADT</h2>
+                <p> add(key,value), min(), remove_min(), is_empty(), length() <br>
+                    <b> update_key(element,newkey) </b># update the elements key ( rebalance) <br>
+                    <b> get_key(element) </b># return the current key for an element <br>
+                    <b>remove(element)</b> remove an element from the APQ, rebalance</p>
+                <h2>how its adaptable</h2>
+                <p>For the priority Queue to be adaptable, we need to be able to remove(from anywhere ) and
+                    update an element and rebalance that element <br> <br>
+                    This is acheived by keeping an index reference for each element in the APQ, and when asked to
+                    remove/update a certain element,
+                    we know its position in the list(insiojjkldfkljthis allows us to bubble that item up or down) </p>
+                <h2>How its acheived</h2>
+                <p><b>Class element: key, value, index</b></p>
+                <p>In a list implementation, this is achieved by storing an index value for each Element object that is
+                    in the APQ list.</p>
+                <p>As the list rebalances, the indexes are updated as they are shuffled to stay up to date. <br>
+                    if you are given a reference to an element, you can find its position in the list as it has its
+                    index value, from there you can rebalance it.
+                </p>
+
+                <h2>Complexity Analysis</h2>
+                <table>
+                    <tr>
+                        <th>-</th>
+                        <th>add(key,item)</th>
+                        <th>min()</th>
+                        <th>Remove_min()</th>
+                        <th>update_key()</th>
+                        <th>get_key()</th>
+                        <th>remove()</th>
+                    </tr>
+                    <tr>
+                        <th>HEAP</th>
+                        <td>O(log n)*</td>
+                        <td>O(1)</td>
+                        <td>O(log n)</td>
+                        <td>O(log n)</td>
+                        <td>O(1)</td>
+                        <td>O(log n)*</td>
+                    </tr>
+                    <tr>
+                        <th>unordered list</th>
+                        <td>O(1)</td>
+                        <td>O(n)</td>
+                        <td>O(n)</td>
+                        <td>O(1)</td>
+                        <td>O(1)</td>
+                        <td>O(1)</td>
+                    </tr>
+                </table>
+                <p>Its O(log n) because you need to rebalance the tree. its O(n) because you need to do a linear search
+                </p>
+            </section>
             <h1>Dijkstra's Algorithm &#8691;</h1>
-            <h1>Prim's Algorithm &#8691;</h1>
-            <h1>Kruskal's Algorithm &#8691;</h1>
-            <h1>All-pairs shortest path &#8691;</h1>
+            <section>
+                <h2>Pseudo-code</h2>
+                <p>open vertices - vertices that have not been checked yet, starts out with <b>entry: startingVertex : 0
+                        cost</b><br><br>
+                    while theres vertices in open: <br>
+                    &emsp; &emsp; pick lowest cost vertex X <br>
+                    &emsp; &emsp; add entry dict[x] : (cost,pred) <br><br>
+                    &emsp; &emsp; for each vertex Y opposite X: <br>
+                    &emsp; &emsp;&emsp; &emsp; calculate new cost to Y;<br>
+                    &emsp; &emsp;&emsp; &emsp; update 'open vertices' entry for Y if better than old; <br>
+                    &emsp; &emsp;&emsp; &emsp; if new make a new entry for Y in 'open vertices';
+                </p>
+
+                <h2>Proof</h2>
+                <img src="../images/algorithms/proofDijkstra.JPG" />
+                <h2>Complexity Analysis</h2>
+                <img src="../images/algorithms/complexityDijkstra.JPG" />
+                <pre><code class="python">
+def dijkstra(self, s):
+    # initializing
+
+    # s : None is the initial starting point, preds, locs and open have it
+    self.preds = {s: None}
+    startingPoint = self.open.add(s, 0)
+    self.locs[s] = startingPoint
+
+    while not self.open.is_empty():
+        # min_el an instance of the element class, that has the minimum value from APQ open
+        min_el = self.open.remove_min()
+        v = min_el._key # key gives the reference to the Vertex class instance
+        self.locs.pop(v)
+        predecessor = self.preds.pop(v)
+
+        # min_el._value is the cost of getting to that element
+        self.closed[v] = (min_el._value, predecessor)
+
+        # for each edge from v (the min element )
+        for e in self.get_edges(v):
+            w = e.opposite(v)
+            if w not in self.closed:
+                newcost = min_el._value + e.weight
+                if w not in self.locs:
+
+                    self.preds[w] = v
+                    new_el = self.open.add(w, newcost)
+                    self.locs[w] = new_el
+                elif newcost < (self.locs[w]._value):
+
+                    self.preds[w] = v
+                    self.open.update_key(self.locs[w], newcost)
+    return self.closed
+                </code></pre>
+            </section>
+            <h1>Prim's Algorithm | Minimum spanning tree &#8691;</h1>
+
+            <section>
+                <p>Prim's algorithm works by gradually building a single tree one edge at
+                    a time until all vertices in the graph are in the tree.</p>
+                <h2>Minimum Spanning tree</h2>
+                <p>
+                    <b> spanning tree</b> - subgraph of G that contains every vertex in that graph <br>
+                    <b> minimum spanning tree </b>- applies to weighted graphs, has lowest sum on selected Vertices in
+                    the spanning tree
+                </p>
+                <h2>Pseudo-code</h2>
+                <p> <b>how to do it on paper </b><br> <br>
+                    for a vertex (starting/ any other) add all edges coming out of it to APQ <br>
+                    take the cheapest edge and consider it as a path <br>
+                    repeat<br>
+
+                    <pre><code>
+prim(): #pseudocode
+
+    add each vertex in G into a free dictionary
+    create an empty dictionary locs for locations of vertices in APQ
+    create an APQ pq, which contains costs and (vertex,edge) pairs
+
+    for each v in G
+        add (¥, (v,None)) into pq and store location in locs[v]
+
+    create an empty list, which will be the output (the edges in the tree)
+    
+    while pq is not empty
+        remove c:(v,e), the minimum element, from pq
+        remove v from free
+        remove v from locs
+        if e is not None, append e to the list
+        for each edge d incident on v
+            w = d opposite vertex
+            cost = d cost
+            if w is in free, and cost is cheaper than w entry in pq
+                replace ?:(w,?) in pq with cost: (w, d)
+    return the list
+                    </code></pre>
+                    <h2>Complexity Analysis O((n+m)log n) </h2>
+                    <img src="../images/algorithms/complexityPrim.JPG">
+                    <h2>Proof</h2>
+                    <img src="../images/algorithms/proofPrim.JPG">
+            </section>
+
+
+            <h1>Kruskal's Algorithm | minimum spanning tree &#8691;</h1>
+            <section>
+                <p>Kruskal's algoritm works by making trees (every vertex is a tree at the start) and merging them</p>
+                <h2>Pseudo-code</h2>
+                <pre><code>
+kruskal(): #pseudocode version 1
+    create an empty mst
+
+    for each vertex in the graph
+        create a separate tree
+
+    for each edge in the graph in increasing order of cost
+        if edge joins two separate trees
+            add edge to the mst
+            merge the two trees into one tree
+    return mst
+
+kruskal(): #pseudocode version 2
+    create an empty mst
+    create an empty dictionary stating the tree containing each vertex
+    create an APQ pq
+
+    for each edge e in G
+        add (w(e), e) into pq
+
+    for each vertex v in G
+        create a tree t for v and add (v:t) to dictionary
+
+    while length(mst) < |V|-1 and pq is not empty
+        remove the minimum cost edge
+        get the trees of its vertices from the dictionary
+        
+        if the two trees are different
+            add the edge into mst
+            join the two trees into a single tree and update dictionary
+    return mst
+
+                    </code></pre>
+                <h2>Complexity Analysis</h2>
+                <img src="../images/algorithms/complexityKruskal.JPG">
+
+                <h2>Python code</h2>
+                <pre><code class="python">
+def mst_k(self):
+    tree = []
+    n = self.num_vertices()
+    whichtree = {}
+
+    for v in self.vertices():
+        vtree = Stack()
+        vtree.push(v)
+        whichtree[v] = vtree
+
+    pq = PQHeap()
+
+    for e in self.edges():
+        pq.add(e.element(), e)
+
+    while len(tree) < n and not pq.is_empty():
+        key, e = pq.remove_min()
+        (x,y) = e.vertices()
+        xtree = whichtree[x]
+        ytree = whichtree[y]
+
+        if xtree != ytree:
+            tree.append(e)
+            self._jointrees(xtree, ytree, whichtree)
+    return tree
+
+def _jointrees(self, xtree, ytree, whichtree):
+    if xtree.length() < ytree.length():
+        target = ytree
+        deltree = xtree
+    else:
+        target = xtree
+        deltree = ytree
+
+    while deltree.length() > 0:
+        v = deltree.pop()
+        whichtree[v] = target
+        target.push(v)
+    del deltree
+                    </code></pre>
+
+            </section>
+            <h1>All-pairs shortest path | 'adapted' floyd warshall &#8691;</h1>
+            <section>
+                <a href="http://www.cs.ucc.ie/~kb11/teaching/CS2516/Lectures/restricted/L18-AllPairsShortestPaths.pdf">All-pairs
+                    shortest paths Lecture</a>
+                <p>All-pairs shortest path - <b>the shortest path from any node to any node.</b> <br> <br>
+                    dijkstra computes<b> shortest path</b> from a starting node to all other nodes <br>
+                    one way to compute All-pairs shortest path is to just run<b> dijkstra algorithm for every vertex</b>
+                    in the graph</p>
+                <pre><code>
+floydwarshall(): pseudocode
+    initialise an nxn 2D structure with value ¥ for each entry
+    for each v in graph
+        assign table[v][v] = 0 #cost of path from v to v = 0
+
+    #start visitable set S = {}, so shortest paths visiting only S are just edge costs
+    for each edge (x,y) in the graph
+        table[x][y] = w((x,y)) #initial cost of path is the edge weight, if edge exists
+        table[y][x] = w((x,y))
+
+    for each v in the graph #each time round the loop, add v to S
+        for each w in the graph #but not v
+        
+            for each x in the graph #but not v
+                if table[w][x] > table[w][v] + table[v][x]: #if path via v is cheaper
+                    table[w][x] = table[w][v] + table[v][x] #record that as shortest path
+    return table
+                </code></pre>
+
+                <pre><code class="python">
+def floydwarshall(self):
+    allpairs = {} #create a dictionary, vertices as keys
+    for v in self._structure:
+        allpairs[v] = {} #each value is a dictionary
+        for w in self._structure:
+            allpairs[v][w] = float('inf')
+        allpairs[v][v] = 0
+
+    for e in self.edges():
+        (v,w) = e.vertices()
+        allpairs[v][w] = e.element()
+        allpairs[w][v] = e.element()
+
+    for v in self._structure:
+        for w in self._structure:
+            for x in self._structure:
+                if allpairs[w][x] > allpairs[w][v] + allpairs[v][x]:
+                    allpairs[w][x] = allpairs[w][v] + allpairs[v][x]
+    return allpairs
+                </code></pre>
+                <h2>Complexity Analysis</h2>
+                <p>O(n^2) to initialise the 2D dict <br>
+                    O(m) adding the edge, which is O(n^2) <br>
+                    triple loop O(n^3) <br>
+                    in total its O(n^3)</p>
+                <p>if graph is <b>dense </b>this is better <br>
+                    if graph is<b> sparse</b>, <b>repeated dijkstra-heap</b> is better </p>
+            </section>
         </div>
+
+
         <h1 class="Topic">Assorted Algorithms</h1>
         <div>
             <h1>Substring Searching &#8691;</h1>
+
+            <section>
+                <h2>Searching for a substring whitin a text file</h2>
+                <p>The problem here is to match any sequence of characters, whether inside a word, spanning multiple
+                    words, whole sentances, single characters and so on <br><br>
+                    if we were to match distinct words than we would use a standard searching algorithm in O(log n)</p>
+                <h2>Brute force</h2>
+                <p>Check character by character O(n*m)<br>
+                    if you fail <br>
+                    move over by 1 and keep checking</p>
+                <p>This approach is flawed : <br><br>
+                    if we are matching "aaaaa" in "aaaabaaabaaaaa" then it would do a lot of unecessary work <br>
+                </p>
+                <h2>Better approach - target table</h2>
+                <p><b>Generate a table of the target "offline".</b> <br>
+                    this table will tell you for any point in the target you failed, to<b> which point you should go
+                        to</b>. <br>
+                    e.g if you failed at position <b>7</b>, you query the table , <b>table(6)</b> -- and it will give
+                    you an <b>index</b>
+                    value back saying which position to go to.</p>
+                <p>'If we fail at position i in the target and position j in the source,
+                    then we know that position 0 to (i-1) in the target have matches to positions
+                    (j-i) to (j-1) in the source'</p>
+                <pre><code class="python">
+    # PYTHONIC PSEUDOCODE
+def compute_pi(target):
+    pi[0] = 0
+
+    for i in range(1,len(target)-1):
+        if target[i] == target[pi[i-1]]:
+            pi[i] = pi[i-1] +1
+        else:
+            pi[i] = 0
+
+def KnuthMorisPratt(target,source):
+    i = 0 # TARGET INDEX
+    j= 0 # SOURCE INDEX
+    pi = compute_pi(target)
+
+    while i and j have not gone outside their range:
+        if target[i] == source[j]:
+            i += 1
+            j += 1
+        elif i == 0: # you always have to increase j or i to avoid endless loops
+            j += 1
+        else:
+            pi[i-1]
+
+    if i == len(target):
+        return "SUCESS"
+    else:
+        return 'FAILED'
+                </code></pre>
+
+                <h2>Complexity Analysis</h2>
+                <p>m = length of the target, n = length of the source <br><br>
+                    loop executed max of O(2n) times, as worst case scenario i always changes each time around the loop.
+                    <br>
+                    initializing pi is O(m) <br>
+                    therefore O(n+m) <br><br>
+                    this is optimal worst case as O(n + m) is the minimum amount of work we can possibly do, as you have
+                    to look at every character in target and source at least once
+                </p>
+            </section>
             <h1>Longest common Subsequence &#8691;</h1>
+            <section>
+                <h2>What is it?</h2>
+                <p>We will define the distance between two strings as the <b>minimal</b> number
+                    of<b> additions or deletions</b> that <b>transform</b> the first string into the second. <br><br>
+                    unchanged characters are called <b>common Subsequence</b> <br>
+                    formally a subsequence of character has to obey the fact that each common character<b> needs to
+                        appear before</b> <br>
+                    if<b> x0 x1 x2 x3</b>...xn-1 is a sequence of characters, <br>
+                    then a subsequence is xj0 xj1 xj2... xjp such that <br>
+                    0 &#60;= <b>j0 &#60; j1 &#60; j2</b> &#60; ... &#60; jp &#60;=n-1 </p>
+
+
+                <h2>How to do it?</h2>
+                <span>Complexity O(n*m) - 2 loops m x n </span> <br>
+                <img src="../images/algorithms/rules.JPG">
+                <pre><code>
+def lcs(str1, str2):
+    n = len(str1)
+    m = len(str2)
+    L = [[0] * (m+1) for i in range(n+1)]
+
+    for j in range(n):
+        for k in range(m):
+            if str1[j] == str2[k]:
+                L[j+1][k+1] = L[j][k] + 1
+            else:
+                L[j+1][k+1] = max(L[j][k+1], L[j+1][k])
+    return L,n,m
+
+def lcs(str1, str2):
+    L,n,m = lcs_table(str1,str2)
+    print_table(L,n,m)
+    j = n
+    k = m
+    seq = [''] * L[n][m]
+    while L[j][k] > 0:
+        if L[j-1][k] < L[j][k] and L[j][k-1] < L[j][k]:
+            j = j-1
+            k = k-1
+            seq[L[j][k]] = str1[j]
+        elif L[j-1][k] == L[j][k]:
+            j = j-1
+        else:
+            k = k-1
+
+    print(L[n][m], ':', end=' ')
+    for x in seq:
+        print(x, end=' ')
+                        
+                </code></pre>
+                <img src="../images/algorithms/example.JPG">
+                <h2>Proof</h2>
+                <img src="../images/algorithms/proofLongestCommonsubs1.JPG">
+                <img src="../images/algorithms/proofLongestCommonsubs2.JPG">
+            </section>
         </div>
-        <main>
+    </main>
             <aside>
                 <h1>Things to remember</h1>
-                <ol>
+                <ol class="overviewLists">
                     <li>Python list slicing make a new copy of a list, expensive</li>
                     <li>Avoid doing pointless work every Recursive call</li>
                     <li>Depth of a balanced binary tree is log n</li>
-
+                    <li>Usuall implementations of insertion/selection sort are<b> in place</b></li>
+                    <li>Stable sort - keeps the <b>original order of items</b> that have equivalent value/key</li>
+                    <li>Simple<b> undirected </b>graph with n vertices can have a maximum of <b>1/2(n)(n-1) == O
+                            (n^2)</b> edges</li>
+                    <li>Simple<b> directed </b>graph with n vertices can have a maximum of <b>(n-1)2 == O(n2)</b> edges
+                    </li>
+                    <li>Length of a path in a directed Graph is number of vertices in the path - 1</li>
+                    <li>Cycle - length >= 1 and it starts and ends at the same vertex</li>
+                    <li>All-pairs shortest path - <b>the shortest path from any node to any node.</b> </li>
+                    <li>Optimal worst case - where the task you are trying to do requires at least this much work and
+                        the algorithm provided has the same complexity</li>
+                    <li>We will define the distance between two strings as the <b>minimal</b> number
+                        of<b> additions or deletions</b> that <b>transform</b> the first string into the second.</li>
                 </ol>
             </aside>
 </body>

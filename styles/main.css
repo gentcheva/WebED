@@ -86,7 +86,12 @@ main{
     margin-top: 2em;
     border-radius: 2em;
 }
-
+.overview {
+    text-align: center;
+}
+.overview section{
+    text-align: left;
+}
 .overview div{
     text-align: unset;
 }
