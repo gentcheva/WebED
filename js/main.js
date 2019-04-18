@@ -60,6 +60,16 @@ $(function(){
                     $(this).next("section").toggle("slow")
             });
         
+
+        $("#keywordsUsability td").toggle();
+        $("button").click(function(){
+            $("#keywordsUsability td").toggle();  
+        })
+        $("#keywordsUsability th").click(function(){
+            $(this).next().toggle();
+
+        });
+
         $(".overview img").css("width","100px");
         $(".overview img").click(function(){
             if($(this).width() > 100){
@@ -72,4 +82,5 @@ $(function(){
     catch(err){
         console.log("not on overview page")
     }
+    
 });

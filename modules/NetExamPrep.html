@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="utf-8" />
+    <link href="../styles/main.css" rel="stylesheet" />
+
+    <script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
+    <title>Networking</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="java.html">Java</a></li>
+            <li><a href="compArchitecture.html">Architecture</a></li>
+            <li><a href="networking.html">Networking</a></li>
+            <li><a href="databases.html">Databases</a></li>
+            <li><a href="operatingSystems.html">OS</a></li>
+            <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
+            <li><a href="algorithms.html">Algorithms</a></li>
+        </ul>
+    </nav>
+
+
+    <header>
+        <img src="../images/comp_networking/networking.jpg" title="Web servers" alt="Room with web servers" />
+        <h1>Network Computing</h1>
+    </header>
+    <main class="overview">
+        <a href="../downloadPDFS/networkFundamentals.pdf" target="_blank">Network Fundamentals Notes</a> <br>
+        <a href="../downloadPDFS/ApplicationLayer.pdf" target="_blank">Application layer Notes</a><br>
+        <a href="../downloadPDFS/transportLayer.pdf" target="_blank">Transport Layer Notes</a><br>
+        <br><br>
+        <a href="https://drive.google.com/open?id=1yfrFXtLU3nnuPz4lzBHTwjCDlNrqcIti" target="_blank">General notes,
+            google drive</a>
+        <br> <br>
+
+        <img src="../images/comp_networking/overview.JPG" alt="">
+        <h1>General networking Concepts</h1>
+        <h1>Calculations | network Performance </h1>
+        <section>
+            <h1>Formulas</h1>
+
+            <p><b>Circuit switching </b>: how data is transferred though the network <br>
+                change into same value (bits) , divide file size by link speed, multiply by TDM. add RTT
+            </p>
+
+            <p><b>Transmission delay</b> = L / R where R = <b>link</b> bandwidth b/s, L =<b> packet </b>Length bits <br>
+                <b> Propagation delay</b> = d/s where d = <b>length</b> of link, s = <b>propagation speed</b> in medium
+                (2x10^8 for copper) <br>
+                <b>Transmission time </b> - time it takes ro process at each router
+            </p>
+
+            <p>Nodal delay = Dproc + Dqueue + Dtrans + Dprop <br>
+                where : proc - processing delay, queue - queue delay, trans - Transmission delay (L/R) prop -
+                propagation delay
+            </p>
+            <p>
+                Throughput = bits/time unit is the rate at which the bits are transferred between sender/user | theres
+                always a bottleneck <br>
+                Rs less than Rc then Rs is average <br>
+                Rc less than Rs then Rc is average
+            </p>
+        </section>
+        <h1>Networking fundamentals</h1>
+        <section>
+            <img src="../images/comp_networking/protocolArchitecture.JPG" alt="">
+        </section>
+        <h1>Application Layer</h1>
+
+        <section>
+            <h2>Communication between Proxy server/client/internet</h2>
+            <img src="../images/comp_networking/proxyCache.JPG" >
+        </section>
+        <h1>Transport Layer</h1>
+    </main>
+    <aside>
+        <h1>Things to remember!</h1>
+        <ol>
+            <li>Mb ( Mbs ) to bits ( bits/s ) multiply by 1000000 (million, 6 zeros )</li>
+            <li>1 megabit - 0.001 Gigabits - multiply or divide by 1000 ( same conversion from megabyte to gigabyte )
+            </li>
+            <li>Kilo Bytes to Mega bits : KB X 8 X 1000 will give bits -> divide by 1 000 000 to get Megabits || or
+                divide KB/125 to get Megabits</li>
+            <li>Kilo bits to Mega bits : divide Kb / 1000 </li>
+            <li>Seconds to milliseconds : 1000 x seconds = ms</li>
+            <li>Milliseconds to seconds : ms/1000 = seconds </li>
+
+
+            <li><b>FDM ( radio / TV ) - frequency division multiplexing</b>: bandwidth is split into parts ( non-overlapping bands ) each
+                carries a separate signal  </li>
+            <li><b>TDM ( telephone ) - Time-division multiplexing: </b>each signal appears only a fraction of the time  </li>
+            <li><b>Packet switching - Statistical multiplexing </b>: allocates resources to channels currently transmitting  </li>
+
+            
+        </ol>
+    
+    </aside>
+
+</body>
+
+</html>

@@ -301,3 +301,43 @@ th {
 td, th {
     border: 2px solid #FFE400;   
 }
+
+
+
+#keywordsUsability{
+
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#keywordsUsability td, th{
+    padding: 1.5em;
+}
+
+button{
+    color:black;
+    padding:1em;
+}
+
+#guidelines li {
+    color:rgb(206, 78, 78);
+    font-weight: bold;
+    
+}
+#guidelines span {
+    color:rgb(97, 104, 240);
+    font-weight: bold;
+    font-size: 1.4em;
+    
+}
+
+#interactionStyles  li{
+    color:lightseagreen;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+#interactionStyles li p{
+font-size: 0.7em;
+font-weight: normal;
+}
