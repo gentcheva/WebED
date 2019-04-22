@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8" />
+    <link href="../styles/main.css" rel="stylesheet" />
+    <script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
+    <title>Operating Systems</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="java.html">Java</a></li>
+            <li><a href="compArchitecture.html">Architecture</a></li>
+            <li><a href="networking.html">Networking</a></li>
+            <li><a href="databases.html">Databases</a></li>
+            <li><a href="operatingSystems.html">OS</a></li>
+            <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
+            <li><a href="algorithms.html">Algorithms</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Operating Systems II</h1>
+    </header>
+
+    <main class="overview">
+        <a href="../downloadPDFS/CS 2506 Review 2019.pdf">GRU'S Review</a>
+        <h1>Lecture notes links</h1>
+        <section>
+            <a href="../downloadPDFS/Lecture 1.pdf" target="_blank">Lecture 1 - Intro (nothing important), System
+                Layers, Kernel services,
+                Os classes, Library functions</a> <br>
+            <a href="../downloadPDFS/Lecture 2.pdf" target="_blank">Lecture 2 - Processes structure and management,
+                Threads, Scheduling</a> <br>
+            <a href="../downloadPDFS/Lecture 3.pdf" target="_blank">Lecture 3 - Process scheduling</a> <br>
+            <a href="../downloadPDFS/Lecture 4.pdf" target="_blank">Lecture 4- Process scheduling in multi-core
+                systems</a> <br>
+            <a href="../downloadPDFS/Lecture 5.pdf" target="_blank">Lecture 5 - Sensor OS, TinyOS, resource contention,
+                Split-phase </a> <br>
+            <a href="../downloadPDFS/Lecture 6.pdf" target="_blank">Lecture 6 - Mobile OS, Android, Intents</a> <br>
+            <a href="../downloadPDFS/Lecture 7.pdf" target="_blank">Lecture 7 - Linux management, system calls, process
+                creation, parent behaviour</a> <br>
+            <a href="../downloadPDFS/Lecture 8.pdf" target="_blank">Lecture 8 - Concurrency, mutual exclusion,
+                semaphores</a> <br>
+            <a href="../downloadPDFS/Lecture 9.pdf" target="_blank">Lecture 9 - principles of memory management, PTE
+                fields, base registers/segmentation/Paging</a> <br>
+            <a href="../downloadPDFS/Lecture 10.pdf" target="_blank">Lecture 10 - page allocation techniques, free bit
+                map, Swapping</a> <br>
+            <a href="../downloadPDFS/Lecture 11.pdf" target="_blank">Lecture 11 - Memory Replacement Techniques </a>
+            <br>
+            <a href="../downloadPDFS/Lecture 12.pdf" target="_blank">Lecture 12 - IO subsystem, IO drivers,
+                Buffering</a> <br>
+            <a href="../downloadPDFS/Lecture 13.pdf" target="_blank">Lecture 13 - Disk scheduling, IO management
+                examples</a> <br>
+            <a href="../downloadPDFS/Lecture 14.pdf" target="_blank">Lecture 14 - Sensor
+                Framework/Manager/Events/Examples</a> <br>
+            <a href="../downloadPDFS/Lecture 15.pdf" target="_blank">Lecture 15 - OS FS, Structure, Concept, Open,
+                Operations, Metadata</a> <br>
+            <a href="../downloadPDFS/Lecture 16.pdf" target="_blank">Lecture 16</a> <br>
+            <a href="../downloadPDFS/Lecture 17.pdf" target="_blank">Lecture 17 - FS in linux, Superblock, inode,
+                VFS,EXT3 FS, block devices, </a> <br>
+        </section>
+
+        <h1>Process Management lectures 1 to 8 </h1>
+        <section>
+            <h1>Lecture 2</h1>
+            <h2>Process Structure</h2>
+            <b> Process </b>- Instance of a running program or a context(state and what it owns) associated with a
+            program in execution
+            <br><br>
+            a process has <b>executable instructions, data, stack, buffer memory, administrative info. (stored in
+                kernel)</b>
+            <br> <br>
+            <b> process context</b> - represents a series of info a <b>process knows</b> - process/parent/user
+            <b>ID</b>, CWD ,File
+            descriptor, code area, stack, heap, priority, environment, Signal disposition (whats blocked and whats
+            waiting) , Unmask (specifies what permission are granted to created files)
+
+            <h2>Process Management</h2>
+            <ul>
+                <li>Create - resources are allocated</li>
+                <li>Terminate - release resources</li>
+                <li>Change program - replaces code its executing </li>
+                <li>Block - wait for an even e.g IO</li>
+                <li>Awaken process - after sleeping resume running it</li>
+                <li>Switch process - process context switching</li>
+                <li>Schedule process - take control of CPU</li>
+                <li>Set/get process params - like priority</li>
+
+            </ul>
+            <p>A process <b>can be</b> Ready, Blocked, Running. <b>It is</b> created and terminated</p>
+
+            <h2>Fork , vfork, clone</h2>
+
+            <p>
+                <b>fork() -</b> makes a copy of the parent, the copy is: <b>identical</b>, executes
+                <b>asynchronously</b> (compete for CPU) ,
+                computes different things to the parent.
+                <br><br>
+                <b> calling fork()</b> returns the child ID to the parent, and 0 to the child - thats why when invoking
+                fork()
+                its with an<b> if statement.</b>
+                <br>
+                <b> vfork() </b>- variation of fork - child shares same address space as parent <br>
+                <b> clone()</b> - creates a new child process and specifies which parts of parents must be copied to a
+                child
+                process and which parts are shared.
+            </p>
+            <h2>Threads</h2>
+
+            <p><b>Lightweight</b> process within a process - all threads <b>share the same process context</b> and code.
+                . All threads are running concurrently. Most benefit most on multi core system
+                <br>
+                invoking a thread is fast as the its context is minimum. <br><br>
+
+                <b>thread affinity - </b>describes which core the thread is allowed to run ( should be avoided as it
+                reduces the schedulers effectiveness)
+            </p>
+            <h2>Scheduling</h2>
+
+            <p>before (historically) there was<b> batch processing</b> one process had the CPU at a time.
+                Now the CPU is<b> time shared</b>.</p>
+
+            <p>The<b> kernel</b> holds the scheduler which schedules the processes based on an<b> algorithm</b>.
+                <br><br>
+                it uses things like FCFS (first come first serve) or<b> Round robin </b>( queue ), Priority scheduling (
+                kernel
+                processes always have <b>higher priority</b>).
+            </p>
+
+            <h1>Lecture 3</h1>
+            <h2>Priority Scheduling </h2>
+
+            <p>
+                Picking which process gets <b>CPU time</b>, picked based on an int value. <b>Priority may change</b>
+                after its time
+                slot.
+            </p>
+
+            <p>Multi-level feedback queue - <b>dynamic implementation of priority queue</b> <br><br>
+                processes are <b>assigned levels</b> ( according to their priority) each level has a<b> predefined
+                    execution time</b>.
+                once a process executes - the <b>priority decreases</b> . If a process is blocked its <b>priority
+                    increases</b>.
+            </p>
+
+            <p>Idle process- located on the lowest level, it is executed when there are no other processes to run. it
+                performs some cleaning tasks and switches the PC to sleeping state. Invokes the Kernel power policy
+                management. a set of rules to help decrease power consumption.</p>
+
+
+            <h2>Priority Inversion </h2>
+            <p>Occurs when one thread has a lock on some resources and that thread is low in priority. Some other high
+                priority thread needs those resources and is waiting ( cannot be scheduled ). the Scheduler then
+                schedules the next priority thread. To solve this issue of waiting. Scheduler will randomly boost lock
+                holders priority level.</p>
+            <h2>Scheduling in Multi core systems</h2>
+            <p> Implement Real parallelism: running multiple processes at the same time on different cores.
+                <br><br>
+                <b> Scheduler's main challenge:</b> to identify and predict the resource needs of each process and
+                schedule them
+                in a fashion that will minimize shared resource content, maximize shared resource utilization, and
+                exploit the advantage of shared resources between cores.
+
+                <br><br>
+                Scheduler needs to be aware of
+                Shared resource<b> topology</b>,
+                <b>Resource requirements</b> of processes , and
+                The inter-relationship between the processes
+            </p>
+
+            <h1>Lecture 4</h1>
+
+            <p> <b>schedule</b> them in a fashion that will
+                minimize shared resource contention,<b> maximize shared resource</b>
+                utilization, and exploit the advantage of shared resources
+                between cores.</p>
+
+            <p>The scheduler need to know : <b>resource topology</b> ,<b> resource requirements</b> of a process,
+                inter-relationship
+                between the processes.</p>
+
+            <p>L2 memory's impact on performance has a lot to do with knowing what <b>resources are shared</b>, the
+                number of
+                active
+                processes and the memory access patterns of the <b>individual process</b>. <br><br>
+
+                <b> Heterogenous data access patterns </b>of memory-intensive-processes running on the cores sharing
+                caches can
+                lead to
+                cache contention and sub-optimal performance.
+                <br><br>
+               
+
+            </p>
+
+            <h2>Prediction of resource use</h2>
+
+            <p>The processes characteristics and behaviour can be predicted using <b>micro-architectural history</b> of
+                a
+                process by using a performance counter or if thats absent it uses some<b> heuristic.</b> </p>
+
+            <h2>Scheduling Domains - load balancing</h2>
+            <p>In multi core systems, the scheduler must balance the load so that there are<b> no idle or overloaded
+                    cores.</b>
+                <br><br>
+                <b> domain based scheduler - </b>describes what decision should be made, describes the systems structure
+                and
+                scheduling policy in <b>sufficient detail.</b>
+                <br>
+                <b> scheduling domain -</b> a set of cores which share properties and scheduling policies and can be
+                balanced
+                against each other. Scheduling domains are hierarchial.
+            </p>
+            <h2>Group scheduling</h2>
+            <img src="../images/os/groupScheduling.JPG" alt="">
+            <p>
+                <br> the<b> core groups are treated as single units.</b> When scheduler balances the laod it balances
+                based on
+                the groups and not what is going on inside the group. <br><br>
+                therefore if we know what process shares context with another we can schedule them on the same
+                core/package. otherwise it will lead to<b> L2 contention</b>.
+                <br> Scheduling them on different packages would be faster but more <b>power hungry</b>.
+            </p>
+
+            <h2>Domain Policies</h2>
+            <p>
+                policies that say how decision should be made at that level of the hierarchy. things like how often to
+                make <b>attempts between</b> balancing the loads or how long a process should <b>sit idle</b>, policy
+                flags
+            </p>
+
+            <h2>Heterogenous multi-core</h2>
+            <p>Mobile phones use it. They have <b>energy efficient cores</b> that are slower, and have more power,<b>
+                    big.LITTLE</b>.
+                A72 is high perfromance - A53 is energy efficient. </p>
+
+            <h1>Lecture 5</h1>
+
+            <img src="../images/os/MICAcontroller.JPG" alt="">
+            <h2>TinyOS</h2>
+            <p>Each app is built into the OS. It has no file system, <b>no virtual memory and basic commands</b>. <br>
+                The sensors are connected into a<b> sensor network</b> ( they can pass on data to others and
+                communicate?)
+            </p>
+            <p>Theres <b>no time sharing</b>, a task runs until <b>its completed</b>. Events cannot be pre empted by
+                another event.
+                Event handlers are very simple ( few ins.)</p>
+
+            <p>If an event occurs (generated by hardware - interrupts), it posts a task . that task will then take
+                <b>control of the CPU</b>. <br>
+                if the CPU queue is empty, the sensor sleeps as it is battery powered. <br><br>
+                there is lack of fairness when the same task is posted all the time. So the CPU will never be free.
+            </p>
+
+            <p>This was fixed in TinyOS 2.x - it fixed the 2 issues <br><br>
+                no more than <b>one post of a task</b> in the queue - only of instance in the queue. the posting is
+                delayed.
+                <br>
+                allow <b>new task models</b> with priorities ( int ),<b> earliest deadline fist</b> etc...
+            </p>
+            <img src="../images/os/FieldMonitor.JPG" alt="">
+
+            <p>
+                <b>The split phase operation</b>
+                <br><br>
+                Operation is called, but the caller returns immediately, doesn't wait for the <b>operation to be
+                    completed</b>.
+                Once its completed it triggers an event, which notifies the caller.
+                <br>
+                They are using different <b>hardware units</b>, so they are running concurrently.
+                <br>
+                This raises another issue : contention, erase condition, several task want access to the same resource
+            </p>
+            <p>
+                <b> resource contention -</b> handled by <b>explicit rejection of concurrent requests</b>. All
+                split-phase operations
+                return boolea values indicating whether a request to perform the operation is accepted.
+                <br>if send() call is made the AM compnent(if currently busy) it will send an error signal.
+            </p>
+
+
+            <h1>Lecture 6</h1>
+            <h2>Mobile OS -Android</h2>
+            <p>
+                <b>Linux Kernel</b> - middle ware applications - A <b>general</b> purpose system.
+                <br> It has its own JVM (Dalvik VM). <br>
+                The main Goal of Android is to allow apps to <b>interact with one another</b> by sharing content;
+                starting
+                other apps. <br>
+                There are Device drivers - to allow for camera, WiFi, flash memory and other things. Imported libraries
+                (C/C++) for things like OpenGl, Webkit and other media.
+                <br>
+                <br>
+                Because Android is using a linux kernel, it must use the same <b>process model</b>. It assigns each app
+                a
+                <b>different user with a unique ID</b> ( android is <b>multi user Linux system</b>) <br>
+                The application are split into activities, like viewing list of message is one activity and viewing the
+                message and replying is another activity.
+                An app in the background shoundn't use any CPU, <b>just memory resources</b>.
+
+            </p>
+
+
+            <h2>Intent</h2>
+            <p>Android apps are <b>composed of Components</b>(not a single entry with a Main() function like PC apps )
+                <br>
+                this means that the OS can run an app as it needs from the point it needs. Like it doesn't always have
+                to start at a main screen an app can start <b>running where the intent is meant to go</b>. like if your
+                intent
+                is to send an email, it will launch the app on the composing email page straight away.
+
+            </p>
+
+            <h2>Android app Lifecycle</h2>
+
+            <p>
+                the life cycle is managed by the system based on resources available and user needs. Current activity
+                gets higher priority, while an app in the background can be killed for resources.
+            </p>
+            <p>Each android app runs in a separate process which hosts its own virtual machine. its a protected memory
+                env. and the system conrol its priority </p>
+
+
+            <img src="../images/os/AndroidLifecycle.JPG" alt="">
+
+            <h2>Task</h2>
+            <p>A task is a <b>stack of activities</b> - Values for it are set in the root activity (launcher). <br>
+                one activity can start another one ( despite the app ). Tasks are arranged in a <b>back stack.</b> Top
+                of the
+                stack is the <b>activity currently running</b> and selected. when that activity starts another it pushes
+                it
+                down the stack and when the back button is pressed it pops of the current activity and displays the one
+                below it in the stack
+            </p>
+
+            <h2>Multitasking</h2>
+            <p>apps held in the back in <b>RAM</b>, until more RAM is needed it kills the <b>bottom of the stack</b>.
+            </p>
+
+
+            <h1>Lecture 7</h>
+
+                <h2>System Calls - Linux</h2>
+
+
+                <ul>
+                    <li><b> execve()</b> allows a process to specify a program to begin running <b>in place </b>of
+                        the current one. </li>
+
+                    <li>
+                        <b>exit()</b> is for process termination - cleans up open files at app level. then exits so
+                        kernel
+                        can release resources.
+
+                    </li>
+                    <li><b>kill()</b> is the means by which a process sends a signal – for
+                        some signals, the default behaviour is to terminate the
+                        process, for most there is a signal handler that is invoked
+                        when the signal is received.</li>
+                    <li><b>wait4() and waitpid()</b> allow a parent process to inquire as to
+                        the state of a child. Their purpose is to notify the parent
+                        when the child has exited and to deliver its exit status to the
+                        parent</li>
+                    <li><b>nice() </b>gives the process the ability to adjust its priority level
+                        – higher values represent lower priorities. </li>
+                    <span><i>calls to scheduler</i></span>
+                    <li><b>sched_setScheduler()</b> allows a process to change policy and priority levels</li>
+                    <li><b>sched_shceduler()</b> - returns what policy the sched is using</li>
+                    <li><b>sched_yield()</b> - allows a process to give up its time slice.</li>
+                </ul>
+
+                <h2>Process states</h2>
+                <ul>
+                    <li>TASK_RUNNING</li>
+                    <li>TASK_INTERRUPTIBLE - can be awaken by signals</li>
+                    <li>TASK_UNINTERRUPTIBLE - dont come out in response to signals</li>
+                    <li>TASK_STOPPED - can be resumed by signal SIGCONT</li>
+                    <li>TASK_TRACED - can control the exec of another process ( debuggers) </li>
+                    <li>EXIT_ZOMBIE</li>
+                    <li>EXIT_DEAD - process terminates and parent not notified</li>
+                </ul>
+                <img src="../images/os/procStates.JPG" alt="">
+
+
+                <h2>Process creation</h2>
+                <p>created by either fork() , vfork(), clone() <br>
+                    all of the aboce call <b>do_fork()</b>. which <b>copies the context shared</b> into the child. sets
+                    up suspension
+                    if its <b>vfork()</b>. set up the initial <b>state of child</b> (ready,Stopped)
+                </p>
+                <p>
+                    <b> Alloc_pid()</b> - tries to do <b>prev_id + 1</b> , and then checks the<b> bit vector map</b> in
+                    a constant operation,
+                    if the id is used or not. If its used then the next available one is used.
+                    <br><br>
+                    The key passed arguments are: clone_flags, stack_start, regs
+                    and pid <br>
+                    The child is set up to go directly to the code that returns from
+                    the process creation call.
+                </p>
+                <h2>setting up parent behaviour</h2>
+                <p>
+                    if vfork() then parent waits until<b> child calls exit() or execve()</b>. <b>TASK_UNINTERRUPTIBLE
+                    </b>is its state as it waits.
+                </p>
+
+                <h1>Lecture 8</h1>
+                <h2>Race condition</h2>
+                <p>Occurs in concurrent/parallel systems, when multiple processes or thread read and write data so that
+                    the final result depends on the order of execution of instructions.
+                </p>
+
+                <ul>
+                    <span><b>Process Interaction</b></span>
+                    <li>Run independently but compete for resources</li>
+                    <li>Share resources</li>
+                    <li>Co operate together , one result depends on the other </li>
+
+                </ul>
+                <p><b>Mutual exclusion -</b> two or more <b>processes compete</b> for the same resource, only one gets
+                    the resource at
+                    a time. <br>
+                    <b> critical resource -</b> when only a single processor can have it at any time ( e.g a printer),
+                    <b> starvation</b> is experienced when a process cant get it, cos of low priority or smt.</p>
+                <p>
+                    <b>rules for mutual exclusion </b>- only <b>one</b> process enters the critical section. If<b>
+                        critical section</b> is
+                    empty, any process is allowed in <b>without delay</b>. it <b>can't starve</b> a process (deadlock).
+                    only finite
+                    <b> time </b>given in the critical section. no assumption are made about process<b> speed or number
+                        of cores.</b>
+                </p>
+
+                <h2>semaphores</h2>
+                <p>Variable that has int value upon which <b>3 operations</b> can be executed: <br>
+                    1. <b>initialise</b> to a nonnegative int value <br>
+                    2. <b>semWait operation</b> - if value neg process blocked otherwise continue <br>
+                    3. <b>semSignal -</b> increments semaphore value. if less than or equal 0 then process blocked. </p>
+
+                <h2>Binary semaphore</h2>
+                <p>Variable that has 1 or 0 value upon which <b>3 operations</b> can be executed: <br>
+                    1. <b>initialise</b> to 1/0 <br>
+                    2. <b>semWait operation</b> - if value 0 process blocked otherwise continue <br>
+                    3. <b>semSignal -</b> checks if a proc is blocked if yes unblock, else set semaphore to 1. </p>
+
+                <p>Priority is not changed when it interacts with the blocked q through a semaphore, semWait and
+                    semSignal. <br>
+                    semWait and semSignal, primitives are atomic ( meaning they cannot be interrupted) <br>
+                    When a process increments semaphore, and it wakes up a blocked process, both of the processes begin
+                    to run concurrently. <br>
+
+                </p>
+        </section>
+
+
+
+
+        <h1>Memory Management 9 to 11 </h1>
+        <section>
+            <h1>Lecture 9</h1>
+            <h2>Principles of Memory Management</h2>
+            <ul>
+                <li><b>User Area</b> (user processes co-exist) and <b>Kernel Area</b></li>
+                <li>Memory allocate based on availability - if low , process might only get enough to just run else it
+                    will get all it needs.</li>
+                <li>Protecting the access to one process’ memory space is an
+                    important security feature provided by<b> hardware (not the OS)</b>.</li>
+                <li>CPU issues only<b> physical addresses</b>.</li>
+                <li>Process layout is specified in terms of<b> virtual addresses</b></li>
+                <li>MMU (memory management unit) takes care of <b>protecting the memory space</b></li>
+                <li>Methods of Translation - <b>base registers, segmentation, paging</b></li>
+            </ul>
+            <h2>Base registers</h2>
+            <p>Virtual address added to the base register <b>resulting in the physical address</b>. limit can be either
+                the
+                size of the alloc. mem. space or the last physical memory address allowed to this process.</p>
+
+            <h2>segmentation</h2>
+            <p>Diff memory segments store diff. parts of the program: code, data, stack. each segment has separate base
+                and limit registers. <br>
+                one possibility is to use CPU dedicated registers or higher order bits of VA within tables
+            </p>
+            <h2>Paging</h2>
+            <p>
+                The virtual address space is divided into pages of <b>2^k bytes</b>
+                each. If the virtual address is <b>n bits</b>, then the virtual memory
+                space consists of<b> 2^n-k pages.</b> <br><br>
+                <b> upper n-k bits</b> are the page number and<b> lower k bits</b> are offset into page. <br>
+                2^k space is called<b> page frame</b> <br>
+                pages are managed in <b>page tables</b> <br>
+                indexed by page number in virtual address, <b>PTE defines translation </b>
+            </p>
+            <p>
+                <b> Page frame number (PFN):</b> determines the page frame to which the
+                page is mapped - the PFN is <b>combined with the offset</b> to give the
+                <b>physical address.</b>
+            </p>
+            <h2>PTE fields</h2>
+            <p><b>protection bit</b> - if set the page is read-only. <br>
+                <b>present bit / valid bit </b>- if set the page is in memory if not set the page is not in memory or
+                not allocated to that process. <br>
+                <b>modified bit / dirty bit </b>- set if write op occured on the page <br>
+                <b> accessed bit</b> - set if page was/is being accessed
+            </p>
+            <img src="../images/os/PageTables.JPG" alt="">
+            <h2>Memory services</h2>
+            <p>Main services - allocation and de allocation <br>
+                explicit alloc - specifies exactly which memory address is required <br>
+                implicit alloc - it needs memory but doesnt mind where <br>
+                de-allocate - can be explicit (specific area to clear) or not and perform mark and sweep algorithms
+            </p>
+
+            <h1>Lecture 10</h1>
+            <p>
+                if fixed size pages - free bitmap is used to show free pages. <br>
+                sometimes processes need contiguous page frames. <br>
+                If memory is allocated in variable-sized blocks, the list
+                needs to be searched to find a suitable block. <br>
+
+            </p>
+            <h2>Fragmentation</h2>
+            <p>
+                Waste memory as <b>allocation</b> of pages is not always ideal or<b> perfect fit</b>. <br>
+                more than needed - <b>internal fragmentation</b> <br>
+                left not allocated - <b>external fragmentation </b>
+            </p>
+            <h2>Memory allocation Techniques</h2>
+
+            <ul>
+                <li>First fit - Takes the first block that is greater or equal to size requested. Tends to cause
+                    allocation towards the low memory addresses - it gets fragmented while upper addresses remain free
+                </li>
+                <li>Next fit - like first fit but begins search from the place last allocated. More evenly spread out
+                    alloc. </li>
+                <li>Best fit - allocates a free block that is closest to the size to the request. significant external
+                    frag. (like first fit) </li>
+                <li>Worst fit - allocates largest size block for each request. if most request are of similar size it
+                    minimizes external frag.</li>
+                <li>
+                    <b> The buddy system</b> is a memory allocation algorithm which has a
+                    tendency to have very low external fragmentation, but worse
+                    internal fragmentation. <br><br>
+                    The algorithm works by assuming memory is divided into memory
+                    blocks of 2 x and takes a request of size n. <br>
+
+                    1. If n < smallest allocation unit, set n to be the smallest size. <br>
+                        2. Round n up to the nearest power of 2. Select the smallest k such that 2k ≥ n. <br>
+                        3. If there is no free block of size 2k <br>
+                        , then recursively allocate a block of size
+                        2. k+1 and split it into two free blocks of size 2k <br>
+
+                        4. Return the first free block of size 2k
+                        in response to the request. <br>
+
+                        <br>
+                        whenever a block is split, a pair of buddies is created they are then split or paired together.
+                        Buddies can merge to create a larger block.
+
+                </li>
+            </ul>
+
+            <p>
+                <b> Swapping</b> consists in transferring one blocked process
+                memory space on disk. Then, when the process becomes
+                active, it’ll be restored.
+            </p>
+
+            <h1>Lecture 11</h1>
+            <p>
+                <b> Resident set -</b> a number of page frames assigned to a process. <br>
+                <b> Local replacement -</b> replacing a page in the same process . <br>
+                <b> global replacement - </b>choose some page based on an algorithm and replace it. <br>
+                A page can be locked in the memory and cannot be replaced .
+
+            </p>
+
+            <h2>Page replacement Policies</h2>
+            <ul>
+                <li><b>Belady's min :</b> page that will be used least soon is chosen. Optimal as it assures that the
+                    number of
+                    page faults is minimized. not practical ( cant see the future ). </li>
+                <li>
+                    <b> First in first out ( FIFO ) -</b> Replaces the page that has been in the memory the longest.
+                    Implemented
+                    with a queue.
+                </li>
+                <li>
+                    <b> Second chance - extends FIFO -</b> examines the accessed but and if it was accessed it gives it
+                    another
+                    chance.
+                </li>
+                <li>
+                    <b> The clock Algorithm </b>- 2 clock hands are moving synchronously above pages the distance
+                    between hands
+                    determines if a page was accessed, if not accessed for a long time it can be swapped out.
+                </li>
+                <li>
+                    <b> Not recently used -</b> refers only to pages with A=0 and M=0. Works well with clock algorithm
+                    as it anaylyses A and M bits.
+                </li>
+                <li>Least recently used - based on time since a page was last used. rarely used as its hard to time
+                    every page.</li>
+                <li>Not frequently used - each time Access bit is cleared ( periodically by OS) a counter is incremented
+                    for A=1. Pages with smallest counters can be swapped. can be bad for newly loaded pages, old used
+                    pages are kept in ( aging ) </li>
+
+                <li>The working set - number of pages a specific process is using at a time. A process has 2 thresholds
+                    , upper and lower. If it has more pages that upper thr. its a good candidate for page swapping. if
+                    you swap a page and it reaches lower thr. you might as well swap all the pages.</li>
+            </ul>
+
+            <p>Page swapping rather than segment swapping gives more flexibility in satisfying the requests. <br>
+                Memory is the 2nd most important resource managed by the OS. Kernel monitors the correct function of the
+                main memory.
+            </p>
+        </section>
+
+
+
+        <h1>I/O devices 12 to </h1>
+        <section>
+            <h1>Lecture 12</h1>
+            <h2>IO Subsystem</h2>
+            <img src="../images/os/IOBus.jpg" alt="">
+            <p>
+                <b>Peripheral device </b>- stores or prints data, connects to network, used to communicate with the
+                computer.
+                <br>
+                <b>Device controller (kernel privileges) -</b> Peripheral devices access it and it allows them to
+                perform
+                operations, its a
+                software that runs the controller, it manages the events generated by the controller ( interrupt handler
+                ). <br>
+                <b>IOP - </b>IO processors is a controller sometimes called a<b> channel (IBM)</b>. <br><br>
+                The aim is to develop standardized controller/device interfaces like USB (universal serial bus).
+            </p>
+            <p>
+                speed of devices vary and their functionality; they are<b> Heterogenous</b>. <br>
+                <b>DMA</b> (direct memory access) unit is used to free the CPU. <b>Controller registers</b> can be
+                memory mapped or
+                addressed within the <b>IO space.</b>
+            </p>
+
+            <p>
+                System bus - very fast data rate as it need to talk with CPU <br>
+                IO bus - much slower as its talking to slow devices <br><br>
+                We need a driver that is controlling the peripheral device. <br>
+                Like the disk driver, this can then make the interface between any application and the disk
+            </p>
+            <h2>IO Drivers - Software </h2>
+            <p>A driver belongs to a <b>family of drivers </b>it abstracts all devices from the kernel of a particular
+                type. it is stored in Main Memory in kernel space
+                <br>
+                examples are: bus protocols (SCSI parallel, USB), storage(disk), network cards. <br><br>
+
+                A driver <b>becomes a family</b> member by <b>inheritance </b>. it inherits data structures and common
+                behaviour to all members. <b>For example, </b>all SCSI controllers scan the SCSI bus as
+                the SCSI Parallel family defines and implements this scanning
+                functionality. <br><br>
+                <b>Main reason</b> why the driver interact with the family is because it uses and <b>calls their
+                    function.</b>
+            </p>
+            <p><b>Access point and communication </b>channel relate to the bus/protocol to which a device is connected
+                to. (
+                PCI ethernet driver uses IOPCIDevice object from PCI family to communicate over PCI bus ) </p>
+
+            <p> The IO layered architecture gathers common functionality into classes the Driver can interact with.
+                <br><br>
+                <i> Each layer is a client of the layer below it and a provider of services to the layer above it.</i>
+
+            </p>
+
+            <img src="../images/os/DriverVSController.jpg" alt="">
+
+            <h2>Steps taken when a New device has been plugged in : </h2>
+            <img src="../images/os/PCIdeviceExample.JPG" alt="">
+
+            <h2>The device driver work </h2>
+            <p>Processes that issue read/write operations are blocked and placed in queues. First theres a translation
+                happening (as the device issues an operation). the driver translates it into controller params and from
+                there the read/write op can be performed </p>
+
+            <h2>Device driver structure</h2>
+            <p>
+                first control flow - Executes on behalf of user process that requests IO <br>
+                second control flow - responds to interrupts <br>
+                the two flows must co ordinate the access and try to not command the controller at the same time.
+                <br><br>
+                Driver is split into two halves that deal with - upper ( user requests ) lower (controller ). Mutual
+                exclusion is used to prevent corruption of the shared queue
+            </p>
+
+
+            <h2>Device Management Techniques</h2>
+            <img src="../images/os/DriverManagement.JPG" alt="">
+
+
+            <h1>Lecture 13</h1>
+            <h2>Disk operations </h2>
+            <p>
+                <b> Seek time </b>: position to the right track <br>
+
+                <b>Rotational delay</b>: position to the right section <br>
+
+                <b>total time =</b> seek delay + rotational delay + read/write times <br>
+            </p>
+
+            <h2>I/O schedulers</h2>
+            <ul>
+                <li>Noop scheduler - merges adjacent requests (sectors already in the queue)</li>
+                <li>Deadline scheduler - merges requests like above. Has 3 queues : 1.Wire Queue FIFO 2.Read queue FIFO
+                    3.Requests sorted by sector num.
+                    <br>Exp. times read:500ms write:5s. Writes are buffered so processes don't have to stall. processing
+                    executing reads are blocked. <br><br>
+                    requests are emptied from Sorted queue first ( and relevant requests removed from other 2 q's). If
+                    some request is overdue the sched. moves to that queue next.
+                </li>
+
+                <li>Anticipatory scheduler- it adds a delay (to anticipate) another request into the same disk sector so
+                    they can be executed together</li>
+
+                <li> Complete fair queuing scheduler - separate queue for each process ( processes make requests).
+                    Requests are merged in order of sector num. Round robin (executes 4 req. per q) between processor
+                    qs.
+
+                </li>
+            </ul>
+
+            <h2>6th Edition UNIX</h2>
+            <img src="../images/os/6thEDUNIX.JPG" alt="">
+
+            <h2>Representation of devices</h2>
+            <img src="../images/os/repDevices.JPG" alt="">
+            <h2>Elevator scheduler</h2>
+            <img src="../images/os/ElevatorScheduler.JPG" alt="">
+            <p>Rest of the lecture doesn't seem too important / never asked as a question <br>
+                block and character drivers; IO devices in linux; Parallel port driver;
+            </p>
+
+            <h1>Lecture 14</h1>
+
+            <h2>Sensors</h2>
+            <p>
+                <b> Motion sensors ; Environmental sensors ; Position sensors</b> <br>
+                There can be several sensors of the Same Official typle. <br>
+                The purpose of the OS is to allow us to get <b>raw data</b> from sensors and use it in <b>apps.</b>
+                <br><br>
+                Sensors can be <b>Hardware or Software.</b>
+            </p>
+
+            <p>
+                Certain sensors have different <b>data rates</b> as their interaction requires little lag ( microphone,
+                touch
+                screen).
+            </p>
+
+            <img src="../images/os/AndroidSensorSubSystem.JPG" alt="">
+
+
+            <h2>Frameworks Role</h2>
+
+            <p> Framework is responsible for:
+                <b> HAL (Hardware abstraction Layer)</b> - links application to the sensors and manages many apps using
+                the same
+                sensor. <br><br>
+                <b> Activates ( turns on )</b> a sensor when a request is made, deactivates it when no apps want to use
+                a
+                sensor. <br>
+                <b> Sampling frequency - </b>max requested frequency of data coming in from a sensor. The sensor works
+                at the
+                highest freq requested meaning some apps will get data more frequently than asked. <br>
+                <b> the maximum reporting latency</b> will be the minimum of the requested ones.
+            </p>
+            <h2>Sensor Manager</h2>
+            <p>
+                Apps create listeners for the sensors with the <b>Sensor Manager.</b> The sensor manager provides a lot
+                of
+                methods for accessing and <b>listing sensors</b>, activating listeners and getting info.
+            </p>
+
+            <h2>Sensor JNI</h2>
+            <img src="../images/os/JNI.JPG" alt="">
+
+            <h2>Sensor Events</h2>
+            <p>
+                SensorEvent class creates an <b>object </b>that has info about the sensor event. It is associated with a
+                sampling process, and this value is part of the <b>event object</b>, not necessarily when it detects
+                change.
+                <br><br>
+                <b>sensor info</b>: raw data, the type of sensor, accuracy of the data, timestamp for the event
+            </p>
+            <h2>Reporting modes</h2>
+            <p>Each Sensor has only 1 <b>reporting mode</b> out of 3.
+                <br><br>
+                <b> continuous - </b>events generated at constant rate. <br>
+                <b> On-change -</b> events generated only if values change. <br>
+                <b> One-shit -</b> Detects an event it sends the event and deactivates itself. Trigger sensors.
+            </p>
+
+            <p>
+                External sensors can be accommodated by application-level driver framework. This interface is simple and
+                allows lots of external sensors and reduces the amount of code needed to access a sensor.
+                <br><br>
+                The sensor <b>Framewor</b>k automatically multiplexes the communication channels allowing different
+                types of
+                sensors to be used simultaneously by an app.
+            </p>
+        </section>
+
+
+
+        <h1>The File System 15 - 17 </h1>
+        <section>
+            <h1>Lecture 15</h1>
+            <p>A file is a contiguous logical address space. it can store numeric, character, binary; data or code. <br>
+                <br><b> File attributes:(metadata)</b>
+            </p>
+
+            <ul>
+                <li>Name - only info in human readable form</li>
+                <li>identifier - unique tag</li>
+                <li>type</li>
+                <li>Size</li>
+                <li>Protection - read/write/execute</li>
+                <li>Time,data,user id - usage monitoring and security</li>
+            </ul>
+
+            <ul>
+                <span><b>File Operations</b></span>
+                <li>Create</li>
+                <li>Write</li>
+                <li>Read</li>
+                <li>Reposition within file</li>
+                <li>Delete</li>
+                <li>Truncate</li>
+                <br>
+                <li>By calling open(F1) - it brings the file entry to main memory. close(F1) brings it back to dir.
+                    structure on disk. </li>
+
+            </ul>
+
+            <p><b>file pointer -</b> points to last read/write location ,<b> file-open count </b>- counter of times a
+                file was open.
+                <b> Disk location of the file- </b>cache of data access info. <b>access rights -</b> per-process access
+                mode info.</p>
+
+            <h2>Access Methods</h2>
+            <p>
+                <b>Sequential Access </b>- read next, write next, reset, no read after last write (rewrite) <br>
+                <b> Direct Access -</b> read n , write n , position to n (read next write next), rewrite n <br>
+                <b> n = relative block number.</b>
+            </p>
+
+            <h2>Metadata</h2>
+            <p>
+                it is the<b> data </b>about the file (name,size...) <br>
+                compressed files are automatically <b>decompressed</b> when read. It is also used to assign an <b>app to
+                    a file</b>
+                (file types).
+            </p>
+
+            <h2>The FS design</h2>
+            <p>Can be in the <b>Kernel</b>; or <b>User process</b>. <br>
+                <br> FS uses two important data structures : open file table ( entries ( file attr.) of all open files )
+                and mount table (what makes the FS accessible.)
+            </p>
+            <p>
+                <b>Example</b> <br>
+                Embedded systems do not have disks. Some apps may need files some may not. Therefore the system can work
+                <b> without a </b>file system. <br><br>
+
+                You can plug <b>in a disk</b>. And that disk<b> has a file system</b>. And then it is working as a<b>
+                    user process</b> , as
+                it was added ( changed ) to the system it<b> cannot become a kernel process</b>
+            </p>
+
+            <h1>Lecture 16</h1>
+            <p>Nothing really important not asked anywhere in questions.</p>
+
+            <h1>Lecture 17</h1>
+
+            <h2>Virtual File System</h2>
+            <p>
+                Supports a wide range of FS by working with Two levels of abstraction. <br>
+                Higher level, Virtual file system has common services and gen. file op. , this layer allows any FS to
+                interact with the system.
+            </p>
+            <img src="../images/os/VFS.JPG" alt=""> <br>
+            <img src="../images/os/VFSComponents.JPG" alt="">
+            <ul>
+                <span>The VFS common <b>services</b> and <b>operations</b>:</span>
+                <li>has classes for each area of <b>file system activity</b></li>
+                <li>Manages Kernel file <b>abstractions</b></li>
+                <li>Resolves <b>User requests</b> for the FS</li>
+                <li>Interacts with the FS based on<b> mount point traversal</b></li>
+                <li>Handles the requests from <b>memory management</b> and <b>process management</b></li>
+
+                <span>The Specific FS has a structure containing function pointers to get the operations VFS
+                    provides.</span>
+
+            </ul>
+
+            <p>When a FS is mounted it provides structure with a <b>pointer</b> to the functions that <b>loads the
+                    superblock</b>.</p>
+
+            <h2>Superblock</h2>
+            <p> <b>superblock -</b> information about the <b>mounted file system</b>, has functions that carry out
+                <b>operations</b> on mounted FS. Most functions relate to manipulating <b>Inodes</b></p>
+            <ul>
+                <span>Superblock data structures</span>
+                <li>Total number of inodes</li>
+                <li> File system<b> size in blocks</b></li>
+                <li> Free block <b>counter</b></li>
+                <li>Free inode<b> counter</b></li>
+                <li> Block size</li>
+                <li> Blocks per group</li>
+                <li> inodes per group</li>
+                <li>128-bit file system <b>identifier</b></li>
+                <li>Mount <b>counter</b></li>
+            </ul>
+
+            <h2>Inodes</h2>
+            <p>
+                <b>inode:</b> information about a specific file; stores the info of location on disk of blocks of file.
+                Identified by inode number.
+                <br>
+                <br>
+                <b> super_operations: </b>
+                <br> alloc_inode(), read_inode(), write_inode(), write_super()# handle modified superblock , sync_fs()
+
+                <br><br>
+                <b> create() –</b> create a new file in a directory; <br>
+                <b> – lookup()</b> – fetch a directory entry from a directory; <br>
+                <b> – mkdir()</b> – create a new subdirectory; <br>
+                <b> – getattr()</b> – return metadata from an i-node. <br>
+            </p>
+
+            <p>VFS has a cache in Main Memory of the directory entries ( mapping from file names to inodes for quick
+                searching). When a file is opened an internal structure representing the file is created which points to
+                file operations(read,write..)</p>
+
+            <p>Rest of the lecture talks about EXT3 . Write op, Linux input/output - Didn't see a question about these
+            </p>
+
+
+
+        </section>
+
+
+        <h1 style="margin-top:4em;">Q1 Process Management</h1>
+        <section>
+            <h2>2018 Summer</h2>
+            <p>a. A process can create <b>new processes</b> by using specific system calls.
+                Consider <b>fork()</b> and <b>vfork() </b>and analyse the <b>differences</b> between
+                them. </p>
+            <div class="answer">
+                <p>
+                    Fork() - creates an identical copy of itself, it shares the context.
+                    vfork() - the child shares the address space (otherwise same as fork()), but blocks the parent until
+                    its completion.
+                    <br> <br>
+                    The main difference between them is that fork() executes asynchronously with its child while vfork()
+                    the parent waits(suspended) for the completion of its child ( until it calls exec())
+                </p>
+
+            </div>
+
+            <p>b. Consider a system that is using <b>8 multilevel feedback queues</b> for
+                scheduling user processes (numbered from 0, highest priority, to 7,
+                lowest priority). Consider three processes, A, B and C that start on
+                level 2, 4 and 5 respectively and have the <b>execution time</b> 0.5 s, 0.9 s
+                and 3 s respectively. If the time slice, denoted by q, for level 0 is 10
+                ms, determine the time slice for each level. Show the execution of
+                processes A, B and C on the time axis and <b>determine</b> when and
+                from which level they exit the system.`
+                We assume there is <b>no I/O operation.</b> The <b>execution time slice</b> for each level i is
+                determined by
+                the equation t = (2^i)q. </p>
+
+            <div class="answer">
+                <p>A exits at level 5 1300ms into execution. <br>
+                    B exits at level 6 at 2360ms into execution <br>
+                    C exits at level 6 at 4400ms into execution <br>
+                    execution order : A A B A C B A(exit) C B(exit) C C C ....(exit C)
+                </p>
+                <img src="../images/os/2018Q1B.JPG" alt="">
+            </div>
+
+            <p>
+                c. What is the impact of<b> I/O operations</b> on the priority of processes A,
+                B and C in 1.b? As an example, consider that process B will run for
+                480 ms after which it will start disk operations that will take 2 s.
+                Follow B’s execution and determine <b>its exit queue</b>.
+
+            </p>
+            <div class="answer">
+                <p>B exits at 4280 ms into execution at level 6. <br>
+                after b is blocked (for 2s) A executes and quits. and then c executes until b is unblocked and joins the queue. 
+            </p>
+                <img src="../images/os/2018Q1C.JPG" alt="">
+            </div>
+            <p>d. Explain the concept of<b> group scheduling.</b> </p>
+
+            <div class="answer">
+                <p>
+                        It is faster to schedule tasks on separate cores (core packages) its also not power efficient as L2
+                        memory contention is high. <br>
+                        Group scheduling attempts to reduce power consumption by scheduling processes that share data onto the same core
+                        package( one that shares L2 cache). <br>
+                        By making them share the package it reduces memory contention and is saving power. It knows which
+                        processes share data ( like threads that belong to the same process they share all the context or
+                        processes attached to same mem. segment)
+                </p>
+            </div>
+
+
+
+
+        </section>
+
+
+        <h1>Q2 Memory Management</h1>
+        <section>
+
+        </section>
+
+
+        <h1>Q3 I/O Devices</h1>
+        <section>
+
+            <p>
+                structure of device driver
+                difference between device controller and driver
+
+                mobile sensors ( draw the Android sensor subsystem and explain each role of the application framework )
+
+                explain android sensor event and how sensor value is communicated.
+
+                explain sequence of operations associated with the insertion of a new PCI device
+
+                consider Two I/O disk schedulers and explain their execution
+
+                explain how IO drivers interact with its family of drivers (example)
+
+            </p>
+        </section>
+
+        <h1>Q4 File System</h1>
+        <section>
+
+        </section>
+    </main>
+
+    <aside>
+        <h1>Things to Remember!</h1>
+        <ol>
+            <li>Priority Inversion - lock a method of preventing multiple threads from accessing a resource at the same
+                time. Conflicts here are used by the Scheduler to decide which thread should run ( as some are waiting)
+            </li>
+            <li>Review Group scheduling</li>
+            <li>See if Semaphores are asked at all</li>
+            <li>fork () - identical copy, executes asynchronously, computes diff things </li>
+            <li> vfork() - The child uses the parent memory space until invoking exec(). The parent is suspended this
+                time</li>
+            <li>clone() - creates a new child process and specifies which parts of parents must be copied to a child
+                process and which parts are shared.</li>
+            <li>execve() allows a process to specify a program to begin running in place of
+                the current one. </li>
+            <li>
+                thread affinity - describes which core the thread is allowed to run
+            </li>
+            <li>A task is a stack of activities in Android, in TinyOS its a process</li>
+            <li>Aparrently Linux Scheduling lecture wasnever done (its complex) not on the test</li>
+
+        </ol>
+
+        <h1>Gru's words of wisdom</h1>
+        <p>there are several processes which share a page in the main memory, either to communicate or simply they
+            have data that they share in that page. Its important to flag it, cos if a process finishes, you attempt to
+            clean all the pages it has, but if its sharing a page it needs to leave that page in the memory"</p>
+
+        <h1>Wikipedias words of wisdom</h1>
+        <p>
+            In computing, a <b>device driver</b> is a computer program that operates or controls a particular type of
+            device
+            that is attached to a computer.[1] A driver provides a software interface to hardware devices, enabling
+            operating systems and other computer programs to access hardware functions without needing to know precise
+            details about the hardware being used. <br> <br>
+
+            A <b>driver communicates</b> with the device through the <b>computer bus</b> or communications subsystem to
+            which the
+            hardware connects. When a calling program invokes a routine in the driver, the driver issues commands to the
+            device. Once the device sends data back to the driver, the driver may invoke routines in the original
+            calling program. Drivers are hardware dependent and operating-system-specific. They usually provide the
+            interrupt handling required for any necessary asynchronous time-dependent hardware interface.
+        </p>
+        <h2>Sensor JNI</h2>
+        <img src="../images/os/JNI.JPG" alt="">
+    </aside>
+</body>
+
+</html>

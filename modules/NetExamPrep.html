@@ -40,7 +40,414 @@
         <br> <br>
 
         <img src="../images/comp_networking/overview.JPG" alt="">
-        <h1>General networking Concepts</h1>
+        <h1>Network fundamentals - PDF 1</h1>
+        <section>
+            <p><b>Hosts</b> = end systems , running network apps <br>
+                <b>Transmission rate </b>= bandwidth <br>
+                <b>routers</b> forward packets</p>
+
+            <img src="../images/comp_networking/networkDiagram.JPG">
+
+            <p><b>Protocol</b> - "set of
+                rules governing the exchange or
+                transmission of data between
+                devices " - specify the format of each type of message <br>
+                <br><b>Network edge</b> - applications and Hosts <br>
+                <b>network core</b> - interconnected routers, network of networks
+            </p>
+
+            <p>
+                <b>Client Server Model</b> - web browsers, email <br>
+                <b> peer-peer model</b> - skype, BitTorrent <br> <br>
+                <br>
+
+                <b>dial up modem -</b> old technology that uses existing telephony infrastructure - 56Kb/s direct
+                access. can
+                only 1 (phone/web) at any time <br>
+                <br>
+                <b>Digital Subscriber Line ( DSL ) </b>- the telephone infrastructure (3.3 Mb/s upload (1Mb/s actually),
+                24Mb/s
+                down ( 8Mb/s Actually)) <br>
+                <br>
+                <b> Residential Cable modems </b>- TV infrastructure (HFC hybrid fibre coax uses FDM) provides
+                asymmetric high down
+                slower up speeds - attaches to ISP router (Head-end) <br>
+                <br>
+                <b> fibre to the home </b>- carries TV and phone services has very high internet rates <br>
+                <br>
+                <b>Wireless access network </b>- 802.11g (54Mb/s) , 802.11n(150Mb/s) connection via access point
+
+            </p>
+
+              <p>
+                <b>guided media </b>- signals propagate inside a wire <br>
+                <b> unguided media</b> - signal propagate freely like radio waves or WiFi <br>
+
+                <b> Twisted Pair (TP) </b>- two insulated copper wires | category : 3 (10Mb/s) 5 (100Mb/s) 6(1Gb/s) <br>
+                <b> Coaxial cable -</b> two concentric copper conductors, its bidirectional , Broadband multiple
+                channels on
+                cable , HFC <br>
+                <b>fibre optic cable </b>- glass fibre that carries light pulses, high speed operation and transmission,
+                low
+                error rate <br>
+            </p>
+
+
+            <ul>
+                <li><b>FDM ( radio / TV ) - frequency division multiplexing</b>: bandwidth is split into parts (
+                    non-overlapping bands ) each
+                    carries a separate signal </li>
+                <li><b>TDM ( telephone ) - Time-division multiplexing: </b>each signal appears only a fraction of the
+                    time
+                </li>
+
+                <li><b>Circuit switching </b>- network resources divided into pieces, allocated to calls, not for
+                    sharing</li>
+                <li><b>Packet switching - Statistical multiplexing </b>: allocates resources to channels currently
+                    transmitting </li>
+            </ul>
+            <img src="../images/comp_networking/FDMTDM.JPG" alt="">
+            <p>
+                Internet uses packet switching because it can support a lot more users, it shares the resources fairly (
+                statistical multiplexing), if you are luck and are the only person using the link, you get the full
+                capacity
+                <br> it is great for bursty data, however it needs protocols to avoid packet loss ( occurs as congestion
+                happens when too many users use the internet)
+            </p>
+
+
+            <p>Internet is roughly hierarchial (network of networks). There is a Tier 1 ISP (big), Tier 2 (reginal ISP),
+                Tier 3 ( local ISP) <br>
+                because of this a packet may pass through a series of local, regional and big networks.</p>
+
+            <h2>How packets might get lost</h2>
+            <p>
+                packets queue at routers (to be sent), the queue can only hold a finite number of packets as it
+                processes them, if too many
+                packets arrive than the router can handle, some will have to be dropped as there is no where to hold
+                them.
+
+                <br>
+                <b> Throughput - </b>rate at which bits are transferred between sender/receiver <br>
+                <b>bottleneck -</b> slowest link on a series of links on a packet path
+            </p>
+
+            <ul>
+                <span>4 sources of packet delay</span>
+                <li><b>Nodal processing -</b> checking bit errors and determine output link</li>
+                <li><b>Queueing delay - </b>waiting for output link transmission</li>
+                <li><b>Transmission delay -</b> L/R time it takes to send a packet over a link </li>
+                <li><b>Propagation delay -</b> physical limits of links propagation delay - distance/speed</li>
+            </ul>
+
+            <p>
+                Encapsulation - as the data travels down through the network layers each layer adds it own header
+            </p>
+
+            <img src="../images/comp_networking/protocolArchitecture.JPG" alt="">
+        </section>
+
+
+
+        <h1>Application Layer - PDF 2</h1>
+
+        <section>
+            <h2>Communication between Proxy server/client/internet</h2>
+            <ol>
+                <li>Principles of network applications
+                    <p>
+                        Every computer on the internet get a unique IP address <br>
+
+
+                        <b> Client-server - </b>data centers / cloud computing :
+                        the server is always on with a permanent IP address, clients connect only intermittently and
+                        clients do not communicate directly with each other
+
+                        <br> <br>
+                        <b> peer-to-peer (P2P) -</b> arbitrary end systems directly communicate they only connect every
+                        now and
+                        then and change IP, apps with P2P run both client and server processes
+
+                        <br><br>
+                        <b> Hybrid of client-server and P2P -</b> Skype or instant messaging (P2P when chatting, but
+                        centralized
+                        control of IP distribution)
+                    </p>
+
+                    <p>
+                        A <b>socket</b> is one endpoint of a two-way communication link between two programs running on
+                        the
+                        network. A socket is bound to a port number so that the TCP layer can identify the application
+                        that data is destined to be sent to.
+                    </p>
+                    <img src="../images/comp_networking/internetApps.JPG">
+
+                </li>
+
+                <li>Web and HTTP
+                    <p><b>HyperText Transfer Protocol -</b> client/server model , stateless and uses TCP <br>
+
+                        round trip time (RTT) - to from client to server and back -- 2 X PD <br>
+                        Non-persistent HTTP - only 1 object is sent over a TCP connection, each time you must open and
+                        close a connection for each html object <br>
+                        Persistent HTTP - multiple objects sent over a TCP connection
+                    </p>
+                    <img src="../images/comp_networking/TCPHTTP.JPG">
+
+                    <p>
+                        message format : <br>
+                        GET /index.html HTTP/1.1 <br>
+                        Host: www.ucc.ie <br>
+                        User-agent: Mozilla/4.0 <br>
+                        Connection: close <br>
+                        Accept-language:en <br>
+
+                        <br> This is a<b> GET request message format</b>,after "GET" (request line) are a series of
+                        <b>'Header</b>
+                        lines' and carriage return indicates end of message
+                    </p>
+                    <img src="../images/comp_networking/GetFromat.JPG"> <br>
+                    <img src="../images/comp_networking/HTTPResponse.JPG">
+
+                    <p>Status codes - 200 (ok) , 301 (moved permanently) , 400 (bad Request), 505 ( HTTP version not
+                        supported)</p>
+
+
+                    <p><b>Web caches ( proxy servers )</b> - All requests go through a <b>proxy server</b> - the proxy
+                        server keeps
+                        copies of websites and only checks with original server if the copy is still valid
+                        this reduces the strain on the network and can provide higher speeds as the proxy server is
+                        usually <b>closer to the clients</b> than original server <br>
+                        it also enables<b> poor content providers </b>to effectively deliver as they only need to send 1
+                        copy
+                        that is then stored
+                    </p>
+                    <img src="../images/comp_networking/cachingExample.JPG"> <br>
+
+                    <img src="../images/comp_networking/proxyCache.JPG">
+                </li>
+                <li>FTP - file transfer protocol
+
+                    <p>
+                        <b>Port 21</b> , TCP is used, One TCP for commands to the FTP server and another TCP for sending
+                        the
+                        file. The FTP server maintains
+                        state like the current directory and earlier authentication, theres predefined commands and
+                        return codes. It just gets the file and <b>doesn't process anything.</b> HTTP gets the 'file'
+                        (object)
+                        and processes it.
+                    </p>
+
+
+                </li>
+                <li>Electronic mail ( SMTP , POP3 , IMAP )
+
+                    <p> <b>SMTP -</b> Simple Mail Transfer Protocol, its a push protocol, uses persistent connection,
+                        uses
+                        ASCII <br>
+                        <b> POP3 - </b>post office protocol 3 - "store and forward" service, mail is kept on the server
+                        and
+                        whenever possible it is downloaded by the client then deleted off the server, it is stateless
+                        <br>
+                        <b> IMAP -</b> internet Message Access Protocol, works by relying on the server to send and
+                        receive
+                        messages, best for people that use a lot of PC and devices. Messages are only kept on the
+                        server. Keeps state across sessions with folder organization
+                    </p>
+
+                </li>
+                <li>DNS - Domain Name system : Root DNS, com DNS servers, org DNS servers... , individual website
+                    servers
+
+                </li>
+                <li>File distribution ( P2P , CDN , DASH (video))
+
+                    <p>
+                        First approach - <b>mirror sites</b> , a files are copied across multiple servers and a <b>user
+                            selects</b> a
+                        mirror to download it from.
+                        this can cause issues like file consistency or overloading one server.
+                        solution:<b> CDN - Content distribution Network</b> - automates mirror sites - theres many
+                        servers with
+                        the files and when you click
+                        download the CDN does the work of picking the<b> best suitable mirror site</b>. it automates
+                        file
+                        consistency. its organised as Overlay network.
+                    </p>
+
+                    <p>
+                        <b>Pure P2P Architecture</b> - no always on server - only arbitrary end systems that communicate
+                        directly, everyone changes addresses.
+                        The more peers the faster the download and<b> reduced stress on</b> individual nodes ( or server
+                        if comparing with client/server models) <br>
+                        theres rewards for seeding the file, everyone helps everyone download the file.
+                    </p>
+
+                    <p>
+                        <b>BitTorrent -</b> theres a list of file pieces and who has them, your ask for rarest first.
+                        Periodically peers inform each other about their highest sending peer, and thus that person will
+                        get better partners and get the file faster. <br> <br>
+
+                        <b> Tracking -</b> it used a centralised tracker node (vulnerable), also privacy issues as
+                        tracker knew
+                        all peers <br>
+                        <b> Gnutella -</b> flooding approach , lookup request was delivered hop-by-hop to every node in
+                        the
+                        network , very big overhead and possibly slow.
+                        <br><br>
+                        <b>Distributed Tracker -</b> what bit torrent uses , scalable queries when the data is spread
+                        over a
+                        large number of peers, it is implemented as a DHT (Distributed hash table).
+                        <br><br>
+                        <b>DHT - </b>maps<b> keys to values</b> like (content name, ip Address) . so users can
+                        lookup(key) to get the
+                        IP address. Each peer may only know about a small number of peers, this method is safer and
+                        peers can leave
+                        and enter whenever as DHTs are quickly spread
+                    </p>
+
+                    <img src="../images/comp_networking/circularDHT.JPG" alt="">
+                    <p>
+                        DHT circular design can also be implemented with shortcuts where each peer has successor,
+                        predecessor and short cut address. <br>
+                        to handle peer churn - we require to know the address of its next 2 successors, incase that
+                        nodes leaves.
+                    </p>
+
+                    <p>
+                        <b>Streaming Stored Video</b> - problems, once a user starts playing you want to match the
+                        timing to
+                        avoid buffering. You need to respect clients memory capacity, so you cannot buffer too much or
+                        too little. <br>
+                        <b> DASH - Dynamic Adaptive Streaming over HTTP </b>- file is divided into chunks ( each chunk
+                        can be stored multiple times at different encoded rates)
+                        it gives you a good quality chunk if connection or a<b> worse quality chunk if slower
+                            connection</b>, and it does it dynamically by periodically checking the connection.
+                        all of this is done at the<b> client side</b>, and the <b>server only responds</b> to the
+                        requests.
+
+                    </p>
+                </li>
+
+            </ol>
+            <img src="../images/comp_networking/AppSummary1.JPG" alt=""> <br>
+            <img src="../images/comp_networking/AppSummary2.JPG" alt="">
+        </section>
+
+        <h1>Transport Layer - PDF 3</h1>
+        <section>
+
+            <h2>multiplexing and de-multiplexing</h2>
+            <p>de-multiplexing - the receiver can demultiplex the packets received to the correct socket <br>
+                multiplexing - the sender gathers data from multiple sockets and envelops it with a header (this is used
+                for de-multiplexing) <br> <br>
+
+                source port (16 bits) dest port (16 bits) <br>
+                other header fields (32 bits) <br>
+                message data <br>
+
+            </p>
+            <h2>UDP</h2>
+            <p>User Datagram Protocol -Connectionless
+                transport, minimalist. no frills and bare bones. "Best effort" service- often loses packets and packet
+                delivery out of order. No handshaking. </p>
+
+            <p>The lack of handshaking/no connection make UDP faster and less resourceful. it can be used for things
+                that do not need to have 100% guarantee of packets arriving.</p>
+
+            <p>Source port, Dest port, Length , Checksum are all 16 bits in length in UDP segment format.</p>
+
+            <h2>Reliable Data transfer (RDT) : Principles</h2>
+            <img src="../images/comp_networking/datatransferdiagram.JPG" alt="">
+
+            <p>RDT 1.0 - assume underlying channel is reliable, so you just send the message
+                <br><br> RDT 2.0 - assumer underlying channel can flip bits, add checksum. introduce ACKs and NAKs , now
+                you send a packet and wait for ACK or NAK. <br>
+                this is Stop-and-wait protocol, however it has a flaw that if ACK or NAK gets corrupted the sender
+                doesn't know what to do.
+                <br> RDT2.1 they add a checksum to each ACK or NAK. Checksums are now checked at both sender and
+                receiver.
+            </p>
+            <img src="../images/comp_networking/RDT2sender.JPG" alt="">
+            <img src="../images/comp_networking/RDT2receiver.JPG" alt="">
+
+            <p>
+                RDT 2.2 - gets rid of NAKs - only uses ACKs accompanied with sequence number -results in a simpler
+                protocol. Sends ACK for the most recent packet received, telling it to resend the next packet. <br>
+                this opens door for pipelining
+            </p>
+
+            <p>
+                RDT 3.0 - assume channels with errors and loss - now the sender has to introduce a timer, and resend a
+                packet after the timer expires.
+                <br> RDT 3 performance is bad, as it still only sends one packet at a time waiting for an ACK.
+            </p>
+
+            <img src="../images/comp_networking/RDT3inAction.JPG" alt="">
+
+            <h2>Go-back-N</h2>
+            <p>You can send up to N packets before needing an ACK. Receiver doesnt ACK a packet if there is a gap. The
+                sender sender retransmits all packets after the sequence number that was not ACKed. it goes back N
+                packets and re-sends them all. There is no receiver buffering if its out of order it is discarded</p>
+
+            <img src="../images/comp_networking/GBNinAction.JPG" alt="">
+
+            <h2>Selective Repeat</h2>
+            <p>
+                individual ACKs are sent for correctly received packages - theres buffering of packets out of order. The
+                sender only resends an ACK for a packet that has timed out (not ACKed for).
+                the window is moved when the smallest N packet has been ACKed for.
+            </p>
+            <img src="../images/comp_networking/SelectiveRepeat.JPG" alt="">
+
+            <h2>TCP - Transmission Control Protocol</h2>
+            <p>
+                Reliable, in-order byte stream ( with no message boundries). It has TCP congestion and flow control set
+                window size.
+                There can be bi-directional data flow in the same connection. handshaking to establish connection.
+
+            </p>
+
+            <img src="../images/comp_networking/TCPPacket.JPG" alt="">
+
+            <p>
+                SYN - Client sends a TCP SYN segment to the server that specifies initial sequence number (for
+                establishing connection) <br>
+                SYNACK - server sends a SYNACK to say it accepted the connection ( it allocates resources) <br>
+                Client also replies with a SYNACK which can contain data (end of handshaking)
+
+            </p>
+
+            <p>
+                TCP uses a single retranmission timer that is triggered by timeout or by duplicated ACK.
+                <br> Fast Retransmit - the time-outs are often long the packets are sent when duplicate ACK (or triple
+                ACK) has been received for a sequence num. <br>
+                Setting the time-out value is difficult. Its set based on RTT but that varies, if its too short you do
+                unecessary re-transmissions, if its too long than if a packet is lost your reaction is too slow.
+            </p>
+
+            <img src="../images/comp_networking/ACKGeneration.JPG" alt="">
+
+            <p>
+                TCP flow control - the sender won't overwhelm the receiver, it respects the buffer size - it matches the
+                sending rate to receivers app drain rate.
+                the receiver includes its available buffer size value in the segment header. The sender then limits the
+                num of unACKed packets to respect the "rwnd" value
+                <br><br>
+                TCP congestion control - TCP tries to transmit as fast as possible but without congesting the network.
+                When ACKS are received, increase the sending rate. When you get lost segmets/timeout assume the network
+                is congested so decrease the sending rate.
+                As long as everything gets through and ACKS arrive the transmission speed increases exponentially. window size is cut if half if 3 duplicate ACKS arrive.
+
+
+            </p>
+            <img src="../images/comp_networking/probing.JPG" alt="">
+            <img src="../images/comp_networking/summaryTCP.JPG" alt="">
+            
+        </section>
+
+        </ol>
+
         <h1>Calculations | network Performance </h1>
         <section>
             <h1>Formulas</h1>
@@ -65,18 +472,33 @@
                 Rs less than Rc then Rs is average <br>
                 Rc less than Rs then Rc is average
             </p>
-        </section>
-        <h1>Networking fundamentals</h1>
-        <section>
-            <img src="../images/comp_networking/protocolArchitecture.JPG" alt="">
-        </section>
-        <h1>Application Layer</h1>
 
-        <section>
-            <h2>Communication between Proxy server/client/internet</h2>
-            <img src="../images/comp_networking/proxyCache.JPG" >
+
+            <ul>
+                <li><b>FDM ( radio / TV ) - frequency division multiplexing</b>: bandwidth is split into parts (
+                    non-overlapping bands ) each
+                    carries a separate signal </li>
+                <li><b>TDM ( telephone ) - Time-division multiplexing: </b>each signal appears only a fraction of the
+                    time
+                </li>
+
+                <li>Circuit switching - network resources divided into pieces, allocated to calls, not for sharing</li>
+                <li><b>Packet switching - Statistical multiplexing </b>: allocates resources to channels currently
+                    transmitting </li>
+            </ul>
+
+            <ul>
+                <span>Security</span>
+                <li><b>DDOS - ( Distributed ) denial of service -</b> overwhelming the server with requests so it cannot
+                    respond to actual users</li>
+                <li><b>packet sniffing -</b> reads/record all packets passing by , can read passwords</li>
+                <li> <b>IP Spoofing -</b> sending packets with false source address </li>
+            </ul>
+
+            <img src="../images/comp_networking/FDMTDM.JPG" alt="">
         </section>
-        <h1>Transport Layer</h1>
+
+
     </main>
     <aside>
         <h1>Things to remember!</h1>
@@ -91,14 +513,14 @@
             <li>Milliseconds to seconds : ms/1000 = seconds </li>
 
 
-            <li><b>FDM ( radio / TV ) - frequency division multiplexing</b>: bandwidth is split into parts ( non-overlapping bands ) each
-                carries a separate signal  </li>
-            <li><b>TDM ( telephone ) - Time-division multiplexing: </b>each signal appears only a fraction of the time  </li>
-            <li><b>Packet switching - Statistical multiplexing </b>: allocates resources to channels currently transmitting  </li>
-
-            
-        </ol>
-    
+            <li><b>FDM ( radio / TV ) - frequency division multiplexing</b>: bandwidth is split into parts (
+                non-overlapping bands ) each
+                carries a separate signal </li>
+            <li><b>TDM ( telephone ) - Time-division multiplexing: </b>each signal appears only a fraction of the time
+            </li>
+            <li><b>Packet switching - Statistical multiplexing </b>: allocates resources to channels currently
+                transmitting </li>
+            <li>Checksum - treat message as bits, add them all up. This aids to detect flipped bits.</li>
     </aside>
 
 </body>
