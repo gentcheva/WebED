@@ -29,41 +29,42 @@
 
     <main class="overview">
         <a href="../downloadPDFS/CS 2506 Review 2019.pdf">GRU'S Review</a>
-        <h1>Lecture notes links</h1>
-        <section>
-            <a href="../downloadPDFS/Lecture 1.pdf" target="_blank">Lecture 1 - Intro (nothing important), System
-                Layers, Kernel services,
-                Os classes, Library functions</a> <br>
-            <a href="../downloadPDFS/Lecture 2.pdf" target="_blank">Lecture 2 - Processes structure and management,
-                Threads, Scheduling</a> <br>
-            <a href="../downloadPDFS/Lecture 3.pdf" target="_blank">Lecture 3 - Process scheduling</a> <br>
-            <a href="../downloadPDFS/Lecture 4.pdf" target="_blank">Lecture 4- Process scheduling in multi-core
-                systems</a> <br>
-            <a href="../downloadPDFS/Lecture 5.pdf" target="_blank">Lecture 5 - Sensor OS, TinyOS, resource contention,
-                Split-phase </a> <br>
-            <a href="../downloadPDFS/Lecture 6.pdf" target="_blank">Lecture 6 - Mobile OS, Android, Intents</a> <br>
-            <a href="../downloadPDFS/Lecture 7.pdf" target="_blank">Lecture 7 - Linux management, system calls, process
-                creation, parent behaviour</a> <br>
-            <a href="../downloadPDFS/Lecture 8.pdf" target="_blank">Lecture 8 - Concurrency, mutual exclusion,
-                semaphores</a> <br>
-            <a href="../downloadPDFS/Lecture 9.pdf" target="_blank">Lecture 9 - principles of memory management, PTE
-                fields, base registers/segmentation/Paging</a> <br>
-            <a href="../downloadPDFS/Lecture 10.pdf" target="_blank">Lecture 10 - page allocation techniques, free bit
-                map, Swapping</a> <br>
-            <a href="../downloadPDFS/Lecture 11.pdf" target="_blank">Lecture 11 - Memory Replacement Techniques </a>
-            <br>
-            <a href="../downloadPDFS/Lecture 12.pdf" target="_blank">Lecture 12 - IO subsystem, IO drivers,
-                Buffering</a> <br>
-            <a href="../downloadPDFS/Lecture 13.pdf" target="_blank">Lecture 13 - Disk scheduling, IO management
-                examples</a> <br>
-            <a href="../downloadPDFS/Lecture 14.pdf" target="_blank">Lecture 14 - Sensor
-                Framework/Manager/Events/Examples</a> <br>
-            <a href="../downloadPDFS/Lecture 15.pdf" target="_blank">Lecture 15 - OS FS, Structure, Concept, Open,
-                Operations, Metadata</a> <br>
-            <a href="../downloadPDFS/Lecture 16.pdf" target="_blank">Lecture 16</a> <br>
-            <a href="../downloadPDFS/Lecture 17.pdf" target="_blank">Lecture 17 - FS in linux, Superblock, inode,
-                VFS,EXT3 FS, block devices, </a> <br>
-        </section>
+        <h1 class="Topic">Lecture notes links</h1>
+
+
+        <a href="../downloadPDFS/Lecture 1.pdf" target="_blank">Lecture 1 - Intro (nothing important), System
+            Layers, Kernel services,
+            Os classes, Library functions</a> <br>
+        <a href="../downloadPDFS/Lecture 2.pdf" target="_blank">Lecture 2 - Processes structure and management,
+            Threads, Scheduling</a> <br>
+        <a href="../downloadPDFS/Lecture 3.pdf" target="_blank">Lecture 3 - Process scheduling</a> <br>
+        <a href="../downloadPDFS/Lecture 4.pdf" target="_blank">Lecture 4- Process scheduling in multi-core
+            systems</a> <br>
+        <a href="../downloadPDFS/Lecture 5.pdf" target="_blank">Lecture 5 - Sensor OS, TinyOS, resource contention,
+            Split-phase </a> <br>
+        <a href="../downloadPDFS/Lecture 6.pdf" target="_blank">Lecture 6 - Mobile OS, Android, Intents</a> <br>
+        <a href="../downloadPDFS/Lecture 7.pdf" target="_blank">Lecture 7 - Linux management, system calls, process
+            creation, parent behaviour</a> <br>
+        <a href="../downloadPDFS/Lecture 8.pdf" target="_blank">Lecture 8 - Concurrency, mutual exclusion,
+            semaphores</a> <br>
+        <a href="../downloadPDFS/Lecture 9.pdf" target="_blank">Lecture 9 - principles of memory management, PTE
+            fields, base registers/segmentation/Paging</a> <br>
+        <a href="../downloadPDFS/Lecture 10.pdf" target="_blank">Lecture 10 - page allocation techniques, free bit
+            map, Swapping</a> <br>
+        <a href="../downloadPDFS/Lecture 11.pdf" target="_blank">Lecture 11 - Memory Replacement Techniques </a>
+        <br>
+        <a href="../downloadPDFS/Lecture 12.pdf" target="_blank">Lecture 12 - IO subsystem, IO drivers,
+            Buffering</a> <br>
+        <a href="../downloadPDFS/Lecture 13.pdf" target="_blank">Lecture 13 - Disk scheduling, IO management
+            examples</a> <br>
+        <a href="../downloadPDFS/Lecture 14.pdf" target="_blank">Lecture 14 - Sensor
+            Framework/Manager/Events/Examples</a> <br>
+        <a href="../downloadPDFS/Lecture 15.pdf" target="_blank">Lecture 15 - OS FS, Structure, Concept, Open,
+            Operations, Metadata</a> <br>
+        <a href="../downloadPDFS/Lecture 16.pdf" target="_blank">Lecture 16</a> <br>
+        <a href="../downloadPDFS/Lecture 17.pdf" target="_blank">Lecture 17 - FS in linux, Superblock, inode,
+            VFS,EXT3 FS, block devices, </a> <br>
+
 
         <h1>Process Management lectures 1 to 8 </h1>
         <section>
@@ -194,7 +195,7 @@
                 lead to
                 cache contention and sub-optimal performance.
                 <br><br>
-               
+
 
             </p>
 
@@ -487,13 +488,11 @@
             </p>
             <h2>Paging</h2>
             <p>
-                The virtual address space is divided into pages of <b>2^k bytes</b>
-                each. If the virtual address is <b>n bits</b>, then the virtual memory
-                space consists of<b> 2^n-k pages.</b> <br><br>
-                <b> upper n-k bits</b> are the page number and<b> lower k bits</b> are offset into page. <br>
-                2^k space is called<b> page frame</b> <br>
-                pages are managed in <b>page tables</b> <br>
-                indexed by page number in virtual address, <b>PTE defines translation </b>
+                virtual address : n bits ( ex. 32bits) <br>
+                Page size : 2^K ( 2^12 = 4096B) <br>
+                virtual page number: n-k (20bits) <br>
+                offset : k (12bits) <br>
+                physical address: lookup virtual page number in page table get that value + offset
             </p>
             <p>
                 <b> Page frame number (PFN):</b> determines the page frame to which the
@@ -501,10 +500,13 @@
                 <b>physical address.</b>
             </p>
             <h2>PTE fields</h2>
-            <p><b>protection bit</b> - if set the page is read-only. <br>
+            <p>
+                page frame number determines the mapping (physical address is gotten by concatenating that field with
+                offset) <br>
+                <b>protection bit</b> - if set the page is read-only. <br>
                 <b>present bit / valid bit </b>- if set the page is in memory if not set the page is not in memory or
                 not allocated to that process. <br>
-                <b>modified bit / dirty bit </b>- set if write op occured on the page <br>
+                <b>modified bit / dirty bit </b>- set if write op occurred on the page <br>
                 <b> accessed bit</b> - set if page was/is being accessed
             </p>
             <img src="../images/os/PageTables.JPG" alt="">
@@ -532,14 +534,17 @@
             <h2>Memory allocation Techniques</h2>
 
             <ul>
-                <li>First fit - Takes the first block that is greater or equal to size requested. Tends to cause
+                <li><b>First fit -</b> Takes the first block that is greater or equal to size requested. Tends to cause
                     allocation towards the low memory addresses - it gets fragmented while upper addresses remain free
                 </li>
-                <li>Next fit - like first fit but begins search from the place last allocated. More evenly spread out
+                <li><b>Next fit - </b>like first fit but begins search from the place last allocated. More evenly spread
+                    out
                     alloc. </li>
-                <li>Best fit - allocates a free block that is closest to the size to the request. significant external
+                <li><b>Best fit -</b> allocates a free block that is closest to the size to the request. significant
+                    external
                     frag. (like first fit) </li>
-                <li>Worst fit - allocates largest size block for each request. if most request are of similar size it
+                <li><b>Worst fit - </b>allocates largest size block for each request. if most request are of similar
+                    size it
                     minimizes external frag.</li>
                 <li>
                     <b> The buddy system</b> is a memory allocation algorithm which has a
@@ -564,12 +569,17 @@
                 </li>
             </ul>
 
-            <p>
-                <b> Swapping</b> consists in transferring one blocked process
-                memory space on disk. Then, when the process becomes
-                active, it’ll be restored.
-            </p>
+            <h2>Swapping</h2>
 
+            <p>
+                Swapping moves all segments associated with a BLOCKED process to disk(secondary storage). <br>
+                all the segments belonging to a process will be moved back and forth between the main memory and a
+                secondary storage device. <br><br>
+                When the process is unblocked - segments are restored. <br>
+
+                Paging deals with single pages and not necessarily with a specific process. Swapping deals with a
+                specific process. It is more suitable for running heavy workloads.
+            </p>
             <h1>Lecture 11</h1>
             <p>
                 <b> Resident set -</b> a number of page frames assigned to a process. <br>
@@ -603,13 +613,16 @@
                     <b> Not recently used -</b> refers only to pages with A=0 and M=0. Works well with clock algorithm
                     as it anaylyses A and M bits.
                 </li>
-                <li>Least recently used - based on time since a page was last used. rarely used as its hard to time
+                <li><b>Least recently used -</b> based on time since a page was last used. rarely used as its hard to
+                    time
                     every page.</li>
-                <li>Not frequently used - each time Access bit is cleared ( periodically by OS) a counter is incremented
+                <li><b>Not frequently used -</b> each time Access bit is cleared ( periodically by OS) a counter is
+                    incremented
                     for A=1. Pages with smallest counters can be swapped. can be bad for newly loaded pages, old used
                     pages are kept in ( aging ) </li>
 
-                <li>The working set - number of pages a specific process is using at a time. A process has 2 thresholds
+                <li><b>The working set -</b> number of pages a specific process is using at a time. A process has 2
+                    thresholds
                     , upper and lower. If it has more pages that upper thr. its a good candidate for page swapping. if
                     you swap a page and it reaches lower thr. you might as well swap all the pages.</li>
             </ul>
@@ -622,7 +635,7 @@
 
 
 
-        <h1>I/O devices 12 to </h1>
+        <h1>I/O devices 12 to 15 </h1>
         <section>
             <h1>Lecture 12</h1>
             <h2>IO Subsystem</h2>
@@ -951,8 +964,8 @@
 
         </section>
 
-
-        <h1 style="margin-top:4em;">Q1 Process Management</h1>
+        <h1 style="margin-top:4em;" class="Topic">Exam Paper Questions and Answers</h1>
+        <h1 style="margin-top:1em;">Q1 Process Management</h1>
         <section>
             <h2>2018 Summer</h2>
             <p>a. A process can create <b>new processes</b> by using specific system calls.
@@ -1000,25 +1013,49 @@
             </p>
             <div class="answer">
                 <p>B exits at 4280 ms into execution at level 6. <br>
-                after b is blocked (for 2s) A executes and quits. and then c executes until b is unblocked and joins the queue. 
-            </p>
+                    after b is blocked (for 2s) A executes and quits. and then c executes until b is unblocked and joins
+                    the queue.
+                </p>
                 <img src="../images/os/2018Q1C.JPG" alt="">
             </div>
             <p>d. Explain the concept of<b> group scheduling.</b> </p>
 
             <div class="answer">
                 <p>
-                        It is faster to schedule tasks on separate cores (core packages) its also not power efficient as L2
-                        memory contention is high. <br>
-                        Group scheduling attempts to reduce power consumption by scheduling processes that share data onto the same core
-                        package( one that shares L2 cache). <br>
-                        By making them share the package it reduces memory contention and is saving power. It knows which
-                        processes share data ( like threads that belong to the same process they share all the context or
-                        processes attached to same mem. segment)
+                    It is faster to schedule tasks on separate cores (core packages) its also not power efficient as L2
+                    memory contention is high. <br>
+                    Group scheduling attempts to reduce power consumption by scheduling processes that share data onto
+                    the same core
+                    package( one that shares L2 cache). <br>
+                    By making them share the package it reduces memory contention and is saving power. It knows which
+                    processes share data ( like threads that belong to the same process they share all the context or
+                    processes attached to same mem. segment)
                 </p>
             </div>
 
+            <p>2016 Q1 C <br><br>
+                Explain the Android feature of component sharing, discussing activities management with tasks. To
+                illustrate, use an example and drawings.
+            </p>
+            <div class="answer">
+                <p>
+                    Android components are activated by an intent, the intent can come from any app and often one
+                    activity
+                    starts another activity. <br>
+                    The activities are managed with a task (a stack of activities, when back button pressed current
+                    activity
+                    is popped off the stack and one underneath it is now visible). <br><br>
 
+                    an example of this is when one app asks the user to select an image, it makes an intent to the
+                    gallery
+                    app and it would expect a result back, so it calls startActivityForResult(). After the user select a
+                    photo, it returns to the
+                    activity that made the call. This is Component sharing where one activity can use features of
+                    another
+                    through the help of intents and task management
+
+                </p>
+            </div>
 
 
         </section>
@@ -1026,6 +1063,127 @@
 
         <h1>Q2 Memory Management</h1>
         <section>
+            <h2>2018 summer Q2</h2>
+
+            <p>
+                Virtual memory allows programmers to ignore the physical limitations of
+                computer system memory. The page is the main memory allocation unit. <br><br>
+
+                a. Explain the purpose of a page table and all the fields of a page
+                entry. </p>
+
+            <div class="answer">
+                <p>
+                    Page table stores mapping between virtual and physical addresses, fields (bits) of a page. <br>
+                    <b>page frame number</b> determines the mapping <b>(physical</b> address is gotten by
+                    <b>concatenating</b> that field
+                    with <b>offset</b>) <br><br>
+
+                    <b>Access bit</b> - 1 if accessed recently 0 if not <br>
+                    <b> modified bit</b> - if the page has been modified(1) or not (0)<br>
+                    <b>present bit</b> - if the page is in memory(1) or not(0) <br>
+                    <b> protection bit</b>- if the page is write protected or not <br><br>
+
+                    virtual addresses are used by the programs(processes) and physical addresses are used by
+                    hardware(RAM)
+                </p>
+            </div>
+
+            <p>b. Consider that the main memory has a capacity of 512 KB and it is
+                organized of four blocks of 4 KB, one block of 16 KB, one of 32
+                KB, one of 64 KB, one of 128 KB and one of 256 KB. All blocks
+                are initially free and the following sequence of allocations and de-allocations is executed, where A
+                means allocation and D de-allocation: A(3.8KB), A(11KB), A(15KB), D(15KB), A(4.2KB),
+                A(2.7KB), A(3KB), A(33KB). Use the Buddy algorithm and show
+                graphically which block is used for each operation, sequentially.
+                Explain, using the diagram, the size of internal and external
+                fragmentation at the end of the sequence of operations. For the
+                same scenario, use the next fit allocation technique, show
+                graphically the final allocation and determine the size of internal
+                and external fragmentation in this case. </p>
+
+            <div class="answer">
+                <ul>
+                    <li>4 blocks of 4KB</li>
+                    <li>1 -> 16KB</li>
+                    <li>1 -> 32KB</li>
+                    <li>1 -> 128KB</li>
+                    <li>1 -> 256KB</li>
+                </ul>
+                <p>
+                    <b> 1. A(3.8KB),2. A(11KB),3. A(15KB), 4. D(15KB), 5. A(4.2KB), 6. A(2.7KB),7. A(3KB), 8.
+                        A(33KB)</b> <br><br>
+                </p>
+                <ol>
+                    <li>Allocate 1 block of 4 KB</li>
+                    <li>allocate block of 16 (no other power of 2)</li>
+                    <li>take 32/2 -> 16KB 16KB allocate 1 to A</li>
+                    <li>now 1 16KB blocks becomes free ( 2 free in total)</li>
+                    <li>take 16KB /2 -> 8KB 8KB allocate 1</li>
+                    <li>allocate another 4KB block (2 remaining now)</li>
+                    <li>Allocate another 4KB block (1 remaining)</li>
+                    <li>Allocate the 64KB block</li>
+                </ol>
+                <p>Internal frag = 57.7KB was requested - 100KB was allocated <br>
+                    external frag = 4Kb, 16KB, 8KB, 128KB, 256KB == 412KB
+                </p>
+                <img src="../images/os/2018Q2B(1).JPG" alt="">
+
+                <ol>
+                    <li>Allocate 4KB block (3 left now)</li>
+                    <li>Allocate 16KB block </li>
+                    <li>allocate 32KB block</li>
+                    <li>de allocate that 32KB block</li>
+                    <li>allocate 32KB block</li>
+                    <li>Allocate 64KB block</li>
+                    <li>Allocate 128KB block</li>
+                    <li>Allocate 256KB block</li>
+                </ol>
+                <p>Internal frag = 57.7KB was requested - 500KB was allocated <br>
+                    external frag = 3 blocks of 4KB == 12KB
+                </p>
+                <img src="../images/os/2018Q2B(2).JPG" alt="">
+
+            </div>
+
+            <p>
+                c. Explain the page swapping process and when and how a page that
+                was swapped onto the disk is brought back into the main memory.
+            </p>
+
+            <div class="answer">
+                <p><b>Swapping</b> - Moving all segments associated with a<b> BLOCKED process into disk</b>. The page
+                    can be brought
+                    back when a page fault occurs, this is called <b>demand paging</b> (if that page was in disk because
+                    of
+                    swapping).Generally to avoid more fault, more pages from the <b>resident set</b> (set of pages
+                    associated
+                    with a process) are loaded in (<b>pre-loading ,pre-paging</b>)</p>
+                <p>When the process <b>activates again</b> (is unblocked) pages are brought back from the <b>disk into
+                        the main</b>
+                    memory.
+
+                </p>
+            </div>
+
+
+            <p>
+                2016 Q2 B <br><br>
+                Assume the virtual address of 32bits and that the page size is 2^12B. Explain, using a drawing for
+                illustration, how the virtual address is translated into the physical address. If the size of the page
+                table is too big, present a solution that can be used to save memory space.
+            </p>
+
+            <div class="answer">
+                <img src="../images/os/VAtoPA.JPG" alt="">
+                <p>
+                    Multi-level Page Table : use first 10-most significant bits to
+                    index into first level page table (called the page directory). Next 10-bits to index into second level page table, which has the
+                    page number to frame number mappings. Rest 12-bits represents the page offset.
+                </p>
+            </div>
+
+
 
         </section>
 
@@ -1033,19 +1191,66 @@
         <h1>Q3 I/O Devices</h1>
         <section>
 
+            <p> 2018 Q3 <br>
+                Mobile devices are equipped with a number of sensors, managed by the
+                operating system. <br><br>
+                a. Draw the Android sensor subsystem. Explain the role of the application
+                framework and its operation.
+            </p>
+
+            <div class="answer">
+                <p>
+                    Application framework is responsible for<b> linking apps to the HAL</b> in the libraries layer
+                    below. It
+                    handles the user(app)
+                    requests by activating the <b>relative sensor( by making requsts for HAL)</b>.
+                    it also contains the <b>Sensor manager class</b>, which provide listener functionality and other
+                    methods
+                    for <b>listing and accessing sensors</b>. <br> <br>
+                    <b>The app deals with the framework and the framework deals with the layers below</b>. The framework
+                    allows
+                    <b> many apps to use many sensors</b>, otherwise one one app could use 1 sensor.
+
+                </p>
+            </div>
+
             <p>
-                structure of device driver
-                difference between device controller and driver
+                b. Explain what an Android sensor event is and how the sensor value is
+                communicated. Describe the Android event report modes.
+            </p>
 
+            <div class="answer">
+                <p>
+                    Android sensor event (when a sensor generates new data and sends it) when the event occurs the
+                    SensorEvent class creates an<b> object</b> that has everything about the event (its raw data,
+                    timestamp).
+                    that object is then <b>sent to the app</b> that had opened a <b>listener</b> (through the
+                    sensorManager).
+                    <br><br>
+                    There are <b>3 reporting modes</b>, <br>
+                    <b>continuous -</b> data is is sent (by objects) at constant rates <br>
+                    <b> on change -</b> data is only sent (by objects) when change in values occur <br>
+                    <b> one-shot - </b>sensor turns on then data is measured/gotted and sent only once and then the
+                    sensor is
+                    de-activated
+                </p>
+            </div>
+
+            <h2 style="margin-top: 3em;">Some Analysis of questions in past papers</h2>
+            <p>
+                structure of device driver <br>
+                difference between device controller and driver <br>
+                <br>
                 mobile sensors ( draw the Android sensor subsystem and explain each role of the application framework )
-
-                explain android sensor event and how sensor value is communicated.
-
-                explain sequence of operations associated with the insertion of a new PCI device
-
-                consider Two I/O disk schedulers and explain their execution
-
-                explain how IO drivers interact with its family of drivers (example)
+                <br>
+                <br>
+                explain android sensor event and how sensor value is communicated. <br>
+                <br>
+                explain sequence of operations associated with the insertion of a new PCI device <br>
+                <br>
+                consider Two I/O disk schedulers and explain their execution <br>
+                <br>
+                explain how IO drivers interact with its family of drivers (example) <br>
 
             </p>
         </section>
@@ -1053,6 +1258,52 @@
         <h1>Q4 File System</h1>
         <section>
 
+            <p> 2018 Q4
+                a. What is the mechanism by which Linux supports different file
+                systems?
+            </p>
+            <div class="answer">
+                <p>Virtual file system - provides common functionality for any mounted file system. it communicates with
+                    the FS by the superblock (superblock - information about the mounted file system, has functions that
+                    carry out operations on mounted FS. Most functions relate to manipulating Inodes) .
+
+                    <br><br>
+                    it also resolves user requests and handles memory mangement and process management between FS.
+                </p>
+            </div>
+
+            <p>
+                b. What is a superblock and what data structures does it contain?
+            </p>
+
+            <div class="answer">
+                superblock - information about the mounted file system, has functions that carry out operations on
+                mounted FS. Most functions relate to manipulating Inodes.
+                <br><br>
+                counter: free blocks, free inodes, mount ;
+                <br> FS size in blocks, block sizes, blocks per group and inodes per group, 128-bit file system
+                identifier.
+            </div>
+
+
+            <h2 style="margin-top: 3em;">Some Analysis of questions in past papers</h2>
+            <p>
+                how linux supports different file systems <br>
+                whats a superblock and what data structures does it contain <br>
+                <br>
+                VFS abstraction (services and operations) - explain linux file system <br>
+                draw VFS main components and explain superblock and inode. <br>
+                <br>
+                Explain Linux Virtual file system <br>
+                whats a superblock and inode <br>
+                <br>
+                VFS abstraction (services and operations) - explain linux file system <br>
+                draw VFS main components and explain superblock and inode. <br>
+                <br>
+                present file attributes and their role <br>
+                discuss algorithm for exclusive file access <br>
+
+            </p>
         </section>
     </main>
 
@@ -1076,6 +1327,8 @@
             </li>
             <li>A task is a stack of activities in Android, in TinyOS its a process</li>
             <li>Aparrently Linux Scheduling lecture wasnever done (its complex) not on the test</li>
+            <li> Parbegin - processes that can work in parallel.
+            </li>
 
         </ol>
 
@@ -1083,6 +1336,27 @@
         <p>there are several processes which share a page in the main memory, either to communicate or simply they
             have data that they share in that page. Its important to flag it, cos if a process finishes, you attempt to
             clean all the pages it has, but if its sharing a page it needs to leave that page in the memory"</p>
+
+        <p>
+            Over-allocation <br><br>
+            "
+            The amount of memory that is made available by swapping, it depends on the access patterns to the main
+            memory of the process, therefore it makes sense to swap the memory, at least partially, but we need to be
+            careful to save resources and not waste time.
+            "
+        </p>
+
+        <p>
+            page swapping <br><br>
+            "bringing it back, means that other pages might also be required, so we use pre loading, where you load the
+            other pages as well when demanind paging occurs."
+
+            <br><br>
+            " after some time the system allocated all the resources, in order to accommodate all the processes ,it does
+            it by replacing pages that are probably not in use right now."
+            " should we replace a page from the resident set, or should we search through the entire memory"
+
+        </p>
 
         <h1>Wikipedias words of wisdom</h1>
         <p>
@@ -1101,6 +1375,20 @@
         </p>
         <h2>Sensor JNI</h2>
         <img src="../images/os/JNI.JPG" alt="">
+
+        <h2>Internal vs External fragmentation</h2>
+        <img src="../images/os/internalVSexternal.JPG" alt="">
+
+        <h2>Sensor System explaination</h2>
+        <img src="../images/os/SensorSystem.JPG" alt="">
+
+        <h2>Virtual File System</h2>
+        <p>A Virtual File System (VFS) or virtual filesystem switch is an abstract layer on top of a more concrete file
+            system. The purpose of a VFS is to allow client applications to access different types of concrete file
+            systems in a uniform way. A VFS can, for example, be used to access local and network storage devices
+            transparently without the client application noticing the difference. It can be used to bridge the
+            differences in Windows, classic Mac OS/macOS and Unix filesystems, so that applications can access files on
+            local file systems of those types without having to know what type of file system they are accessing.</p>
     </aside>
 </body>
 
