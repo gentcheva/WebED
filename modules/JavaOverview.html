@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8" />
+    <link href="../styles/main.css" rel="stylesheet" />
+    <title>Java</title>
+    <link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
+    <script src="../highlighjs/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="java.html">Java</a></li>
+            <li><a href="compArchitecture.html">Architecture</a></li>
+            <li><a href="networking.html">Networking</a></li>
+            <li><a href="databases.html">Databases</a></li>
+            <li><a href="operatingSystems.html">OS</a></li>
+            <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
+            <li><a href="algorithms.html">Algorithms</a></li>
+        </ul>
+    </nav>
+
+
+    <header>
+        <img src="../images/java/java.png" title="Java programming language"
+            alt="The name Java written with java code" />
+        <h1>Introduction to Java</h1>
+    </header>
+
+    <main class="overview">
+        <h1>Java Theory Questions</h1>
+        <section>
+            <h2>2018 Summer</h2>
+            <p>
+                <b> Objects and classes</b> <br><br>
+                Using two sentences only, please define object state and object behaviour. <br>
+            </p>
+            <div class="answer">
+                <p>
+                    "Object state is what the object knows. Object behaviour is what the object does" - MVD
+                </p>
+            </div>
+            <p>
+                How do you implement object state and object behaviour? <br>
+            </p>
+            <div class="answer">
+                <p>
+                    "You define object state by defining instance attributes in the object's class and assigning values
+                    to these variables. You define object behaviour by defining instance methods in the object's
+                    class(and calling these methods)" - MVD
+                </p>
+            </div>
+
+            <p> <b>Interfaces</b> <br><br>
+                Explain interfaces and provide two advantages of interfaces. <br>
+            </p>
+            <div class="answer">
+                <p>
+                    An interface is a completely "abstract class" that is used to group related methods(API) that are
+                    abstract. When a class implements the interface it MUST override all its methods. <br><br>
+
+                    advantages : <br>
+                    Achieves full abstraction <br>
+                    achieve (we can now implement) multiple inheritance <br>
+                    To break up complex designs and clear the dependencies between objects <br>
+                    Guarantees that classes that implmenet an interface, will have the API <br>
+
+                    <br> Disadvantages <br>
+                    They are slower and more limited than other interface implementation <br>
+                    They should be used a multiple number of times otherwise they are pointless
+                </p>
+            </div>
+            <p> Q. Provide a definition for a worker interface that defines a worker method. Explain how delegation may
+                be
+                used to simulate worker Behaviour. Use java statements to clarify your example <br> <br>
+
+            </p>
+            <div class="answer">
+                <!-- <a href="https://www.geeksforgeeks.org/delegation-vs-inheritance-java/">Delegation vs inheritance</a> -->
+                <p> answer: <br>
+                    Delegation is passing off duty(functionality) to another class. So basically using another class
+                    inside a class to receive its functionality to use it to accomplish its own functionality ( without
+                    the client knowing we are borrowing functionality) <br><br>
+
+                    for this example delegation may be used to simulate worker by providing functionality for
+                    <i>work</i> method. for example, we define a class called "chopWood" that has functionality for
+                    completing a task (work) like chopping wood for example. <br>
+                    We instantiate this class inside the worker class as an attribute "private final ChopWood chopwood =
+                    new ChopWood();".
+                    <br> Then inside <i>work</i> method we can use "chopwood.chopOakTree();" so<i> the worker can
+                        work</i>
+                </p>
+                <pre><code>
+public interface worker{
+    public void work() ; 
+}
+                </code></pre>
+            </div>
+
+            <p><b>Generics </b><br><br>
+                What is a generic class <br>
+            </p>
+            <div class="answer">
+                <p>
+                    Generic classes allow type (like String, Integer ...) to be a parameter to the class. So now instead
+                    of having a class that only works with predefined type, you use a generic class to define the type
+                    of the class when it is being instantiated.
+                </p>
+            </div>
+
+            <p>
+                Provide code for (1) a declaration of a variable with a generic type from an existing class and (2) a
+                meaningful assignment to the variable. <br>
+            </p>
+            <div class="answer">
+                <p>Declare an object of type-T and assign it a value in the constructor</p>
+                <pre><code>
+class Test&lt;T&gt; { 
+    // An object of type T is declared 
+    private final T object; 
+    Test(T obj) { // constructor 
+        object = obj;  
+    }  
+    
+} 
+           </code></pre>
+            </div>
+
+            <p>
+                Provide two (and no more than two) advantages of generic classes. Where possible, please provide short
+                Java examples that illustrates the advantages.<br>
+            </p>
+            <div class="answer">
+                <p>
+                    Generics add re-usability by enabling you to to define a class or interface without specifying fixed
+                    parameter data types. <br>
+                    Allows The code to be flexible. For example when you write a sorting algorithm that needs to sort
+                    integers and strings, you can write one good implementation with a generic class that will handle
+                    both, otherwise you would have to write two separate classes to handle integers and string.
+                </p>
+            </div>
+
+            <h2>2018 Autumn</h2>
+
+            <p>
+                <b> Inheritance</b> <br><br>
+                Using two to three sentences, explain inheritance as a class relationship<br>
+            </p>
+            <div class="answer">
+                <p>
+                    Inheritance allows for a class extending(inheriting) it to gain the functionality (all of its
+                    methods and attributes). The subclass can now use and add on top of the inherited functionality.
+                    Main purpose of inheritance is to share common code written in superclass.
+                </p>
+            </div>
+            <p>
+                Provide and explain three, and no more than three advantages of inheritance. <br>
+            </p>
+            <div class="answer">
+                <p>
+                    Code re-usability - Common code is placed in a common abstract class that can be inherited in many
+                    places, rather than re-written in those places. <br>
+                    code maintainability - Since code is written in one place (the common abstract class), it only needs
+                    to be maintained in that one place.
+                    Data hiding - base class can decide to keep some data private so that it cannot be altered by the
+                    derived class <br>
+                    <br>
+                    Inheritance provide a clear model structure which is easy to understand without much complexity
+                    Using inheritance, classes become grouped together in a hierarchical tree structure Code are easy to
+                    manage and divided into parent and child classes.
+
+                </p>
+            </div>
+
+
+            <p>
+                Abstract classes and interfaces <br>
+
+                Explain the main differences between (regular) classes, abstract classes and an interface
+            </p>
+
+            <div class="answer">
+                <p>
+                    <b> Regular classes - </b>can be instantiated ( made into an object ) can final implementation of a
+                    class <br>
+                    <b> abstract classes -</b> provide common functionality (API) (methods have implementations ) and
+                    cannot be instantiated <br>
+                    <b> interfaces - </b>fully abstract, give just empty methods (API), cannot be instantiated - when
+                    implemented the
+                    implementor has to override each method.
+                </p>
+            </div>
+
+
+            <h2>2017 Summer</h2>
+
+
+            <h2>2017 Autumn</h2>
+
+            <p>
+                <b> Interfaces</b> <br><br>
+                What is multiple inheritance and what are interfaces? <br>
+            </p>
+            <div class="answer">
+                <a href="https://www.journaldev.com/1775/multiple-inheritance-in-java">Multiple inheritance in Java</a>
+                <p>
+                    Multiple inheritance - the capability of creating a single class that inherits(extends) multiple
+                    superclasses. However java doesn't support multiple inheritance, because of abiguity of what method
+                    to call (if the method name is the same in more than 1 inherited class) <br><br>
+                    Interface - An interface is a completely "abstract class" that is used to group related methods(API)
+                    that are abstract. When a class implements the interface it MUST override all its methods. <br><br>
+                    Multiple inheritance is possible in Interfaces, they can inherit many superclasses as the methods
+                    are implemented in the class that inherits the interface, so even if interface inherits many X name
+                    method, the final class only overrides one X method.
+
+                </p>
+            </div>
+
+            <p>
+                Explain how to use delegation to implement the work() behaviour of a carpenter object. Your design
+                should involve a Worker interface, a ConcreteWorker class, and a Carpenter class. Use Java statements to
+                clarify your example <br>
+            </p>
+            <div class="answer">
+                <!-- <a href="https://www.geeksforgeeks.org/delegation-vs-inheritance-java/">Delegation vs inheritance</a> -->
+                <p> answer: <br>
+                    Delegation is passing off duty(functionality) to another class. So basically using another class
+                    inside a class to receive its functionality to use it to accomplish its own functionality ( without
+                    the client knowing we are borrowing functionality) <br><br>
+
+                    for this example delegation may be used to simulate worker by providing functionality for
+                    <i>work</i> method. for example, we define a class called "chopWood" that has functionality for
+                    completing a task (work) like chopping wood for example. <br>
+                    We instantiate this class inside the worker class as an attribute "private final ChopWood chopwood =
+                    new ChopWood();".
+                    <br> Then inside <i>work</i> method we can use "chopwood.chopOakTree();" so<i> the worker can
+                        work</i>
+                </p>
+                <pre><code>
+public class ChopWood(){
+    //...in the class implementation there is this method
+    public void chopOakTree(){
+        // chop the tree 
+    }
+}
+public interface worker{
+    public void work() ; 
+}
+
+public class ConcreteWorker implements worker{
+    // the delegator
+    private final ChopWood chopwood = new ChopWood();
+
+    @Override
+    public void work(){
+        // using the delegator
+        chopwood.chopOakTree();
+    }
+}
+
+// ... in the main ... 
+
+ConcreteWorker carpenter = new ConcreteWorker();
+carpenter.work();   // this uses delegation to implement work functionality but the client isn't aware
+                    </code></pre>
+            </div>
+
+        </section>
+
+    </main>
+
+    <aside>
+        <h1>Things to Remember!</h1>
+        <ol>
+            <li>Enumerated type is used to describe a specific set of values for a variable <br>
+                Enum types are reference type - they can act like classes with constructors and methods
+            </li>
+        </ol>
+    </aside>
+</body>
+
+</html>

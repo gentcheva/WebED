@@ -116,13 +116,16 @@
                 alt="identify, understand and determine objectives for MIPS ISA" width="350px">
 
             <h2>MIPS registers 32 registers 32Bits each</h2>
+            <img src="../images/architecture/RegisterUsage.JPG" alt="">
             <ul class="overviewLists">
                 <li>&#36;zero - constant 0</li>
-                <li>&#36;v0 - &#36;v1 - Syscall codes go here</li>
-                <li>&#36;a0 - &#36;a3 - Arguments, &#36;a0 hold values for printing</li>
+                <li>&#36;v0 - &#36;v1 - Syscall codes go here - integer functions / expression evaluations</li>
+                <li>&#36;a0 - &#36;a3 - Arguments, &#36;a0 hold values for printing, also used for <b>passing arguments
+                        to subroutines</b></li>
                 <li>&#36;t0 -&#36;t9 - temporary registers / general purpose</li>
                 <li>&#36;s0-&#36;s7 - Saved </li>
-                <li>&#36;gp ( global p.), &#36;sp(stack p.), &#36;fp(frame p.), &#36;ra(return address)</li>
+                <li>&#36;gp ( global p.), &#36;sp(stack p. can be used for nesting subroutine calls), &#36;fp(frame p.),
+                    &#36;ra(return address)</li>
             </ul>
 
             <h2>Study logical and conditional instructions - slt, ori, sll, srl....</h2>
@@ -132,12 +135,23 @@
             <p>MIPS is Big Endian ( most significant byte last ), words are aligned in memory ( multiples of 4 ),
                 byte-addressed , register are faster to access than memory.</p>
 
+            <h2>ISA DESIGN FEATURES</h2>
             <p> <b>Make common case fast</b> -addi ( immediate ) ( adding 1 ) for loops</p>
             <p><b>Smaller is faster</b> - fast clock cycle time, smaller instruction size, num of registers all aid
                 speed</p>
             <p><b>Simplicity favours regularity </b>- implementation is simpler and it enables higher performance at
-                lower cost
+                lower cost <br><br>
+                <b>regularity</b> of instructions allows<b> Simplicity</b> in datapath and controller <br>
+                <b> datapath </b>- composes of ALUs registers, muxes, control, memories, PC, buses
             </p>
+
+            <ol>
+                <li>Constant Instruction size of 32Bits - allows for simpler decoding hardware</li>
+                <li>Only 3 instruction formats - ^</li>
+                <li>Theres no complex instruction - only simple ones executed in about 1 clock cycle</li>
+                <li>Regular register set - all registers are 32 bits and thers 32 register</li>
+                <li>Small number of instructions - simpler compilers</li>
+            </ol>
             <h2>R-Format Instructions 32 Bits</h2>
             <table>
                 <tr>
@@ -158,69 +172,69 @@
                 </tr>
             </table>
 
-            <p>I format is for immediate arithmetics and load/store, j- format is for jump, so every other command that
-                isn't i or j , will fall into R-Format/p>
-                <h2>I-Format Instructions 32 Bits</h2>
-                <table>
-                    <tr>
-                        <th>op</th>
-                        <th>rs</th>
-                        <th>rt</th>
-                        <th>Constant or address</th>
-                    </tr>
-                    <tr>
-                        <td>6bit operation code</td>
-                        <td>5bit first source register</td>
-                        <td>5bit second source register</td>
-                        <td>16bit constant/address</td>
-                    </tr>
-                </table>
+            <p>I format is for immediate arithmetics and load/store, j - format is for jump, so every other command that
+                isn't i or j, will fall into R-Format</p>
+            <h2>I-Format Instructions 32 Bits</h2>
+            <table>
+                <tr>
+                    <th>op</th>
+                    <th>rs</th>
+                    <th>rt</th>
+                    <th>Constant or address</th>
+                </tr>
+                <tr>
+                    <td>6bit operation code</td>
+                    <td>5bit first source register</td>
+                    <td>5bit second source register</td>
+                    <td>16bit constant/address</td>
+                </tr>
+            </table>
 
-                <h2>I-Format Instructions 32 Bits</h2>
-                <table>
-                    <tr>
-                        <th>op</th>
-                        <th>Address</th>
-                    </tr>
-                    <tr>
-                        <td>6bit operation code</td>
-                        <td>26bit address</td>
-                    </tr>
-                </table>
-                <h2>AND OR, NOT</h2>
-                <p>And- useful to mask bits ( selecting some bits and setting rest to 0 ) <br>OR - sets bits to 1 and
-                    leaves
-                    other unchanged <br>NOT- inverts bits</p>
+            <h2>J-Format Instructions 32 Bits</h2>
+            <table>
+                <tr>
+                    <th>op</th>
+                    <th>Address</th>
+                </tr>
+                <tr>
+                    <td>6bit operation code</td>
+                    <td>26bit address</td>
+                </tr>
+            </table>
+            <h2>AND OR, NOT</h2>
+            <p>And- useful to mask bits ( selecting some bits and setting rest to 0 ) <br>OR - sets bits to 1 and
+                leaves
+                other unchanged <br>NOT- inverts bits</p>
 
-                <h2>Branching</h2>
-                <p>Why not BLT - its too complicated and would require extra clock cycles per instruction, instead it
-                    uses
-                    two basic instructions to implement the logic , e.g blt is translated to slti and bne , bge - slt/i(
-                    depending if comparing with register or immediate) and beq</p>
-                <p>The more complex branch statements are composed of bne, beq, slt, sltu, slti, sltiu, </p>
-                <p> e.g beq with immediate value - beq &#36;t6, 1 , procedure -- add &#36;1 , &#36;0,1 and beq &#36;1,
-                    &#36;t6</p>
-                <p><b>Signed vs Unsigned</b> (slt - set on less than ). slt/slti - signed, sltu/sltui unsigned. They
-                    yield
-                    different results as values differ whether they are interpreted as signed/unsigned</p>
-                <h2>Procedure calling</h2>
-                <p><b>jal - jump and link</b> address of this instruction is in &#36;ra so it can be used to return, jr
-                    &#36;ra
-                    returns to the place jal was called from</p>
-                <p><b>Leaf procedure</b> - when no calls/links are made to the procedure <br> <b>Non-leaf procedure</b>
-                    -
-                    when its calling another procedure ( jal ) </p>
-                <h2>Supporting large constants</h2>
-                <p>up to 16 bit constants are supported ( make common case fast ), but sometimes 32 bits are needed.
-                    Combination of lui and ori commands are used. <br> lui - copies 16bits to the left of rt ( from R/I
-                    format) and clears the right 16 bits <br> ori- combines the 2 16bits</p>
-                <h2>Key differences between RISC and CISC</h2>
-                <ul class="overviewLists">
-                    <li>The way memory is addressed</li>
-                    <li>Branches are executed</li>
-                    <li>Exceptions are handled</li>
-                    <li>RISC use less power ( in embedded systems )</li>
-                </ul>
+            <h2>Branching</h2>
+            <p>Why not BLT - its too complicated and would require extra clock cycles per instruction, instead it
+                uses
+                two basic instructions to implement the logic , e.g blt is translated to slti and bne , bge - slt/i(
+                depending if comparing with register or immediate) and beq</p>
+            <p>The more complex branch statements are composed of bne, beq, slt, sltu, slti, sltiu, </p>
+            <p> e.g beq with immediate value - beq &#36;t6, 1 , procedure -- add &#36;1 , &#36;0,1 and beq &#36;1,
+                &#36;t6</p>
+            <p><b>Signed vs Unsigned</b> (slt - set on less than ). slt/slti - signed, sltu/sltui unsigned. They
+                yield
+                different results as values differ whether they are interpreted as signed/unsigned</p>
+            <h2>Procedure calling</h2>
+            <p><b>jal - jump and link</b> address of this instruction is in &#36;ra so it can be used to return, jr
+                &#36;ra
+                returns to the place jal was called from</p>
+            <p><b>Leaf procedure</b> - when no calls/links are made to the procedure <br> <b>Non-leaf procedure</b>
+                -
+                when its calling another procedure ( jal ) </p>
+            <h2>Supporting large constants</h2>
+            <p>up to 16 bit constants are supported ( make common case fast ), but sometimes 32 bits are needed.
+                Combination of lui and ori commands are used. <br> lui - copies 16bits to the left of rt ( from R/I
+                format) and clears the right 16 bits <br> ori- combines the 2 16bits</p>
+            <h2>Key differences between RISC and CISC</h2>
+            <ul class="overviewLists">
+                <li>The way memory is addressed</li>
+                <li>Branches are executed</li>
+                <li>Exceptions are handled</li>
+                <li>RISC use less power ( in embedded systems )</li>
+            </ul>
         </section>
 
         <h1>Computer Arithmetics &#8691;</h1>
@@ -286,36 +300,62 @@
                 above</a>
             <p><b>Sign</b> - first bit , 0 if positive 1 if negative<br><b>Mantissa</b>- everything after the decimal
                 point<br><b>Exponent</b> - the power value ( 2^5 , exponent is 5 ), the exponent comes from moving the
-                decimal point to the front, the exponent value is how many places it was moved.<br><b>bias</b> - 2^8 -1
-                = 255, -127 to 128</p>
-            <p>Now add 127 plus the exponent and change it to binary <br> this is the exponent, copy the mantissa and
-                add the sign bit at the front. Thats IEE 754</p>
+                decimal point to the front, the exponent value is how many places it was moved.
+                <br><b>bias</b> a value of 127 that you add to the exponent ( then turn into binary ) and it gives you
+                the final 8bit exponent
+                <p>Now add 127 plus the exponent and change it to binary <br> this is the exponent, copy the mantissa
+                    and
+                    add the sign bit at the front. Thats IEE 754</p>
 
-            <table>
-                <tr>
-                    <th>S</th>
-                    <th>Exponent - 8bits</th>
-                    <th>fraction/mantissa 23bits</th>
-                </tr>
-            </table>
+                <table>
+                    <tr>
+                        <th>S</th>
+                        <th>Exponent - 8bits</th>
+                        <th>fraction/mantissa 23bits</th>
+                    </tr>
+                </table>
 
-            <h2>Floating point addition</h2>
-            <a href="https://www.youtube.com/watch?v=mKJiD2ZAlwM">Video on how to add fps</a>
-            <p>Change it to scientific notation. Make the exponents equal. add them together. convert to binary
-                representation if necessary.</p>
-            <p>example: 1.000 x 2^-1 + -1.110 x 2^-2 <br> shift exponents:1.000 x 2^-1 + -0.111 x 2^-1 <br>add
-                significands: 0.001 x 2^-1 <br> normalize: 1.000 x 2^-4 </p>
+                <h2>Floating point addition</h2>
+                <a href="https://www.youtube.com/watch?v=mKJiD2ZAlwM">Video on how to add fps</a>
+                <p>Change it to scientific notation. Make the exponents equal. add them together. convert to binary
+                    representation if necessary.</p>
+                <p>example: 1.000 x 2^-1 + -1.110 x 2^-2 <br> shift exponents:1.000 x 2^-1 + -0.111 x 2^-1 <br>add
+                    significands: 0.001 x 2^-1 <br> normalize: 1.000 x 2^-4 </p>
 
-            <h2>Floating point multiplication</h2>
-            <img src="../images/architecture/fp_multiplication.JPG" />
-            <img src="../images/architecture/fp_binary_mul.JPG" />
-            <img src="../images/architecture/fp_hardware.JPG" />
-            <h2>FP commands</h2>
-            <p>These operation are made on &#36;f0...&#36;f1... registers <br> <b>Commands:</b> - add.s , sub.s, mul.s,
-                div.s ..
-                add.d, sub.d, mul.d, div.d</p>
+                <ol>
+                    <span>for a binary number</span>
+                    <li>change the  8 bit binry number to decimal</li>
+                    <li>take away 127 from it and that is your exponent ( the 2 to the power of..)</li>
+                    <li>now write  1. X , where x is what ever comes after the exponent bit and x 2^exponent</li>
+                    <span>Now for adding in format ( 1.0101 x 2^4 ) </span>
+                    <li>make sure both number have the same exponent. </li>
+                    <li>If not move the smaller one up to the bigger one by shifting the point to the left</li>
+                    <li>then simply add 1.0101 to  the other number</li>
+                </ol>
+                <h2>Floating point multiplication</h2>
+                <ol>
+                    <span>Multiplying 1.000 x 2^-2 X 1.110 x 2^-2</span>
+                    <ol>
+                        <li>ex. 1.000 x 1.110</li>
+                        <li>multiply 1000 x 1110 as normal</li>
+                        <li>When you get the answer the decimal point goes into : x places from right to left</li>
+                        <li>Where x is (number of digits after the point in multiplicand ) + (number of digits after point in multiplier)</li>
+                        <li>in this case x is 6 (3+3)</li>
+                        <li>to normalise move the point to the front but reflect the change in exponent.</li>
 
-            <img src="../images/architecture/fp_discussion.JPG" />
+                    </ol>
+                    
+                </ol>
+                <img src="../images/architecture/fp_multiplication.JPG" />
+                <img src="../images/architecture/fp_binary_mul.JPG" />
+                <img src="../images/architecture/fp_hardware.JPG" />
+                <h2>FP commands</h2>
+                <p>These operation are made on &#36;f0...&#36;f1... registers <br> <b>Commands:</b> - add.s , sub.s,
+                    mul.s,
+                    div.s ..
+                    add.d, sub.d, mul.d, div.d</p>
+
+                <img src="../images/architecture/fp_discussion.JPG" />
         </section>
         <h1>The Processor &#8691;</h1>
         <section>
@@ -617,9 +657,9 @@
                 instructions to issue each cycle , compiler helps by reordering instructions, hazards resolved with
                 advanced techniques at runtime</p>
 
-                <a href="../downloadPDFS/Lecture 21 - Parallel processing 2.pdf" download="lecture21.pdf">Lecture 21-Vector
-                    processors, vector instructions, multithreading -> different approaches, GPU architecture/operation</a>
-        
+            <a href="../downloadPDFS/Lecture 21 - Parallel processing 2.pdf" download="lecture21.pdf">Lecture 21-Vector
+                processors, vector instructions, multithreading -> different approaches, GPU architecture/operation</a>
+
         </section>
 
     </main>
@@ -634,7 +674,120 @@
             <li>32bit registers , regular instructions, simple load/store addresses, alignment of memory operand -
                 <b>how MIPS is designed for pipelining</b></li>
             <li>Double data hazard and hazard detection unit are a thing ( processor 2)</li>
+            <li>
+                A translation lookaside buffer (TLB) is a memory cache that is used to reduce the time taken to access a
+                user memory location.[1][2] It is a part of the chip’s memory-management unit (MMU). The TLB stores the
+                recent translations of virtual memory to physical memory and can be called an address-translation cache.
+            </li>
+
+            <li>Flynns taxonomy is the classification of computer architectures. SSID SIMD MISD MIMD</li>
+
+
+            <li>How to support Near and far jumps?
+                <ol>
+                    <li>I format support 16 bit address range</li>
+                    <li>J-format support 26 bit address range</li>
+                    <li>For really far jumps use jr, and save up to 32 bit address in a register</li>
+                </ol>
+            </li>
+
+            <li>Techniques that can speed the pipelined processor.
+
+                <p>
+                    How is MIPS designed for pipelining:
+                    <br>
+                    Having a 32 bit fixed size instructions, favours fetching and decoding. <br>
+                    You can read and decode an instruction in fixed number of clock cycles. <br>
+
+                    Simple load/store addressing <br>
+
+                    Alignment of memory operands. <br>
+
+                    Few and regular instruction formats <br>
+                </p>
+            </li>
+
+            <li>The runtime of a program is equal to the number of instructions multiplied by the average time per
+                instruction. </li>
+            <li>Amdahl law - is a formula which gives the theoretical speedup in latency of the execution of a task
+                at fixed workload that can be expected of a system whose resources are improved</li>
         </ol>
+
+        <h2>Speeding up pipeline processor</h2>
+        <p><b>2018 autumn Q3 c:</b>
+            <br>
+            <br>
+            <i>
+                Idenitfy two techniques that can speed the pipelined processor. Explain how do they improve the
+                performance
+                and what are their performance limitations.
+            </i>
+        </p>
+
+        <p>
+            <b>so what affects the speed of a pipeline:</b> <br>
+            <ol>
+                <li>longest time ( the <b>critical stage</b>)</li>
+                <li>time <b>between</b> Instructions</li>
+                <li style="text-decoration: line-through;"> cache performance : miss penalty/miss rate ( not really that
+                    relevant in that chapter)</li>
+            </ol>
+
+            so how to reduce the time of executions of the different stages <br><br>
+            Avoiding all the hazards can speed up everything ( as hazards introduce stalls ).
+
+            <ol class="overviewLists">
+                <span><b>You can speed up pipeline by avoiding: </b></span> <br><br>
+                <li><b>Structure hazards </b>- avoid stalls where two instructions want to access the same resource at a
+                    time.
+                    <b> Its limitation is</b> that dedicated hardware (fetching) is expensive and maybe perhaps the fact
+                    that
+                    once you have all the hardware you can completely avoid these stalls</li>
+
+                <li><b>Data hazards - </b>stalling an instruction in the pipeline as it waits for data. Avoid this by
+                    forwarding. <b>The limitation is</b> that you can only forward when the data is ready, you still
+                    have to
+                    stall if data is in the ALU</li>
+                <li><b>Control hazard -</b> avoid flushing the pipeline when a branch is taken/not taken. this causes
+                    significant performance decrease and you have to restart the pipeline with new instructions.
+                    Introduce the branch prediction hardware (dynamic).<b> Limitation:</b> its expensive and you cannot
+                    predict
+                    the future but they are like 90% effective </li>
+
+
+            </ol>
+
+            all of these methods above reduce the time between instructions by removing the bubbles/stalls. This
+            increases the pipeline performance. <br><br>
+
+            <i style="text-decoration: line-through;">
+                A stupid simple answer would be to get faster hardware with lower time for each stage. and to minimize
+                cache
+                miss and penalty.
+            </i>
+        </p>
+
+        <h2>How to improve parallel processing</h2>
+        <p>
+            Due to the power wall (electrical demand and heat generation and physical barriers) we cannot increase the
+            speed in single processors much more. <br>
+            Multi-core processors use the idea of parallel processing.
+
+            <br><br>
+            Since parallel processing relies on dividing a task and computing it on separate cores and combining the
+            results. One way to increase the speed is to have tasks that are suited for parallel processing.
+
+            <br><br>
+            <i>
+                Communication and synchronization between the different subtasks are typically some of the greatest
+                obstacles to getting good parallel program performance.
+                .</i>
+        </p>
+
+        <h2>Cache Block size</h2>
+        <img src="../images/architecture/CachBlockSize1.JPG" alt="">
+        <img src="../images/architecture/CachBlockSize2.JPG" alt="">
+        <img src="../images/architecture/CachBlockSize3.JPG" alt="">
     </aside>
 </body>
 
