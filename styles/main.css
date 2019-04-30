@@ -103,6 +103,12 @@ main{
     padding-bottom:0.5em;
 }
 
+.overviewLists i {
+    color: #FFE400; 
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
 .Topic{
     text-align: center;
     font-size: 3em;
@@ -320,16 +326,21 @@ button{
     padding:1em;
 }
 
-#guidelines li {
+.guidelines li {
     color:rgb(206, 78, 78);
     font-weight: bold;
     
 }
-#guidelines span {
+.guidelines span {
     color:rgb(97, 104, 240);
     font-weight: bold;
     font-size: 1.4em;
     
+}
+
+.guidelines div{
+    color: rgb(189, 177, 12);
+    font-style: italic;
 }
 
 #interactionStyles  li{

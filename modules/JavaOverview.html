@@ -123,10 +123,10 @@ public interface worker{
                 <p>Declare an object of type-T and assign it a value in the constructor</p>
                 <pre><code>
 class Test&lt;T&gt; { 
-    // An object of type T is declared 
-    private final T object; 
-    Test(T obj) { // constructor 
-        object = obj;  
+    // An attribute of type T is declared 
+    private final T someAttribute 
+    Test(T attribute) { // constructor 
+        someAttribute = attribute;  
     }  
     
 } 
@@ -139,8 +139,9 @@ class Test&lt;T&gt; {
             </p>
             <div class="answer">
                 <p>
-                    Generics add re-usability by enabling you to to define a class or interface without specifying fixed
-                    parameter data types. <br>
+                    Stronger type checks at compile time - compiler issues erros if code violates type safety.
+                    <br>
+                    elimination of casts <br>
                     Allows The code to be flexible. For example when you write a sorting algorithm that needs to sort
                     integers and strings, you can write one good implementation with a generic class that will handle
                     both, otherwise you would have to write two separate classes to handle integers and string.
@@ -168,7 +169,7 @@ class Test&lt;T&gt; {
                     Code re-usability - Common code is placed in a common abstract class that can be inherited in many
                     places, rather than re-written in those places. <br>
                     code maintainability - Since code is written in one place (the common abstract class), it only needs
-                    to be maintained in that one place.
+                    to be maintained in that one place. <br>
                     Data hiding - base class can decide to keep some data private so that it cannot be altered by the
                     derived class <br>
                     <br>
@@ -234,40 +235,43 @@ class Test&lt;T&gt; {
                     Delegation is passing off duty(functionality) to another class. So basically using another class
                     inside a class to receive its functionality to use it to accomplish its own functionality ( without
                     the client knowing we are borrowing functionality) <br><br>
-
-                    for this example delegation may be used to simulate worker by providing functionality for
-                    <i>work</i> method. for example, we define a class called "chopWood" that has functionality for
-                    completing a task (work) like chopping wood for example. <br>
-                    We instantiate this class inside the worker class as an attribute "private final ChopWood chopwood =
-                    new ChopWood();".
-                    <br> Then inside <i>work</i> method we can use "chopwood.chopOakTree();" so<i> the worker can
-                        work</i>
                 </p>
                 <pre><code>
-public class ChopWood(){
-    //...in the class implementation there is this method
-    public void chopOakTree(){
-        // chop the tree 
-    }
-}
 public interface worker{
     public void work() ; 
 }
 
 public class ConcreteWorker implements worker{
-    // the delegator
-    private final ChopWood chopwood = new ChopWood();
+    final String workType;
+    public ConcreteWorker(String WorkType){
+        workType = workType;
+    }
+    //...in the class implementation there is this method
 
     @Override
     public void work(){
+        // perform the task
+        System.out.println(workType);
+
+    }
+}
+
+public class Carpenter {
+    // the delegator
+    private final ConcreteWorker workBehaviour;
+
+    public Carpenter(String workType){
+        workBehaviour = new ConcreteWorker(workType);
+    }
+
+    public void work(){
         // using the delegator
-        chopwood.chopOakTree();
+        workBehaviour.work();
     }
 }
 
 // ... in the main ... 
-
-ConcreteWorker carpenter = new ConcreteWorker();
+Carpenter carpenter = new Carpenter();
 carpenter.work();   // this uses delegation to implement work functionality but the client isn't aware
                     </code></pre>
             </div>
@@ -283,7 +287,232 @@ carpenter.work();   // this uses delegation to implement work functionality but 
                 Enum types are reference type - they can act like classes with constructors and methods
             </li>
         </ol>
+
+
+        <h2>Int Enums and why are they bad. 2018 autumn Q4c</h2>
+        <p>
+            Java Joe's claim to fame is his Colour class, which uses the integer enum anti-pattern to represent the
+            colours red, yellow, and blue.
+
+            <br><br>
+
+            provide two examples that show why Java Joe's class has a poor design: explain the examples. <br>
+            Provide an enumaretd Colour class that overcomes the Disadvantages of Java Joe's design.
+        </p>
+
+        <p>
+            Answer: <br> 
+            <b>Anti-patterns</b> are certain patterns in software development that is considered a bad programming
+            practice. <br><br>
+            The values below are compile-time constants and the client can break if enum constant changes. <br><br>
+
+            Translating the int enums into Strings is hard. You have to pass in their value and then cast them to print
+            them. <br><br>
+
+            Since the below are compile-time variables they have no private name space
+        </p>
+
+        <pre><code>
+public static final int APPLE_FUJI = 0;
+public static final int APPLE_PIPPIN = 1;
+public static final int ORANGE_NAVEL = 0;
+public static final int ORANGE_TEMPLE = 1;
+public static final int ORANGE_BLOOD = 2;
+
+// it allows for illogical things like
+
+    if (APPLE_FUJI == ORANGE_BLOOD) {  /* ????? * / }
+
+    int apple = ORANGE_BLOOD; // out of range
+
+        </code></pre>
+
+        <p>Provide an enumarted Colour class that overcomes the Disadvantages of Java Joe's design</p>
+        
+        <pre><code>
+    public enum Colour {
+        RED, YELLOW, BLUE
+    }
+        </code></pre>
+        <p>This simple enum class, overcomes the private name space issue, the compile time constants issue. These values can be easily modifed to be printed like so:</p>
+
+        <pre><code>
+    public enum Colour {
+        RED("red"),
+        YELLOW("Yellow"),
+        BLUE("Blues");
+
+        private final String colourName;
+
+        private Colour( final String colourName){
+            colourName = colourName;
+        }
+
+        public String toString(){
+            return colourName;
+
+        }
+    }
+
+        </code></pre>
+        <br><br>
+        <h2>
+            Enumarated class - Calculator
+        </h2>
+
+        <p>
+
+            Java joes claim to fame is a scientific calculator, implemented in java using the int enum anti-design
+            pattern, each button corresponds to a binary operation and each button has a printable operator symbol.
+            <br><br>
+
+            Provide an enumerated class for the buttons on the calculator. The class should define a method for printing
+            the operator and a method for applying the binary operation.
+            For simplicity, only assume adding and subtracting are the only allowed button operations.
+
+        </p>
+        <pre><code>
+public enum MyCalculator{
+    ADD("+"){
+        @Override
+        public int calculate(int x, int y){
+            return x + y;
+        }
+    
+    } ,
+    
+    SUBTRACT("-"){
+        @Override
+        public int calculate(int x, int y){
+            return x - y;
+            }
+    };
+    
+    public abstract int calculate(int x, int y);
+    
+    private final String operator;
+    
+    private MyCalculator(String operator){
+    
+        this.operator = operator;
+    }
+    
+    public String toString(){
+        return operator;
+    }
+
+}
+                
+        </code></pre>
+
+        <p>
+            Provide 3 reasons why Your implementation is better than Anti pattern int enums ?
+        </p>
+
+        <ol>
+            <li>My implementation is more maintainable - int enums are compile time constants </li>
+            <li>In my implementation, it is easy to cast from one data type to another, however, int enums are difficult
+                to translate to strings </li>
+            <li>Finally, in my implementation, my attributes have private name spaces, whereas int enums do not have
+                private name space</li>
+            </li>
+        </ol>
+
+
+        <h2>Generic Object reference Question</h2>
+
+        <p>
+            The reference class represents object references, which you can get and set. Provide a class definition for
+            the reference class.
+        </p>
+
+        <pre><code>
+public class Reference &lt;T&gt; {
+
+    private T objectReference;
+
+    public T getObject() {
+
+        return this.objectReference;
+    }
+
+    public void setObject ( final T object){
+        this.objectReference = object;
+
+    }
+
+}
+        </code></pre>
+
+
+
+    <h2>Iterators and generics</h2>
+    <img src="../images/java/JavaMock.jpg" alt="" width="700">
+
+        <pre><code>
+// 4.a
+
+// FILL IN #1
+implements iterable&lt;String&gt;     
+
+
+// FILL IN #2
+
+public Iterator &lt;String&gt; Iterator(){
+
+    return new Iterator&lt;String&gt; (){
+
+        private int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return index &lt; memebers.length; 
+
+        }
+
+        @Override
+        public void remove(){}
+    } ;
+
+
+} 
+
+// 4.b
+
+public class Pair&lt;S,T&gt; {
+    private S first;
+    private T second;
+
+    public Pair (S s, T t){
+        first = s;
+        second = t;
+    }
+
+    public void setFirst (S s){
+        first = s; 
+    }
+
+    public void setSecond (T t){
+        second = t; 
+    }
+
+    public S getFirst() {
+        return first;
+
+    }
+
+    public T getSecond(){
+        return second;
+    }
+} 
+
+        </code></pre>
+
+
+
     </aside>
+
+
 </body>
 
 </html>
