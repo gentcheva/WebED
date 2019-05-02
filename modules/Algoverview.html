@@ -43,7 +43,7 @@
             <section>
                 <h2>Recursive call- call to the same function with params nearing base case</h2>
                 <p>There must be a<b> base case</b> <br>
-                If a <b>value is returned</b>, every path <b>must have a return value</b></p>
+                    If a <b>value is returned</b>, every path <b>must have a return value</b></p>
                 <h2>Activation records</h2>
                 <p><b>Activation record -</b> holds parameters, progress in the function code, and local variables. Its
                     pushed onto a stack when a function is called. Deleted off the stack when a function finishes
@@ -120,8 +120,8 @@ def selectionSort(list):
             # find min
             if list[min_idx] > list[j]: 
                 min_idx = j 
-            #swap       
-            list[i], list[min_idx] = list[min_idx], list[i] 
+        #swap       
+        list[i], list[min_idx] = list[min_idx], list[i] 
                         </code></pre>
             </section>
             <h1>In-place sorting &#8691;</h1>
@@ -852,37 +852,39 @@ def topological_sort(self):
                 <pre><code class="python">
 def dijkstra(self, s):
     # initializing
-
+    open = APQ()
+    locs = {}
+    closed = {}
+    preds = {s: None}
     # s : None is the initial starting point, preds, locs and open have it
-    self.preds = {s: None}
-    startingPoint = self.open.add(s, 0)
-    self.locs[s] = startingPoint
+    startingPoint = open.add(s, 0)
+    locs[s] = startingPoint
 
-    while not self.open.is_empty():
+    while not open.is_empty():
         # min_el an instance of the element class, that has the minimum value from APQ open
-        min_el = self.open.remove_min()
+        min_el = open.remove_min()
         v = min_el._key # key gives the reference to the Vertex class instance
-        self.locs.pop(v)
-        predecessor = self.preds.pop(v)
+        locs.pop(v)
+        predecessor = preds.pop(v)
 
         # min_el._value is the cost of getting to that element
-        self.closed[v] = (min_el._value, predecessor)
+        closed[v] = (min_el._value, predecessor)
 
         # for each edge from v (the min element )
-        for e in self.get_edges(v):
+        for e in get_edges(v):
             w = e.opposite(v)
-            if w not in self.closed:
+            if w not in closed:
                 newcost = min_el._value + e.weight
-                if w not in self.locs:
+                if w not in locs:
 
-                    self.preds[w] = v
-                    new_el = self.open.add(w, newcost)
-                    self.locs[w] = new_el
-                elif newcost < (self.locs[w]._value):
+                    preds[w] = v
+                    new_el = open.add(w, newcost)
+                    locs[w] = new_el
+                elif newcost < (locs[w]._value):
 
-                    self.preds[w] = v
-                    self.open.update_key(self.locs[w], newcost)
-    return self.closed
+                    preds[w] = v
+                    open.update_key(locs[w], newcost)
+    return closed
                 </code></pre>
             </section>
             <h1>Prim's Algorithm | Minimum spanning tree &#8691;</h1>
@@ -1203,27 +1205,132 @@ def lcs(str1, str2):
             </section>
         </div>
     </main>
-            <aside>
-                <h1>Things to remember</h1>
-                <ol class="overviewLists">
-                    <li>Python list slicing make a new copy of a list, expensive</li>
-                    <li>Avoid doing pointless work every Recursive call</li>
-                    <li>Depth of a balanced binary tree is log n</li>
-                    <li>Usuall implementations of insertion/selection sort are<b> in place</b></li>
-                    <li>Stable sort - keeps the <b>original order of items</b> that have equivalent value/key</li>
-                    <li>Simple<b> undirected </b>graph with n vertices can have a maximum of <b>1/2(n)(n-1) == O
-                            (n^2)</b> edges</li>
-                    <li>Simple<b> directed </b>graph with n vertices can have a maximum of <b>(n-1)2 == O(n2)</b> edges
-                    </li>
-                    <li>Length of a path in a directed Graph is number of vertices in the path - 1</li>
-                    <li>Cycle - length >= 1 and it starts and ends at the same vertex</li>
-                    <li>All-pairs shortest path - <b>the shortest path from any node to any node.</b> </li>
-                    <li>Optimal worst case - where the task you are trying to do requires at least this much work and
-                        the algorithm provided has the same complexity</li>
-                    <li>We will define the distance between two strings as the <b>minimal</b> number
-                        of<b> additions or deletions</b> that <b>transform</b> the first string into the second.</li>
+    <aside>
+        <h1>Things to remember</h1>
+        <ol class="overviewLists">
+            <li>Python list slicing make a new copy of a list, expensive</li>
+            <li>Avoid doing pointless work every Recursive call</li>
+            <li>Depth of a balanced binary tree is log n</li>
+            <li>Usuall implementations of insertion/selection sort are<b> in place</b></li>
+            <li>Stable sort - keeps the <b>original order of items</b> that have equivalent value/key</li>
+            <li>Simple<b> undirected </b>graph with n vertices can have a maximum of <b>1/2(n)(n-1) == O
+                    (n^2)</b> edges</li>
+            <li>Simple<b> directed </b>graph with n vertices can have a maximum of <b>(n-1)2 == O(n2)</b> edges
+            </li>
+            <li>Length of a path in a directed Graph is number of vertices in the path - 1</li>
+            <li>Cycle - length >= 1 and it starts and ends at the same vertex</li>
+            <li>All-pairs shortest path - <b>the shortest path from any node to any node.</b> </li>
+            <li>Optimal worst case - where the task you are trying to do requires at least this much work and
+                the algorithm provided has the same complexity</li>
+            <li>We will define the distance between two strings as the <b>minimal</b> number
+                of<b> additions or deletions</b> that <b>transform</b> the first string into the second.</li>
+        </ol>
+
+
+        <h1>Some questions and answers</h1>
+
+        <p>What is the best possible wors-case complexity for any comaparison-based sorting algorithm?
+            <br>How could a sorting algorithm avoid comparing elements? (5 marks)
+        </p>
+
+        <div class="answer">
+            <p>
+                Best possible worst case is O(n log n) as seen in merge or heap sort. <br><br>
+                to avoid comparisons we need to know additional info about the list that is being sorted. <br>
+                <br>
+                Bucket sort need to know the range (for example [0- (N-1)]). It then can make buckets for each element
+                in
+                the range and sort the list accordingly.
+
+            </p>
+        </div>
+
+        <p>Explain what it means for a sorting algorithm to be stable. Using the concept of stable sorting, if our input
+            array of 5000 integers with values between 10000 and 12000, use the answer above to outline an efficient
+            sorting algorithm for this input. Explain the complexity of your algorithm. (5 marks)</p>
+
+        <div class="answer">
+            <p>
+                Stable sorting - a sorting algorithm that does not mess with the order of appearance of keys/values that
+                are the same.
+                for example sorting a list [4 5 2 2 3 4] the two 2s will remain in the same order. This could be
+                important if the key stands for some other object.
+                <br><br>
+                Stable sort algorithms - bubble sort , merge sort, bucket sort, insertion sort. <br><br>
+
+                Algorithm <br>
+                <ol>
+                    <li>make buckets indexed 10000 to 12000.</li>
+                    <li>For each of the 5000 integers in the list, the items equivalent bucket index is its value --
+                        Place the values in the bucket</li>
+                    <li>Empty the buckets 1 by 1 into a list.</li>
+
                 </ol>
-            </aside>
+
+                Complexity - O(n) if the N is not too big (this case range of N is 2000 and n is 5000) <br>
+                <br>
+                if N was big the complexity is O(n^2).
+            </p>
+        </div>
+
+
+        <p>Hard Q : algorithm to provide a union between A and B list in O(n). every distinct item must be present
+            either form A or B, no duplicate</p>
+
+        <pre><code>
+def mergeLists(A,B):
+    lenA = len(A) - 1
+    lenB = len(B) - 1
+    i = 0
+    j = 0
+    res = []
+
+    while i < lenA and j < lenB:
+        # if the items are the same only add 1
+        if B[j] == A[i]:
+            res += [A[i]]
+            i += 1
+            j += 1
+
+        elif B[j] > A[i]:
+            res += [A[i]]
+            i += 1
+        else:
+            res += [B[j]]
+            j += 1
+
+        # if a duplicate was added pop it off, poping from the end O(1)
+        if len(res) > 2 and res[(len(res) - 2)] == res[-1]:
+            x = res.pop()
+
+    # at this point  a list could not be emptied if A and B are not same sized
+
+    # empty it in a similar style as above
+
+    # if A has 20 items and B has 15 the below loop will execute 5 times
+    # therefore its O(n) where n is bigger list (20)
+    if i < lenA:
+        while True:
+            if i < lenA:
+                res += [A[i]]  # add the remaining of the list to the merged result
+                i += 1
+            else:
+                break
+            if len(res) > 2 and res[(len(res) - 2)] == res[-1]:
+                x = res.pop()
+    if j < lenB:
+        while True:
+            if j < lenB:
+                res += [B[j]]  # add the remaining of the list to the merged result
+                j += 1
+            else:
+                break
+            if len(res) > 2 and res[(len(res) - 2)] == res[-1]:
+                x = res.pop()
+    return res
+
+        </code></pre>
+    </aside>
 </body>
 
 </html>

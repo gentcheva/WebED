@@ -356,4 +356,5 @@ font-weight: normal;
 .answer{
     border: #14A76C 2px solid;
     padding:1em;
+    text-align: left;
 }
