@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8" />
+    <link href="../styles/main.css" rel="stylesheet" />
+    <title>CS2501-DB</title>
+    <link href="../styles/db_styles.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../highlighjs/styles/railscasts.css" />
+    <script src="../highlighjs/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../jQuery/jquery-3.3.1.min.js"></script>
+    <script src="../js/main.js"></script>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="java.html">Java</a></li>
+            <li><a href="compArchitecture.html">Architecture</a></li>
+            <li><a href="networking.html">Networking</a></li>
+            <li><a href="databases.html">Databases</a></li>
+            <li><a href="operatingSystems.html">OS</a></li>
+            <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
+            <li><a href="algorithms.html">Algorithms</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <img src="../images/databases/databases.png" title="Database Stacks"
+            alt="Cylinders that represent a database" />
+        <h1>Database Design and Administration </h1>
+
+    </header>
+
+
+    <main class="overview">
+
+
+        <a href="../downloadPDFS/PHP.pdf">TOPIC 1 - PHP</a> <br>
+        <a href="../downloadPDFS/SQL.pdf">TOPIC 2 - SQL</a><br>
+        <a href="../downloadPDFS/Views.pdf">TOPIC 3 - Views</a> <br>
+        <a href="../downloadPDFS/databasedirectory.pdf">TOPIC 4 - Database Directory</a> <br>
+        <a href="../downloadPDFS/filesupport.pdf">TOPIC 5.1 - File Support</a> <br>
+        <a href="../downloadPDFS/DBSample.pdf">Sample Paper</a>
+
+
+        <h1>Database Specification</h1>
+        <section>
+            <h2>Create/ update / insert table</h2>
+            <pre><code>
+CREATE TABLE students (
+    id_number CHAR(9) ,
+    first_name VARCHAR(20),
+    ...
+);
+
+
+DELETE
+ FROM students
+WHERE id number = ’987654321’;
+
+UPDATE students
+ SET points = 500
+ WHERE id number = ’112356489’;
+
+ INSERT INTO students VALUES ("123456789", "John");
+            </code></pre>
+
+            <p>
+                the effect of the CREATE TABLE command is to store a descriptor of the table in the
+                database directory [system catalog]; the effect of ALTER TABLE is to modify that descriptor;
+                the effect of DROP TABLE is to remove the descriptor
+            </p>
+
+
+            <h2>CREATE INDEX - WORKS_ON</h2>
+            <pre><code>
+        CREATE INDEX EMPIX ON EMPLOYEE(SSN);
+        CREATE INDEX WEP ON WORKS_ON(ESSN, PNO);
+        CREATE UNIQUE INDEX DEPTX ON DEPARTMENT(DNUMBER);
+        DROP INDEX EMPIX;
+            </code></pre>
+            <p>Index is a secondary storage item that speeds up queries on the indexed columns. however it slows downs
+                for updates/inserts and deletes. The query optimizer chooses to use the index or not when generating an
+                evaluation plan. INDEXES are not visible to us and are just used to speed up queries.</p>
+
+
+            <img src="../images/databases/datatypes.JPG" alt="">
+            <ul>
+                <li> INT (3) - displays in column width 3</li>
+                <li> DECIMAL (7,2) - displays in “7.2” format</li>
+                <li> CHAR (15) - storage 15 characters, padded</li>
+                <li> VARCHAR (15) - max storage 15 characters, unpadded</li>
+                <li>TEXT/BLOB types are relatively uncommon, as they don’t fit easily into a table
+                    structure</li>
+            </ul>
+
+
+        </section>
+
+        <h1>Database Directory and Security</h1>
+
+        <section>
+
+            <h2>SQL CONSTRAINTS</h2>
+
+            <p>
+                <b> Constraints</b> are used to limit the type of data that can go into a table. This ensures the
+                accuracy and
+                <b> reliability</b> of the data in the table. If there is any<b> violation between the constraint</b>
+                and the data
+                action, the action is aborted. They can be present across the table or just one columns.
+            </p>
+
+            <ul>
+                <span>Common Constraints</span>
+                <li><b>NOT NULL</b></li>
+                <li> <b>UNIQUE -</b> all values in that column are unique</li>
+                <li> <b>PRIMARY KEY - </b>combines NOT NULL AND UNIQUE to identify each row</li>
+                <li> <b>FOREIGN KEY -</b> a primary key of another table for reference</li>
+                <li><b>CHECK - </b>all values in a column satisfy a specific condition</li>
+                <li><b>DEFAULT -</b> gives a column a default value if left empty</li>
+                <li><b>INDEX -</b> used to create and retreive data from db really quickly.</li>
+
+            </ul>
+
+
+            <h2>Referential integrity violation</h2>
+            <p>DML (data Manipulation language) statements like update, insert or delete can cause the table and db to
+                be inconsistent. for example creating a row for an employee with Dno = 50, but there isn't a Department
+                50 so it cannot be possible to query that employee successfully.</p>
+
+            <ul>
+                <span>How to solve this:</span>
+                <li>Choose the people you give permissions to wisely, and trust them and do nothing hoping it will be
+                    fine. Easy to do;<b> Disadvantage:</b> DB corruption is almost certain</li>
+                <li>Specify Constraints for columns and tables to ensure data is put in properly. <b>Advantage:</b>
+                    automated
+                    consistency checks, <b>Disadvantage:</b> slower SQL evaluation, and problems with making the queries
+                    could
+                    arise.</li>
+
+                <li>Use a middle man - PhP to interact with the database, it can do more sanity checks and queries are
+                    more consistent.
+                    <b> advantage:</b> sophisticated validation of data and commands<b> Disadvantage:</b> Requires time
+                    and effort to
+                    build.
+                </li>
+
+            </ul>
+
+            <h2>DCL - Data Control language</h2>
+            <p>GRANT and REVOKE give and take permissions for tables/databases for a specific(named) user. <br><br>
+                GRANT/REVOKE - ALTER[table], INDEX[create and drop], SELECT, INSERT, DELETE, UPDATE, ALL <br>
+                ON - database.tablename (specific table), database.* (all tables in a db), *.* (global all dbs and all
+                tables)
+            </p>
+            <h2>Creating a new user</h2>
+            <p>Requires a username and a password and a privilege level. <br>
+                CONNECT : login to DBMS only <br>
+                RESOURCE: connects and execute DDL statements; <br>
+                DBA: RESOURCE + GRANT/REVOKE privilege
+            </p>
+
+            <pre><code>
+                    GRANT RESOURCE
+                    TO white
+                    IDENTIFIED BY SecretPsw;
+
+                    GRANT SELECT, INSERT
+                    ON companydb.department
+                    TO gray
+                    WITH GRANT OPTION;
+
+                /* WITH GRANT OPTION means that the grantee can grant this permission to other users */
+            </code></pre>
+
+            <h2>Database Directory</h2>
+
+            <p>
+                <b> Database directory </b>- metadata for data stored. all info about result of user commands and info
+                about
+                validation. It is stored as a relation table. You can have SELECT permissions on the DD table, but only
+                SELECT.
+            </p>
+            <ul class="overviewLists">
+                <li> <b>SYSTABAUTH </b>- contains info on user authorization privileges on tables and views the user has
+                    created or given access to
+
+                    <ul>
+                        <li>Accessible to each user (private copy)</li>
+                        <li>modified by : CREATE/ALTER/DROP table or view, GRANt/REVOKE (for table auth permission)
+                        </li>
+                    </ul>
+
+                </li>
+                <li><b>SYSCATALOG -</b> has info of all the table names + who is the creator + if its table or a view
+
+                    <ul>
+                        <li>Accessible to each user (private copy)</li>
+                        <li>modified by : CREATE/ALTER/DROP table or view, GRANt/REVOKE (for table auth permission)
+                        </li>
+                        <li>SYSCATALOG is superset of CATALOG - it has info on sys tables as well as user tables. Most
+                            tables have a SYS counterpart that just stores the sys tables in addition.</li>
+                    </ul>
+
+                </li>
+                <li><b>COLUMNS -</b> has info of all columns of a tables/view accessible by a user ( its data type,
+                    width of chars and constraints)
+
+                    <ul>
+                        <li>Accessible to each user (private copy)</li>
+                        <li>modified by : CREATE/ALTER/DROP table or view, GRANt/REVOKE (for table/View auth permission)
+                        </li>
+
+
+                    </ul>
+
+                </li>
+                <li><b>VIEWS -</b> has all views created by a user ( with the stored view text)
+                    <ul>
+                        <li>Accessible to each user (private copy)</li>
+                        <li>modified by : CREATE VIEW, DROP VIEW, DROP TABLE, GRANT(2), REVOKE(2)
+                        </li>
+
+
+                    </ul>
+
+                </li>
+                <li><b>SYSUSERAUTH -</b> describes all users of the database it has passwords access privileges and
+                    other time stamps
+
+                    <ul>
+                        <li>ONLY DBA privileged users</li>
+                        <li>modified by GRANt/REVOKE</li>
+
+
+                    </ul>
+                </li>
+                <li><b>DTAB </b>- master index of DD contents, everyone can access <b>it cannot be modified</b></li>
+            </ul>
+
+            <p>A view is created from the<b> base DD tables</b> for a private copy of each user, this ensures a user can
+                only
+                see their permissions/tables (<b>catalog</b>).</p>
+
+            <h2>Command validation</h2>
+            <p>For every command the DBMS performs necessary validations steps many of which include access to DD
+                tables. <br><br>
+            </p>
+
+            <ol>
+                <span><b>CHECKING FOR A SELECT STATEMENT</b></span>
+                <li>Check privilages of tables (FROM clause) in <b>SYSTABAUTH</b>, does this user have permissions</li>
+                <li>Is the table a view or base table (check <b>CATALOG</b>). if view activate query modifier.</li>
+                <li>are WHERE and SELECT clauses correctly referencing things from FROM clause </li>
+                <li>are WHERE and SELECT clauses valid and unambiguous? (check <b>COLUMNS</b>)</li>
+                <li>is WHERE clause type compatible? (<b>COLUMNS</b>)</li>
+                <li>Now you can compile.</li>
+            </ol>
+
+            <ol>
+                <span><b>CHECKING FOR GRANT STATEMENT</b></span>
+
+                <li> Does ON clause table exist (CATALOG)</li>
+                <li>Does the user have grant option for that permission (<b>SYSTABAUTH</b>)</li>
+                <li>Goes Grantee exist ( <b>SYSTABAUTH</b> )</li>
+
+            </ol>
+
+            <p>
+                simple SELECT statement on a single table actually requires a potential search of five separate
+                tables (SYSTABAUTH, CATALOG, VIEWS, COLUMNS and the table itself).
+            </p>
+            <ol>
+                <span><b>Techniques to improve efficiency:</b> </span>
+                <li>precompiled and<b> highly optimized routines</b> for DD access ( DD queries are not validated)</li>
+                <li>DBMS do not use DD views but rather the<b> base tables</b></li>
+                <li>DDs are multiply indexed</li>
+                <li>a lot of DD is<b> in memory during </b>DBMS use, reducing access time.</li>
+
+            </ol>
+
+        </section>
+
+
+        <h1>Database Manipulation</h1>
+        <section>
+
+            <h2>Calculation functions</h2>
+            <ul>
+                <li> AVG(expr): average value of expr</li>
+                <li>COUNT(*): number of rows in result table</li>
+                <li>COUNT(DISTINCT expr): number of distinct rows containing expr</li>
+                <li> MAX(expr): maximum value of expr</li>
+                <li> MIN(expr) minimum value of expr</li>
+                <li> SUM (expr): summation of all values of expr</li>
+            </ul>
+
+            <p>
+                <b> CONCAT (str1, str2, …)</b>: concatenate strings <br>
+                <b>LEFT (str, len):</b> returns leftmost len characters from string str <br>
+                <b>LENGTH (str):</b> returns string length <br>
+                <b>LOWER (str):</b> returns lower-case version of str <br>
+                <b> REVERSE (str):</b> reverse the string str <br>
+                <b>RTRIM (str):</b> removes trailing blanks <br>
+                <b> SOUNDEX (str)</b>: returns phonetic sequence of str <br>
+                <b> UPPER (str):</b> returns upper-case version of str <br>
+            </p>
+
+
+            <p>Find the name of employees earning between $20,000 and $30,000</p>
+            <pre><code>
+
+            SELECT Fname
+            FROM employees
+            WHERE Salary BEETWEEN 20 000 AND 30 000;
+        </code></pre>
+            Find the name of male employees aged between 21 and 25
+            <pre><code>
+
+            SELECT fname
+            FROM Employee
+            WHERE SEX = "M" and
+            BDATE BETWEEN SUB_DATE(CURDATE(),INTERVAL 21 YEAR)
+                 AND SUB_DATE(CURDATE(), INTERVAL 25 YEAR) ;
+                </code></pre>
+
+            <p>Find the identifier and name of employees earning less than $25,000 who work in departments 4 or 5</p>
+            <pre><code>
+            SELECT Fname, SSN
+            FROM employees
+            WHERE Salary < 25000 and Dno in (4,5);
+            </code></pre>
+
+            <h2>GROUP BY and HAVING</h2>
+
+            <p>Find the highest salary in each department</p>
+            <pre><code>
+                SELECT Dno, MAX(Salary)
+                FROM EMPLOYEE
+                GROUP BY Dno 
+        </code></pre>
+
+            <p>Find the highest salary in each department with more than five employees</p>
+
+            <pre><code>
+                SELECT Dno, MAX(Salary)
+                FROM EMPLOYEE
+                GROUP BY Dno
+                HAVING COUNT(*) >= 5
+        </code></pre>
+
+            <h2>JOINS and SUB-QUERIES</h2>
+
+            <p>
+                Find the name of employees working for the Research Department
+
+            </p>
+            <pre><code>
+SELECT Fname, Lname                                       SELECT Fname, Lname
+FROM Employee                                             FROM Employee , Department
+WHERE Dno = (SELECT Dnumber                               WHERE Dno = Dnumber AND Dname = "Research";
+            FROM Department 
+            WHERE Dname = "Research"); 
+          </code></pre>
+
+            <p>Find the name & address of the lowest-paid employee living in Houston </p>
+            <pre><code>
+            SELECT fname, lname , address 
+            FROM Employee
+            WHERE Address LIKE "%Houston%"
+            AND Salary = (SELECT MIN(Salary) FROM employee WHERE address LIKE "%Houston%");
+        </code></pre>
+
+
+            <p>Find the identifier and address of female employee working on either ‘ProductX’ or ‘ProductY’ projects
+            </p>
+
+            <pre><code>
+            SELECT Fname, Lname, Address 
+            FROM Employee, Works_On , projects
+            ON SSN = ESSN AND Pno = Pnumber 
+            WHERE Pname in ("ProducX","ProductY") AND SEX = "F"
+        </code></pre>
+
+            <h2>Synchronized Sub-Queries</h2>
+            <p>Find the identifier & name of departments hiring no employees resident in Houston</p>
+
+            <pre><code>
+                SELECT Dnumber, Dname
+                FROM DEPARTMENT D
+                WHERE NOT EXISTS
+                 ( SELECT *
+                FROM EMPLOYEE
+                WHERE Address LIKE '%Houston%'
+                 AND Dno = D.Dnumber )
+        </code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </section>
+        <h1>VIEWS</h1>
+        <section>
+            <h2>Limitations Of SQL (privacy)</h2>
+            <ol>
+                <li>Security Cannot be for individual columns. You cannot hide a column if granting permissions
+                    to a
+                    user.
+                </li>
+                <li>Sometimes simple data retrieval requires complex SQL query due to design of the SQL table
+                </li>
+
+            </ol>
+            <h2>What are VIEWS?</h2>
+            <p>
+                VIEW - a derived table from a base table ( or more ), Data is not stored on disk but dynamically
+                produced
+                when asked. <br><br>
+                VIEWS solve the 2 limitations above, by simplifying SQL query statements as a view can combine
+                one or
+                more
+                tables. A VIEW is also treated as a normal db table. Meaning you can give permissions on a VIEW
+                to a
+                user.
+                This allows you to cut out sensitive columns (solving first limitation). <br><br>
+
+                The Database system stores the Query of the VIEW - not the table, meaning any updates to the
+                base
+                table/s
+                are reflected in the VIEW.
+            </p>
+
+            <h2>Creating VIEWS</h2>
+            <p>Create a view containing information on Houston-based employees of Department 5. <br><br>
+                creating a view is a simple as sticking "CREATE VIEW x AS" and follow it with a SELECT
+                statement.
+            </p>
+            <pre><code>
+        CREATE VIEW HoustonEmployeesD5 AS
+        SELECT Ssn, Fname, Lname, Sex, Salary
+        FROM EMPLOYEE
+        WHERE Address LIKE ‘%Houston, TX’
+            AND Dno = 5;
+        
+        
+        CREATE VIEW HER_1 ( StaffId, Name, Sex, Salary ) AS
+        SELECT Ssn, CONCAT (Lname, ‘, ‘, Fname), Sex, Salary
+        FROM EMPLOYEE, DEPARTMENT
+        WHERE Dno = DNumber
+            AND Address LIKE ‘%Houston, TX’
+            AND Dname = ‘Research’
+              </code></pre>
+
+            <h2>Using the VIEWS - implementation</h2>
+
+            <p>
+                Treated exactly the same way as normal base tables. <br><br>
+                howevery after submitting your query it undergoes -<b> query modification</b> .
+                The text of the view and text of the user query are merged into a single final query that refers
+                only to
+                base tables.
+            </p>
+
+            <pre><code>
+        View Definition:
+        
+        CREATE VIEW MaleStaff AS
+        SELECT Ssn, Fname, Lname, Bdate, Salary
+        FROM EMPLOYEE
+        WHERE Sex = 'M';
+        
+        User Query
+        
+        SELECT Fname, Lname
+        FROM MaleStaff
+        WHERE Salary > 50000;
+        
+        Final Query
+        
+        SELECT Fname, Lname
+        
+        FROM EMPLOYEE
+        WHERE Sex = 'M'
+        
+            and Salary > 50000
+                </code></pre>
+
+            <h2>View Updatability</h2>
+            <p>
+                Problems arise when trying to use INSERT/UPDATE/DELETE on a view because a view may be many
+                tables
+                acting as one, it can be a single table but with only some columns. <br><br>
+                beacuse a view is not actual physical data and is derived dynamically, it cannot be updated.
+                However
+                some DBMS allows for (it updates the base table through the view) this,but with certain rules.
+                rules are - single table view, a view has all of the NOT NULL columns, and not function calls
+                inside the
+                view creation statement.
+            </p>
+        </section>
+
+        <h1>Database Programming</h1>
+
+        <section>
+            <ul>
+                <li><b>MYSQL_CONNECT</b> - connects to mysql server, 3 params- host, user and password</li>
+                <li><b>MYSQL_QUERY </b>- performs query on db - 2 params - query and database </li>
+                <li><b>MYSQL_NUM_FIELDS -</b> get num fields in query result - query is param </li>
+                <li><b>…..OR DIE('MESSAGE')</b> - exit() and print the message on the screen</li>
+                <li><b>MYSQL_FREE_RESULT </b>- free memory associated with result </li>
+                <li><b>MYSQL_ERROR - </b>returns text of error message from prev operation </li>
+                <li><b>MYSQL_FETCH_ARRAY - </b>fetch result row as associative or numeric array </li>
+                <li><b>MYSQL_FETCH_ASSOC -</b> fetches result row as associative array, rows are accessed by
+                    $row['Column Name'] </li>
+                <li><b>MYSQL_FETCH_ROW -</b> result row as enumerated rows, rows are accessed by index $row[0]
+                </li>
+                <li><b>MYSQL_CLOSE -</b> closes connection to the database</li>
+                <li><b>MYSQL_SELECT_DB - </b>sets current active db on server</li>
+            </ul>
+
+            <p>The PHP superglobals $_GET and $_POST are used to collect form-data.</p>
+
+
+            <img src="../images/databases/phpExample.JPG" alt="">
+
+
+
+        </section>
+
+        <h1>File support</h1>
+        <section>
+            <h2>DBMS Storage engine</h2>
+            <p>
+                DBMS do not use in-built File system. They just request data and they have their own native file
+                system
+                powered by Storage engine.
+
+                <br><br>
+                storage engine is tuned to cater for specific data retrievals (SELECT). It handles concurrent
+                access to
+                file/table data and data conflicts, indexing.
+                The DBMS file system is specific.
+            </p>
+
+            <h2>How a hard-drive works</h2>
+            <p>HDD is divited into tracks and sectors ( and Cylinders nad clusters), they are used as storage
+                bins (of
+                fixed 512bytes capacity).
+                <br><br>
+                To read data from a sector there is a seek delay ( 4-9 ms) and a rotational delay ( 2ms). Its
+                best if a
+                file is stored on a single or adjacent, cylinders of disk.
+            </p>
+
+            <h2>File System - File Manager - Storage Manager</h2>
+            <p>File directory - partly visible and partly hidden for file/disk Administration. <br>
+                file organisations - serial, sequential and indexed sequential
+            </p>
+
+            <h2>File allocation</h2>
+            <p>records are packed into a <b>sector</b> ( e.g 4 110Byte records can fit into a sector with
+                80bytes left
+                over.)
+                <br>
+                this is limiting as only<b> serial files</b> are possible and reorganizing files on disk is very
+                difficult.
+                <br><br>
+                <b>sequential files -</b> supported by keeping sectors 66% full (partially filled) and split the
+                sector
+                when
+                insertions cause it to overflow. <br>
+                <b>Indexed sequential files </b>- supported by keeping the lowest key value of an data sector in
+                master
+                sectors
+                along the data sector pointer. They are called index sectors and form a data structure ( B+
+                tree) that
+                supports <b>sparse index,</b> as only one index per sector is made and not one index per record.
+
+            </p>
+
+            <p>
+                On average - validation take sup 80% of the time, and execution itself takes 20%
+
+            </p>
+
+            <h2>Sequential File Organisation</h2>
+            <p>
+                Records are stored and accessed in a particular order using a <b>key under which they are sorted
+                    on</b>.
+                <br>
+                for Retreival - you need to search sequentially through the entire file <b>record by record</b>.
+                <br><br>
+
+                primarily used in apps where there is a high file hit rate. Makes them good for master files and
+                batch
+                processing (like payroll systems) <br><br>
+
+                Sometimes when overflow happens, the records are not contiguous anymore but are mapped in such a
+                way
+                that they are still retreived win their sequential sorted order despite different physical
+                location
+            </p>
+
+            <h2>Serial File Organisation</h2>
+
+            <p>
+                Records entered in order of <b>their creation , unordered.</b> Serial files are primarily used
+                as
+                transaction
+                files in which the transactions are recorded <b>in the order that they occur</b> <br><br>
+
+                its only used on a serial medium like Magnetic tape. Usually used for transaction files
+                (unsorted) and
+                dump files.
+                to find anything you need to look through all the records.
+            </p>
+            <h2>Indexed - sequential File Organisation</h2>
+            <p> They are the same as sequential files but have an index for a block that contains the record
+                given a key
+                value. <br><br>
+                Stored and sorted with a primary key, for each primary key an index is generated and mapped to
+                the
+                record. <br><br>
+                record can <b>accessed either sequentially </b>(in the order they were entered) or<b> randomly
+                    (with an
+                    index)</b>
+            </p>
+            <h2>Sample exam Questions and Answers</h2>
+
+            <p>What function does a <b>storage engine</b> play in a modern database management system? Why is it
+            </p>
+
+            <div class="answer">
+                <p>
+                    Storage engine is used (tuned) to cater for the specific file access patterns and storage of
+                    DBMS.
+                    it is specifically tuned for r<b>etrieval for SELECT statements</b>, it also handles
+                    multiple access
+                    to
+                    files/tables <b>(concurrent access)</b>. It also handles <b>data conflicts</b>.
+                </p>
+            </div>
+            <p>
+                In what way does the presence of <b>variable-length </b>records within a file impact on the
+                subsequent
+                <b> processing</b> of that file?
+            </p>
+
+            <div class="answer">
+                <p>
+                    DBMS treats the variable length field <b>as a fixed size</b>. This aids access of columns as
+                    records
+                    can
+                    now be accessed at known offsets. ( for example if its known that each record is 100bytes
+                    long
+                    rather than around 100 bytes) <br><br>
+                    The file system can have<b> predefined index</b> to jump to every time to read a new record
+                    (and
+                    knows
+                    where ite ends). <br>
+                    if the variable length file was stored in a variable fashion, the File System would have to
+                    read it
+                    one by one until it reaches a <b>terminator character</b> signifying the end of the record.
+                    By having it fixed it can skip this and read in the whole record cos it <b>knows where the
+                        terminator</b>
+                    is.
+                </p>
+            </div>
+
+            <p>Under what conditions would a serial file suffice for database table storage? What about a
+                sequential
+                file? What about an indexed sequential file?</p>
+
+            <div class="answer">
+                <p> Serial files are used mainly for storing <b>transactions</b> and they are unordered,
+                    They need to be <b>read 1 by 1</b> to find any record. <br><br>
+                    Sequential files are useful for <b>batch processing</b> systems like<b> Payroll</b> systems.
+                    They
+                    are ordered based on a
+                    key. <br><br>
+                    Indexed-Sequential file are essentially like sequential files but also maintain an index
+                    value and
+                    when given a key you can obtain an index to directly access the sector/block the record is
+                    held in.
+                    They would be useful for<b> identifying files with search systems</b> and accessing more
+                    specific
+                    data.
+                </p>
+            </div>
+
+            <p>What is multiple buffering and what role does it play in database query processing?</p>
+
+            <div class="answer">
+                <p>
+                    Multiple processing referes to the idea of having <b>many buffers to hold block of data.</b>
+                    For
+                    query
+                    processing, having multiple buffers allows DBMS to<b> process one record</b> while another
+                    record it
+                    being
+                    <b> brought in. </b>This means that when DBMS is finished processing a record another record
+                    is
+                    already
+                    waiting/ or close to being brought in. This <b>improves performance</b> as it reduces
+                    potential
+                    stalls as
+                    we wait for info to be brought in from disk <br><br>
+
+                    unrelated example: for displays one buffer holds the current frame being displayed while
+                    another is
+                    acquiring bits for the next frame. So when it is time to switch the next frame is ready.
+                </p>
+            </div>
+        </section>
+
+
+
+
+        <h1>Sample Paper Simple Answers</h1>
+        <section>
+            <p>Q1 (a) (i) - 1, 2, 3 can be done with Constraints. 1 - UNIQUE , 2 - FOREIGN KEY , 3 - FOREIGN KEY
+                <br><br>
+                (ii) Programming language like PhP or JavaScript can be used to further validate data before
+                insertions
+
+                <br><br>
+                (b) They are not supported because of unexpected/surprise deletes (maybe sometimes u want to
+                modify the
+                data), performance issues (cascading can trigger lots of operations)
+
+            </p>
+
+            <p>Q2 (a) COLUMNS table is modified to reflect added/deleted/modified columns and their constraints
+                <br><br>
+                (b) - GRANT SELECT ON Employee TO user123; - affects SYSTABAUTH table to reflect permission
+                changes for
+                user123 for employee table. <br><br>
+                (c) change to native file system over the years + use of Aliases like "Show tables" or "describe
+                table"
+                are used to improve security and reduce interaction with DD tables. <br><br>
+                (d ) 1. Check if the Table exists (CATALOG) , 2. Check if the issuer exists and has right
+                privileges
+                (SYSTABAUTH) 3. Checks if the user you revoke the permission from exists (SYSUSERAUTH) <br><br>
+                (e) Create a VIEW as they have different permissions to base tables.
+
+            </p>
+
+            <p>Q3 (a) Indication for using joins - if the data you want to retreive is spread across more than 1 table
+                <br><br>
+                or if data from one table is used to gather data from another table ( like using Dname = "Research" to
+                find Dnumber so then you can find employees working in that dep.) <br><br>
+            </p>
+
+            <pre><code>
+                /* Find the identity and name of each dependent of an employee working for the
+                Research department */
+                SELECT ESSN, Dependent_name 
+                FROM dependent 
+                WHERE ESSN IN ( SELECT SSN 
+                            FROM Employee
+                            WHERE Dno = (SELECT Dnumber FROM Department WHERE Dname = "Research")
+                            )
+
+            
+            SELECT ESSN, Dependent_name 
+            FROM dependent, Employee, Department
+            ON ESSN = SSN AND Dno = Dnumber
+            WHERE Dname = "Research" ;
+            </code></pre>
+
+            <pre><code>
+                /* Question 3 (c) */
+
+                    CREATE VIEW DependEmpDept ( Dependent_name, SSN, Dno) AS 
+                    SELECT Dependent_name, SSN, Dno
+                    FROM Employee, Department, Dependent
+                    ON ESSN = SSN AND Dno = Dnumber ;
+    
+    
+                    SELECT Dependent_name 
+                    FROM DependEmpDept
+                    WHERE Dno = (SELECT Dnumber FROM department WHERE Dname = "Research");
+    
+                    
+                    SELECT Dependent_name 
+                    FROM Employee, Department, Dependent
+                    ON ESSN = SSN AND Dno = Dnumber
+                    WHERE Dno = (SELECT Dnumber FROM department WHERE Dname = "Research");
+    
+                    
+                /* (d) */
+
+                SELECT Fname, lname
+                FROM Employee, Department 
+                ON Dno = Dnumber 
+                WHERE Dname = "Research" 
+                AND SSN not in ( SELECT ESSN FROM WORKS_ON)
+        
+        
+                SELECT Fname, lname
+                FROM Employee, Department 
+                ON Dno = Dnumber 
+                WHERE Dname = "Research" 
+                AND SSN in (SELECT ESSN 
+                        FROM WORKS_ON 
+                        GROUP BY ESSN
+                        HAVING COUNT(ESSN) = (SELECT COUNT(*) FROM PROJECT)
+                )
+        
+            </code></pre>
+
+        </section>
+
+        <h1>Some Questions and Answers</h1>
+        <section>
+            <h2>PHP can dynamically send HTML to user's browser, how? Give examples</h2>
+            <p>
+                dynamic html - html that is more interactive and can change based on some conditions. PHP can achieve
+                this by generating a html page based on some conditions. This means that the website might not be
+                identical across two computers as conditions change and the webpage is dynamic.
+                <br><br>
+                example- only showing a section of the page if a user is a registered member. can be achieved (checked
+                and generated) by php.  if ($member == true) { # content just for members here } else # content for normal visitors
+
+            </p>
+
+            <h2>A PHP program that runs correctly when first written might subsequently result in errors, why?</h2>
+            <p>Changes to the database, deletion of rows or any modification can cause a query to fail. Losing </p>
+        </section>
+
+    </main>
+
+
+
+    <aside>
+        <h1>Things to remember! </h1>
+
+        <h2>CASCADING</h2>
+        <p>
+            "ON DELETE CASCADE" - it means that when deleting a row that hold a primary key that is referenced as
+            foreign key in another table
+            those entries are also deleted. <br><br>
+
+            for example Deleting department number 5 entry with CASCADE will also delete any employee entry with dep.no
+            5 as otherwise<b> referential integrity</b> will be violated . <br><br>
+            <b> Cascading referential integrity</b> constraints are foreign key constraints that tell SQL Server to
+            perform
+            certain actions when a <b>primary key field</b> in a primary key-foreign key relationship is updated or
+            deleted
+        </p>
+
+        <p>
+            The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+            <br><br>
+            The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+
+
+        </p>
+        <h2>SQL language types</h2>
+        <p>DDL - database Definition language ( CREATE DROP ALTER) <br>
+            DML - database Manipulation language (SELECT DELETE UPDATE INSERT)
+            DCL - Database control language ( GRANT REVOKE)
+        </p>
+
+        <h2>Limitations Of SQL (privacy)</h2>
+        <ol>
+            <li>Security Cannot be for individual columns. You cannot hide a column if granting permissions to a user.
+            </li>
+            <li>Sometimes simple data retrieval requires complex SQL query due to design of the SQL table</li>
+
+        </ol>
+        <h2>What are VIEWS?</h2>
+        <p>
+            VIEW - a derived table from a base table ( or more ), Data is not stored on disk but dynamically produced
+            when asked. <br><br>
+            VIEWS solve the 2 limitations above, by simplifying SQL query statements as a view can combine one or more
+            tables. A VIEW is also treated as a normal db table. Meaning you can give permissions on a VIEW to a user.
+            This allows you to cut out sensitive columns (solving first limitation). <br><br>
+
+            The Database system stores the Query of the VIEW - not the table, meaning any updates to the base table/s
+            are reflected in the VIEW.
+        </p>
+
+        <h2>SQL stuff</h2>
+        <p>MySQL does not support embedded function calls – the calculation of a function of a function, for example
+            <br>
+            HAVING COUNT (*) = MAX (COUNT (*)) <br><br>
+
+            When using sub-queries you are only allowed to return a single column.
+        </p>
+
+        <p>A COrrelated Subquery or Synchronized Subquery - is a subquery that uses information (like table name) from
+            the outer query. For example here it uses outer query Dno value inside the subquery to get a result. You
+            must Alias the outer table to use it inside a subquery</p>
+
+        <pre><code>
+                    SELECT Fname, Lname 
+                    FROM Employee E
+                    WHERE "Research" IN ( SELECT Dname 
+                                FROM Department 
+                                WHERE Dnumber = E.Dno
+                        )
+            </code></pre>
+    </aside>
+
+</body>
+
+</html>
