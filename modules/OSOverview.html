@@ -11,20 +11,39 @@
 </head>
 
 <body>
+    <a href="../index.html"><img id="home" src="../images/Logo.jpg" alt=""></a>
     <nav>
         <ul>
-            <li><a href="java.html">Java</a></li>
-            <li><a href="compArchitecture.html">Architecture</a></li>
-            <li><a href="networking.html">Networking</a></li>
-            <li><a href="databases.html">Databases</a></li>
-            <li><a href="operatingSystems.html">OS</a></li>
-            <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
-            <li><a href="algorithms.html">Algorithms</a></li>
+            <li><a class="links" href="java.html">Java</a>
+                <a class="overviews" href="JavaOverview.html">Overview</a>
+            </li>
+            <li><a class="links" href="compArchitecture.html">Architecture</a>
+                <a class="overviews" href="CAoverview.html">Overview</a>
+            </li>
+            <li><a class="links" href="networking.html">Networking</a>
+
+                <a class="overviews" href="NetExamPrep.html">Overview</a>
+            </li>
+            <li><a class="links" href="databases.html">Databases</a>
+                <a class="overviews" href="DBOverview.html">Overview</a>
+            </li>
+            <li><a class="links" href="operatingSystems.html">OS</a>
+                <a class="overviews" href="OSOverview.html">Overview</a>
+            </li>
+            <li><a class="links" href="usabilityEngineering.html">Usability</a>
+                <a class="overviews" href="UsabEngOverview.html">Overview</a>
+            </li>
+            <li><a class="links" href="algorithms.html">Algorithms</a>
+                <a class="overviews" href="Algoverview.html">Overview</a>
+            </li>
+
         </ul>
     </nav>
+    <img id="ham" src="../images/utlities/hamburger.jpg" alt="">
 
     <header>
         <h1>Operating Systems II</h1>
+        <img src="../images/os/bg.jpg" alt="">
     </header>
 
     <main class="overview">
@@ -1178,7 +1197,8 @@
                 <img src="../images/os/VAtoPA.JPG" alt="">
                 <p>
                     Multi-level Page Table : use first 10-most significant bits to
-                    index into first level page table (called the page directory). Next 10-bits to index into second level page table, which has the
+                    index into first level page table (called the page directory). Next 10-bits to index into second
+                    level page table, which has the
                     page number to frame number mappings. Rest 12-bits represents the page offset.
                 </p>
             </div>

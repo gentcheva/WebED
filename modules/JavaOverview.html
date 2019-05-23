@@ -15,18 +15,35 @@
 </head>
 
 <body>
+    <a href="../index.html"><img id="home" src="../images/Logo.jpg" alt=""></a>
     <nav>
         <ul>
-            <li><a href="java.html">Java</a></li>
-            <li><a href="compArchitecture.html">Architecture</a></li>
-            <li><a href="networking.html">Networking</a></li>
-            <li><a href="databases.html">Databases</a></li>
-            <li><a href="operatingSystems.html">OS</a></li>
-            <li><a href="usabilityEngineering.html">Usability Eng.</a></li>
-            <li><a href="algorithms.html">Algorithms</a></li>
+            <li><a class="links" href="java.html">Java</a>
+                <a class="overviews" href="JavaOverview.html">Overview</a>
+            </li>
+            <li><a class="links" href="compArchitecture.html">Architecture</a>
+                <a class="overviews" href="CAoverview.html">Overview</a>
+            </li>
+            <li><a class="links" href="networking.html">Networking</a>
+
+                <a class="overviews" href="NetExamPrep.html">Overview</a>
+            </li>
+            <li><a class="links" href="databases.html">Databases</a>
+                <a class="overviews" href="DBOverview.html">Overview</a>
+            </li>
+            <li><a class="links" href="operatingSystems.html">OS</a>
+                <a class="overviews" href="OSOverview.html">Overview</a>
+            </li>
+            <li><a class="links" href="usabilityEngineering.html">Usability</a>
+                <a class="overviews" href="UsabEngOverview.html">Overview</a>
+            </li>
+            <li><a class="links" href="algorithms.html">Algorithms</a>
+                <a class="overviews" href="Algoverview.html">Overview</a>
+            </li>
+
         </ul>
     </nav>
-
+    <img id="ham" src="../images/utlities/hamburger.jpg" alt="">
 
     <header>
         <img src="../images/java/java.png" title="Java programming language"
@@ -301,7 +318,7 @@ carpenter.work();   // this uses delegation to implement work functionality but 
         </p>
 
         <p>
-            Answer: <br> 
+            Answer: <br>
             <b>Anti-patterns</b> are certain patterns in software development that is considered a bad programming
             practice. <br><br>
             The values below are compile-time constants and the client can break if enum constant changes. <br><br>
@@ -328,13 +345,14 @@ public static final int ORANGE_BLOOD = 2;
         </code></pre>
 
         <p>Provide an enumarted Colour class that overcomes the Disadvantages of Java Joe's design</p>
-        
+
         <pre><code>
     public enum Colour {
         RED, YELLOW, BLUE
     }
         </code></pre>
-        <p>This simple enum class, overcomes the private name space issue, the compile time constants issue. These values can be easily modifed to be printed like so:</p>
+        <p>This simple enum class, overcomes the private name space issue, the compile time constants issue. These
+            values can be easily modifed to be printed like so:</p>
 
         <pre><code>
     public enum Colour {
@@ -446,8 +464,8 @@ public class Reference &lt;T&gt; {
 
 
 
-    <h2>Iterators and generics</h2>
-    <img src="../images/java/JavaMock.jpg" alt="" width="700">
+        <h2>Iterators and generics</h2>
+        <img src="../images/java/JavaMock.jpg" alt="" width="700">
 
         <pre><code>
 // 4.a
